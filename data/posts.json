@@ -1,13 +1,21 @@
 [
   {
+    "id": "2108275041276420573",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-08T19:15:14Z",
+    "text": "Day 4/\n\nWe have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort.\n\nAlso releasing GPT-6.1 Sol ultrafast. The two work very well https://t.co/4sjkptOtvG",
+    "url": "https://x.com/thsottiaux/status/2108275041276420573",
+    "fetchedAt": "2026-10-08T19:20:38Z",
+    "classification": null,
+    "eventStatus": null
+  },
+  {
     "id": "2108084615349170480",
     "author": "thsottiaux",
     "createdAt": "2026-10-08T06:38:33Z",
     "text": "Day 3 (encore)/\n\nWe silently re-shipped codex cloud. It’s pretty good now",
     "url": "https://x.com/thsottiaux/status/2108084615349170480",
-    "fetchedAt": "2026-10-08T06:40:46Z",
-    "classification": null,
-    "eventStatus": null
+    "fetchedAt": "2026-10-08T19:20:38Z"
   },
   {
     "id": "2108040921044639779",
@@ -15,7 +23,7 @@
     "createdAt": "2026-10-08T03:44:55Z",
     "text": "Confirmed landed across all accounts. How are we doing so far?",
     "url": "https://x.com/thsottiaux/status/2108040921044639779",
-    "fetchedAt": "2026-10-08T06:40:46Z"
+    "fetchedAt": "2026-10-08T19:20:38Z"
   },
   {
     "id": "2107913738791596286",
@@ -35,7 +43,7 @@
     "createdAt": "2026-10-07T19:19:17Z",
     "text": "Day 3/\n\nThe big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.\n\nLoading a banked reset in everyone's paid accounts. See you again tomorrow!",
     "url": "https://x.com/thsottiaux/status/2107913674593644711",
-    "fetchedAt": "2026-10-08T06:40:46Z"
+    "fetchedAt": "2026-10-08T19:20:38Z"
   },
   {
     "id": "2107912709715132482",
@@ -43,7 +51,7 @@
     "createdAt": "2026-10-07T19:15:27Z",
     "text": "We're going beyond text and are releasing a new version of GPT-6 to all users in ChatGPT. Lots of model and infra improvements coming together here to scale it to 1.2B users!",
     "url": "https://x.com/thsottiaux/status/2107912709715132482",
-    "fetchedAt": "2026-10-08T06:40:46Z"
+    "fetchedAt": "2026-10-08T19:20:38Z"
   },
   {
     "id": "2107676261099426030",
