@@ -1,38 +1,46 @@
 # WHENRESET · Codex 重置监控
 
-公开页面会展示 Tibo（@thsottiaux）的 Codex 用量重置线索、预告和已确认记录。GitHub Actions 每 10 分钟读取 X 公开 Posts 页面并运行本地规则；不登录、不调用 X API、不调用 AI。抓取结果和公开历史保存在此仓库，GitHub Pages 负责展示。
+网站展示 Tibo（@thsottiaux）的 Codex 用量重置线索、预告和已确认记录。运行抓取的电脑每 10 分钟读取 X 公开 Posts 并运行本地规则；不登录、不调用 X API、不调用 AI。脚本将公开抓取结果推送到此公开仓库，GitHub Actions 随后发布静态页面。
 
-## GitHub Pages 部署
+## GitHub Pages
 
-1. 将仓库设为公开。
-2. 在仓库 **Settings → Pages → Build and deployment** 中，将 Source 设为 **GitHub Actions**。
-3. 在 **Settings → Actions → General → Workflow permissions** 中允许读写仓库内容。
-4. 在 **Actions** 页面手动运行一次 **Update monitor and publish Pages**。
-5. 完成后从 **Settings → Pages** 打开站点地址。之后工作流每 10 分钟抓取、更新历史并发布网页。
+仓库使用 GitHub Actions 发布 Pages。到 **Settings → Pages → Build and deployment** 检查 Source 为 **GitHub Actions**。网站地址可在同一页面查看。
 
-GitHub 的定时工作流可能延迟启动。浏览器通知需要先在页面点击“开启本机浏览器提醒”，并保持页面打开。若要发送飞书消息，在仓库 **Settings → Secrets and variables → Actions** 中配置 `WHENRESET_FEISHU_WEBHOOK`；机器人启用了签名时，再配置 `WHENRESET_FEISHU_SECRET`。这些值不会进入公开仓库或网页。
+X 会拦截 GitHub 云端 runner 的直接抓取请求，因此抓取任务运行在已登录 GitHub 的 Windows 电脑上。电脑需开机并联网，GitHub Actions 只负责构建和发布 Pages。仓库公开包含网页代码、公开推文内容与事件历史；本机通知配置和抓取诊断文件已加入忽略规则。
 
-公开仓库会包含站点代码、抓取到的公开推文文本和重置事件历史。不要把个人资料、订阅者信息、Webhook、签名密钥或其它凭据提交到仓库。
+## 本机监控
+
+需要 Python 3 和 GitHub CLI 登录账号。安装或更新每 10 分钟执行一次的 Windows 计划任务：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install-monitor-task.ps1
+```
+
+任务会抓取公开 Posts、生成页面数据，并把更新后的公开数据推送到仓库。抓取失败时也会发布状态，网站会显示暂时受阻。移除计划任务：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\uninstall-monitor-task.ps1
+```
+
+也可以手动运行一次并发布：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\update-and-publish.ps1
+```
+
+在网页点击“开启本机浏览器提醒”后，保持页面打开即可接收浏览器通知。可选的飞书配置保存在运行电脑的 `data/notification-config.json`，不会进入公开仓库。
 
 ## 本地预览
-
-需要 Python 3：
 
 ```powershell
 python .\server.py
 ```
 
-浏览器访问 <http://127.0.0.1:4173/>。如需手动更新抓取数据：
+浏览器访问 <http://127.0.0.1:4173/>。首次抓取只建立基线，不会把旧帖作为新提醒；同一重置事件的预告和到账确认会合并。
 
-```powershell
-python .\monitor.py --once
-python .\tools\build_site.py
-```
+## 监控限制
 
-## 监控规则和限制
-
-- 首次运行只建立基线，不会把旧帖作为新提醒；历史帖子与事件按本地规则归档，预告和到账确认会合并。
-- 通知只针对明确关联 Codex 用量/额度的重置信号；普通动态不触发。
-- 只读取公开 Posts，不包含回复、私密帖子或已删除内容。X 偶尔返回空页，也可能静默改变页面内部格式。
-- GitHub Actions 免费额度适用于公开仓库；工作流每次更新监控状态和公开数据，再部署静态页面。
-- 静态 Pages 不提供邮箱订阅、祈愿计数等需要数据库的表单服务。
+- 只读取公开 Posts，不包含回复、私密帖子或已删除内容。
+- X 可能返回空页或调整页面内部格式；抓取失败会保留错误状态，恢复后继续抓取。
+- Pages 是静态网站；邮箱订阅、祈愿计数等需要数据库的交互不提供。
+- GitHub 的定时发布会在数据推送后启动，显示时间还受 Actions 排队影响。

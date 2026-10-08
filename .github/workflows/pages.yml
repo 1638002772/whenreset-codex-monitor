@@ -1,12 +1,12 @@
 name: Update monitor and publish Pages
 
 on:
-  schedule:
-    - cron: "*/10 * * * *"
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -26,24 +26,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Fetch public X Posts and classify updates
-        env:
-          WHENRESET_FEISHU_WEBHOOK: ${{ secrets.WHENRESET_FEISHU_WEBHOOK }}
-          WHENRESET_FEISHU_SECRET: ${{ secrets.WHENRESET_FEISHU_SECRET }}
-        run: python monitor.py --once
-
       - name: Build static data and site
         run: python tools/build_site.py
-
-      - name: Save monitor state and public history
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/state.json data/posts.json data/events.json data/site-data.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Update public reset monitor data"
-            git push
-          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
