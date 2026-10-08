@@ -25,7 +25,7 @@ powershell -ExecutionPolicy Bypass -File .\uninstall-monitor-task.ps1
 也可以手动运行一次并发布：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\update-and-publish.ps1
+python .\tools\update_and_publish.py
 ```
 
 在网页点击“开启本机浏览器提醒”后，保持页面打开即可接收浏览器通知。可选的飞书配置保存在运行电脑的 `data/notification-config.json`，不会进入公开仓库。

@@ -1,14 +1,14 @@
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$powershellExe = (Get-Command powershell.exe -ErrorAction Stop).Source
-$scriptPath = Join-Path $projectRoot 'tools\update-and-publish.ps1'
+$pythonExe = (Get-Command python.exe -ErrorAction Stop).Source
+$scriptPath = Join-Path $projectRoot 'tools\update_and_publish.py'
 $taskName = 'WHENRESET public X monitor'
 
-if (-not (Test-Path -LiteralPath $powershellExe)) {
-    throw "PowerShell was not found at $powershellExe"
+if (-not (Test-Path -LiteralPath $pythonExe)) {
+    throw "Python was not found at $pythonExe"
 }
 
-$action = New-ScheduledTaskAction -Execute $powershellExe -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WorkingDirectory $projectRoot
+$action = New-ScheduledTaskAction -Execute $pythonExe -Argument "`"$scriptPath`"" -WorkingDirectory $projectRoot
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes 10) -RepetitionDuration (New-TimeSpan -Days 3650)
 $principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" -LogonType Interactive -RunLevel Limited
 $settings = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 2)
