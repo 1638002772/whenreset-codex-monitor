@@ -95,14 +95,19 @@ def decode_rsc_string(value: str) -> str:
 
 
 def fetch_html() -> str:
+    profile_url = os.environ.get("WHENRESET_X_PROFILE_URL", PROFILE_URL)
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Cache-Control": "no-cache",
+    }
+    proxy_token = os.environ.get("WHENRESET_PROFILE_PROXY_TOKEN", "").strip()
+    if proxy_token:
+        headers["Authorization"] = f"Bearer {proxy_token}"
     request = urllib.request.Request(
-        PROFILE_URL,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Cache-Control": "no-cache",
-        },
+        profile_url,
+        headers=headers,
     )
     try:
         with urllib.request.urlopen(request, timeout=35) as response:
