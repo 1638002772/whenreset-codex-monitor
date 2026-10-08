@@ -2,8 +2,8 @@
   "connected": true,
   "status": {
     "state": "ok",
-    "lastAttemptAt": "2026-10-08T22:00:37Z",
-    "lastSuccessAt": "2026-10-08T22:00:38Z",
+    "lastAttemptAt": "2026-10-08T22:10:37Z",
+    "lastSuccessAt": "2026-10-08T22:10:38Z",
     "lastNewPostAt": "2026-10-08T19:15:14Z",
     "nextCheckAt": null,
     "consecutiveFailures": 0,
