@@ -1,0 +1,9 @@
+__pycache__/
+data/notification-config.json
+data/subscribers.json
+data/diagnostics/
+dist/
+cloudflare/.dev.vars
+cloudflare/.wrangler/
+cloudflare/public/
+cloudflare/seed-data.js

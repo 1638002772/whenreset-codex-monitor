@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07131c">
+  <meta name="description" content="WHENRESET · Codex 重置监控">
+  <title>Codex 重置监控 · WHENRESET</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./signal-console.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="demo-ribbon"><span class="demo-dot" id="connectionDot"></span><span id="demoBadge" data-copy="demoBadge">本机公开抓取 · 正在连接</span><span class="demo-ribbon__date" id="lastUpdatedAt">等待首次抓取</span></div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="WHENRESET 首页">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>whenreset<span class="brand-period">.</span></span>
+      </a>
+      <nav class="primary-nav" aria-label="主导航">
+        <a class="active" href="#radar" data-copy="navRadar">重置雷达</a>
+        <a href="#how" data-copy="navGuide">重置问答</a>
+        <a href="#feed" data-copy="navCases">动态记录</a>
+      </nav>
+      <div class="header-actions">
+        <button class="button button--small button--outline" id="miniProgramButton" data-copy="miniProgram">小程序</button>
+        <div class="language-switch" aria-label="页面语言">
+          <button class="selected" type="button" data-lang="zh">中文</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+        <label class="sr-only" for="timezone" data-copy="timezoneLabel">选择显示时区</label>
+        <select id="timezone" class="timezone-select">
+          <option value="Asia/Shanghai" data-copy="tzBeijing">北京</option>
+          <option value="UTC">UTC</option>
+          <option value="America/Los_Angeles" data-copy="tzLosAngeles">洛杉矶</option>
+          <option value="America/New_York" data-copy="tzNewYork">纽约</option>
+          <option value="Europe/London" data-copy="tzLondon">伦敦</option>
+          <option value="Asia/Tokyo" data-copy="tzTokyo">东京</option>
+        </select>
+      </div>
+      <button class="mobile-menu" id="mobileMenu" aria-label="打开导航"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top" class="page-shell">
+    <section class="hero-panel" id="radar" aria-labelledby="heroTitle">
+      <div class="hero-orb hero-orb--one"></div><div class="hero-orb hero-orb--two"></div>
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse-dot"></span><span id="connectionBadge" data-copy="heroEyebrow">重点关注 · 本地时间</span></div>
+          <h1 id="heroTitle" data-copy="heroTitle">正在读取监控数据</h1>
+        <div class="hero-summary">
+          <span class="summary-mark">↗</span>
+          <p id="heroSummary" data-copy="heroSummary">页面会读取本机脚本抓取的 Tibo 公开 Posts；等待本地数据服务连接。</p>
+        </div>
+        <div class="hero-actions">
+          <a class="button button--dark" href="https://x.com/thsottiaux" target="_blank" rel="noreferrer">
+            <span data-copy="viewPost">查看相关原帖</span><span class="button-arrow">↗</span>
+          </a>
+          <button class="button button--text" data-modal="basis" type="button"><span data-copy="whySignal">为什么是积极信号</span><span>ⓘ</span></button>
+        </div>
+        <div class="hero-footnote"><span class="mini-star">✳</span><span data-copy="heroDisclaimer">基于公开信息的观察，不代表官方到账确认</span></div>
+      </div>
+      <div class="hero-art" aria-label="历史重置概率估算">
+        <span class="art-spark art-spark--a">✦</span><span class="art-spark art-spark--b">✧</span>
+        <div class="battery-shell" id="batteryShell" aria-label="基于历史的重置概率">
+          <div class="battery-cap"></div><div class="battery-inner"><div class="battery-fill" id="batteryFill"></div><div class="battery-face"><span class="eye eye--left"></span><span class="eye eye--right"></span><span class="smile"></span></div></div>
+          <div class="battery-percent" id="batteryPercent">—</div>
+        </div>
+        <a class="wish-button" href="#subscribe"><span>🔔</span><span data-copy="wish">开启提醒</span><b>↗</b></a>
+        <span class="art-caption" data-copy="localDemo">本机抓取 · 每 5 分钟</span>
+      </div>
+      <span class="hero-watermark">RESET RADAR</span>
+    </section>
+
+    <section class="last-reset-strip">
+      <div class="strip-icon">↻</div>
+      <span data-copy="lastReset">最近一次 Codex 重置</span>
+      <strong id="lastResetValue" data-copy="oneDayAgo">—</strong>
+      <span class="strip-separator"></span>
+      <button class="text-link" type="button" data-modal="resetCard"><span data-copy="cardIssued">重置卡发放</span><span>↓</span></button>
+      <span class="strip-meta" data-copy="communityConfirm">公开帖子与历史档案</span>
+    </section>
+
+    <section class="probability-section" aria-labelledby="probTitle">
+      <div class="section-heading">
+        <div><span class="section-kicker" data-copy="forecastKicker">FORECAST</span><h2 id="probTitle" data-copy="forecastTitle">未来重置概率</h2></div>
+        <button class="info-button" type="button" data-modal="probability" aria-label="概率说明">ⓘ</button>
+      </div>
+      <div class="probability-grid">
+        <article class="prob-card prob-card--first"><div class="prob-top"><span data-copy="within24">未来 24 小时</span><span class="prob-icon">◷</span></div><div class="prob-number"><strong id="prob24">—</strong><span id="prob24Suffix"></span></div><div class="prob-meter"><span id="meter24" style="--meter:0%"></span></div><div class="prob-foot"><span data-copy="sampleModel">历史间隔估计</span><span id="prob24Note">—</span></div></article>
+        <article class="prob-card prob-card--second"><div class="prob-top"><span data-copy="within48">未来 48 小时</span><span class="prob-icon">◷</span></div><div class="prob-number"><strong id="prob48">—</strong><span id="prob48Suffix"></span></div><div class="prob-meter"><span id="meter48" style="--meter:0%"></span></div><div class="prob-foot"><span data-copy="sampleModel">历史间隔估计</span><span id="prob48Note">—</span></div></article>
+        <article class="prob-card prob-card--third"><div class="prob-top"><span data-copy="within72">未来 72 小时</span><span class="prob-icon">◷</span></div><div class="prob-number"><strong id="prob72">—</strong><span id="prob72Suffix"></span></div><div class="prob-meter"><span id="meter72" style="--meter:0%"></span></div><div class="prob-foot"><span data-copy="sampleModel">历史间隔估计</span><span id="prob72Note">—</span></div></article>
+        <article class="accuracy-card"><div class="accuracy-top"><span data-copy="accuracy">预测准确率</span><span class="accuracy-spark">✳</span></div><strong id="accuracyValue">—</strong><div class="accuracy-copy" id="accuracyHint" data-copy="accuracyHint">本地尚无足够的预测回测记录</div><span class="accuracy-date" id="updatedAt" data-copy="updatedAt">尚未更新</span></article>
+      </div>
+      <p class="section-note"><span class="note-dot"></span><span id="probDisclaimer" data-copy="probDisclaimer">历史样本不足时不显示概率估算。</span></p>
+    </section>
+
+    <section class="subscribe-section" id="subscribe">
+      <div class="subscribe-heading"><div><span class="section-kicker" data-copy="notifyKicker">STAY IN THE LOOP</span><h2 data-copy="notifyTitle">接收重置提醒</h2></div><span class="subscribe-illustration">✉</span></div>
+      <div class="subscribe-grid">
+        <article class="subscribe-card">
+          <div class="subscribe-card__head"><span class="channel-icon channel-icon--mail">🔔</span><div><h3 data-copy="browserTitle">浏览器提醒</h3><p data-copy="browserHint">打开网页并允许通知后接收更新</p></div></div>
+          <button class="button button--olive button--full" id="browserAlertButton" type="button"><span data-copy="browserAlert">开启本机浏览器提醒</span><span>→</span></button>
+        </article>
+        <article class="subscribe-card">
+          <div class="subscribe-card__head"><span class="channel-icon channel-icon--feishu">飞</span><div><h3 data-copy="feishuTitle">飞书群机器人</h3><p id="feishuStatus" data-copy="feishuHint">可选：管理员在仓库密钥中配置</p></div><button class="help-link" type="button" data-modal="feishuHelp" data-copy="setupGuide">配置教程 ↗</button></div>
+          <p class="channel-note" data-copy="feishuBody">有明确的新重置消息时，由定时抓取脚本发送到已配置的群聊。</p>
+        </article>
+        <div class="subscribe-card subscribe-card--wechat">
+          <div class="subscribe-card__head"><span class="channel-icon channel-icon--wechat">微</span><div><h3 data-copy="wechatTitle">微信群通知</h3><p data-copy="wechatHint">扫码加入提醒群</p></div></div>
+          <button class="qr-placeholder" type="button" id="qrButton" aria-label="查看微信群二维码"><span class="qr-corners"><i></i><i></i><i></i></span><span class="qr-symbol">微</span><span class="qr-caption" data-copy="qrDemo">二维码待配置</span></button>
+          <div class="qr-bottom"><span class="qr-check">✓</span><span data-copy="qrComing">真实通知接入后开放</span></div>
+        </div>
+      </div>
+      <p class="demo-note"><span>i</span><span id="formDisclaimer" data-copy="formDisclaimer">浏览器提醒需要保持网页打开；飞书 Webhook 由仓库管理员配置。</span></p>
+    </section>
+
+    <section class="history-section" id="history">
+      <div class="history-header">
+        <div class="section-heading section-heading--compact"><div><span class="section-kicker" data-copy="historyKicker">LOOKING BACK</span><h2 data-copy="historyTitle">过去的重置</h2></div><button class="info-button" type="button" data-modal="historyHelp" aria-label="历史统计说明">ⓘ</button></div>
+        <div class="history-controls"><button class="month-arrow" id="prevMonth" aria-label="上个月">←</button><div class="month-tabs" id="monthTabs"></div><button class="month-arrow" id="nextMonth" aria-label="下个月">→</button></div>
+      </div>
+      <div class="calendar-card">
+        <div class="calendar-top"><div><span class="calendar-year">2026</span><strong id="selectedMonthLabel">10 月</strong></div><div class="calendar-legend"><span><i class="legend-dot legend-dot--reset"></i><span data-copy="resetLegend">额度重置</span></span><span><i class="legend-dot legend-dot--card"></i><span data-copy="cardLegend">重置卡发放</span></span></div></div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <div class="calendar-bottom"><span id="calendarCaption">10 月 · 等待本机数据</span><button class="calendar-more" data-modal="historyHelp" type="button"><span data-copy="historyDetails">查看统计口径</span><span>↗</span></button></div>
+      </div>
+      <div class="stat-grid">
+        <article class="stat-card"><span class="stat-icon">↻</span><span data-copy="statResets">记录重置</span><strong id="statResetsValue">—</strong><small id="statSource" data-copy="fromHistory">来自本地历史记录</small></article>
+        <article class="stat-card"><span class="stat-icon stat-icon--amber">▧</span><span data-copy="statCards">重置卡发放</span><strong id="statCardsValue">—</strong><small data-copy="fromHistory">来自本地历史记录</small></article>
+        <article class="stat-card"><span class="stat-icon stat-icon--blue">⌁</span><span data-copy="statAverage">平均间隔</span><strong id="statAverageValue">—</strong><small data-copy="fromHistory">按已确认事件估算</small></article>
+        <article class="stat-card"><span class="stat-icon stat-icon--rose">◷</span><span data-copy="statLongest">最长等待</span><strong id="statLongestValue">—</strong><small data-copy="fromHistory">按已确认事件估算</small></article>
+      </div>
+    </section>
+
+    <section class="feed-section" id="feed">
+      <div class="feed-heading"><div><span class="section-kicker" data-copy="feedKicker">SIGNALS & UPDATES</span><h2 data-copy="feedTitle">最新动态</h2></div><div class="feed-actions"><div class="feed-filter" role="group" aria-label="动态筛选"><button class="selected" type="button" data-filter="all" data-copy="allUpdates">全部</button><button type="button" data-filter="signal" data-copy="signalOnly">重置信号</button></div><div class="language-switch language-switch--feed"><button class="selected" type="button" data-feed-lang="zh">中文</button><button type="button" data-feed-lang="en">EN</button></div></div></div>
+      <div class="feed-list" id="feedList"></div>
+      <div class="feed-end"><span></span><span id="feedEnd" data-copy="feedEnd">正在读取本机数据…</span><span></span></div>
+    </section>
+
+    <section class="how-section" id="how">
+      <div class="how-icon">✳</div><div><span class="section-kicker" data-copy="howKicker">HOW IT WORKS</span><h2 data-copy="howTitle">把信号看清楚，再决定要不要等</h2><p data-copy="howCopy">后台每 5 分钟抓取 Tibo 的公开 Posts，不登录、不调用 X API。页面会区分重置预告和到账确认。</p></div><a href="#radar" class="button button--outline" data-copy="backToTop">回到雷达 ↑</a>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand brand--footer" href="#top"><span class="brand-mark"><span></span><span></span><span></span></span><span>whenreset<span class="brand-period">.</span></span></a><span data-copy="footerCopy">记录公开信号，等待下一次重置。</span><span class="footer-status"><i></i><span data-copy="previewOnly">本地公开抓取 · 每 5 分钟</span></span></footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="info-dialog" id="infoDialog">
+    <div class="dialog-top"><span class="dialog-symbol" id="dialogSymbol">✳</span><button class="dialog-close" id="dialogClose" aria-label="关闭">×</button></div>
+    <span class="section-kicker" id="dialogKicker">ABOUT THIS PREVIEW</span><h2 id="dialogTitle">说明</h2><p id="dialogBody"></p><button class="button button--dark dialog-ok" id="dialogOk" type="button">知道了</button>
+  </dialog>
+  <div class="mobile-nav" id="mobileNav"><a href="#radar" data-copy="navRadar">重置雷达</a><a href="#how" data-copy="navGuide">重置问答</a><a href="#feed" data-copy="navCases">动态记录</a><a href="#subscribe" data-copy="notifyTitle">通知设置</a><div class="mobile-language"><span data-copy="pageLanguage">页面语言</span><div class="language-switch"><button class="selected" type="button" data-lang="zh">中文</button><button type="button" data-lang="en">EN</button></div></div></div>
+</body>
+</html>

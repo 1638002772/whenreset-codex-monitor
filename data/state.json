@@ -1,0 +1,21 @@
+{
+  "lastAttemptAt": "2026-10-08T13:20:45Z",
+  "initialized": true,
+  "seenIds": [
+    "2108040921044639779",
+    "2107913674593644711",
+    "2107912709715132482",
+    "2107676072871600470",
+    "2107597780352950624",
+    "2108084615349170480"
+  ],
+  "lastSuccessAt": "2026-10-08T13:20:46Z",
+  "consecutiveFailures": 0,
+  "lastError": null,
+  "monitorState": "ok",
+  "postsFetched": 5,
+  "failureAlertSent": false,
+  "lastNewPostAt": "2026-10-08T06:38:33Z",
+  "lastNewPostIds": [],
+  "lastNotifications": []
+}
