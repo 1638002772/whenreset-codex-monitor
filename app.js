@@ -7,17 +7,17 @@ const translations = {
     lastReset: '最近一次 Codex 重置', oneDayAgo: '—', cardIssued: '重置卡发放', communityConfirm: '公开帖子与历史档案', forecastKicker: 'FORECAST', forecastTitle: '未来重置概率',
     within24: '未来 24 小时', within48: '未来 48 小时', within72: '未来 72 小时', sampleModel: '历史间隔估计', accuracy: '预测准确率', accuracyHint: '本地尚无足够的预测回测记录', updatedAt: '等待首次抓取',
     probDisclaimer: '按已记录重置的历史间隔估算；这是简单统计模型，不是 AI 预测。', notifyKicker: 'STAY IN THE LOOP', notifyTitle: '接收重置提醒', browserTitle: '浏览器提醒', browserHint: '打开网页并允许通知后接收更新', feishuTitle: '飞书群机器人', feishuHint: '尚未配置', feishuConfigured: '已配置 · 由定时任务推送', feishuBody: '有明确的新重置消息时，由定时抓取脚本发送到已配置的群聊。', setupGuide: '配置教程 ↗',
-    wechatTitle: '微信群通知', wechatHint: '当前未接入微信机器人', qrDemo: '二维码待配置', qrComing: '需要真实群二维码或机器人凭据', browserAlert: '开启本机浏览器提醒', browserEnabled: '本机浏览器提醒已开启', browserDenied: '浏览器通知被禁用，请在站点设置中打开', browserUnsupported: '此浏览器不支持通知', formDisclaimer: '浏览器提醒需要保持网页打开；飞书 Webhook 由仓库管理员配置。',
+    wechatTitle: '微信群通知', wechatHint: '当前未接入微信机器人', qrDemo: '二维码待配置', qrComing: '需要真实群二维码或机器人凭据', browserAlert: '开启本机浏览器提醒', browserEnabled: '本机浏览器提醒已开启', browserDenied: '浏览器通知被禁用，请在站点设置中打开', browserUnsupported: '此浏览器不支持通知', formDisclaimer: '浏览器提醒需要保持网页打开；飞书 Webhook 保存在抓取电脑本地，不会公开。',
     historyKicker: 'LOOKING BACK', historyTitle: '过去的重置', resetLegend: '额度重置', cardLegend: '重置卡发放', historyDetails: '查看统计口径', statResets: '记录重置', statCards: '重置卡发放', statAverage: '平均间隔', statLongest: '最长等待', times: '次', days: '天', sinceApril: '自 4 月开始统计', fromHistory: '按历史事件估算',
     feedKicker: 'SIGNALS & UPDATES', feedTitle: '最新动态', allUpdates: '全部', signalOnly: '重置信号', feedEnd: '由 GitHub Actions 定时抓取公开数据', howKicker: 'HOW IT WORKS', howTitle: '把信号看清楚，再决定要不要等',
     howCopy: 'GitHub Actions 每 10 分钟抓取 Tibo 的公开 Posts，不登录、不调用 X API，也不调用 AI。页面读取公开的事件档案，自动区分预告与已确认到账；只有新出现的明确重置消息才会触发浏览器提醒或已配置的飞书通知。', backToTop: '回到雷达 ↑', footerCopy: '记录公开信号，等待下一次重置。', previewOnly: 'GitHub Actions 抓取 · 每 10 分钟',
     info: '说明', ok: '知道了', month: '月', all: '全部', signal: '重置信号', activeSignal: '活动暗示', notice: '重置预告', confirmed: '已确认重置', compensation: '额度补偿', capIncrease: '上限提升', normalPost: '普通动态', community: '社区观测', summary: '摘要', original: '原文',
     modal: {
       basisTitle: '为什么把它标作重置信号？', basisBody: '只有帖子明确把 reset 与 Codex 用量、额度、付费账户或预存重置联系起来，才会进入重置信号。时间窗原样记录；公告和到账确认归并到同一事件。',
-      probabilityTitle: '概率卡片说明', probabilityBody: '概率使用本机历史重置间隔作简单统计估算；历史间隔样本不足 4 个时不显示。它不是官方预测，也不调用 AI。',
+      probabilityTitle: '概率卡片说明', probabilityBody: '概率使用公开历史记录中的重置间隔作简单统计估算；历史间隔样本不足 4 个时不显示。它不是官方预测，也不调用 AI。',
       resetCardTitle: '重置卡发放', resetCardBody: '这里会展示额度补偿或额外重置卡发放的公开消息，并和常规额度重置分开统计。此卡片当前仅用于展示交互。',
       feishuHelpTitle: '飞书机器人配置', feishuHelpBody: '公开网页不保存机器人密钥。可在运行抓取脚本的电脑上创建被忽略的 data/notification-config.json，填写飞书 Webhook 和可选签名密钥；该文件不会上传到公开仓库。',
-      historyHelpTitle: '历史统计口径', historyHelpBody: '历史档案由公开推文抓取与公开历史数据快照组成；同一事件的预告和到账确认会合并。网页只展示保存到本机的事件，不使用静态样例。',
+      historyHelpTitle: '历史统计口径', historyHelpBody: '历史档案由公开推文抓取与公开历史数据快照组成；同一事件的预告和到账确认会合并。网页读取仓库中的公开数据，并由抓取脚本定时更新。',
       miniTitle: '小程序入口', miniBody: '这里可以放置真实的小程序码或跳转入口。当前预览没有绑定小程序，也没有可用的入群二维码。',
       qrTitle: '微信群提醒', qrBody: '真实群二维码需要由你提供，或在通知服务部署后生成。当前这个灰色图案只是占位，不会跳转或入群。'
     },
@@ -31,17 +31,17 @@ const translations = {
     lastReset: 'Most recent Codex reset', oneDayAgo: '—', cardIssued: 'Reset cards', communityConfirm: 'Public posts and archived history', forecastKicker: 'FORECAST', forecastTitle: 'Reset probability',
     within24: 'Next 24 hours', within48: 'Next 48 hours', within72: 'Next 72 hours', sampleModel: 'Historical interval estimate', accuracy: 'Forecast accuracy', accuracyHint: 'Not enough local forecast history yet', updatedAt: 'Waiting for first fetch',
     probDisclaimer: 'Estimated from recorded reset intervals using a simple statistical model, not an AI prediction.', notifyKicker: 'STAY IN THE LOOP', notifyTitle: 'Get reset alerts', browserTitle: 'Browser alerts', browserHint: 'Keep this page open and allow notifications', feishuTitle: 'Feishu bot', feishuHint: 'Not configured', feishuConfigured: 'Configured · sent by the scheduled job', feishuBody: 'When a clear reset update appears, the scheduled script sends it to the configured group.', setupGuide: 'Setup guide ↗',
-    wechatTitle: 'WeChat group', wechatHint: 'No WeChat bot configured', qrDemo: 'QR code not configured', qrComing: 'A real group QR code or bot credential is required', browserAlert: 'Enable browser alerts on this computer', browserEnabled: 'Browser alerts are enabled', browserDenied: 'Notifications are blocked; allow them in site settings', browserUnsupported: 'This browser does not support notifications.', formDisclaimer: 'Browser alerts require this page to stay open. The repository owner manages the Feishu webhook.',
+    wechatTitle: 'WeChat group', wechatHint: 'No WeChat bot configured', qrDemo: 'QR code not configured', qrComing: 'A real group QR code or bot credential is required', browserAlert: 'Enable browser alerts on this computer', browserEnabled: 'Browser alerts are enabled', browserDenied: 'Notifications are blocked; allow them in site settings', browserUnsupported: 'This browser does not support notifications.', formDisclaimer: 'Browser alerts require this page to stay open. The Feishu webhook stays on the monitor computer and is not published.',
     historyKicker: 'LOOKING BACK', historyTitle: 'Reset history', resetLegend: 'Usage reset', cardLegend: 'Reset card issued', historyDetails: 'View counting rules', statResets: 'Resets recorded', statCards: 'Reset cards issued', statAverage: 'Average interval', statLongest: 'Longest wait', times: ' times', days: ' days', sinceApril: 'Tracking since April', fromHistory: 'Estimated from past events',
     feedKicker: 'SIGNALS & UPDATES', feedTitle: 'Latest activity', allUpdates: 'All', signalOnly: 'Reset signals', feedEnd: 'Public data is updated by GitHub Actions', howKicker: 'HOW IT WORKS', howTitle: 'Read the signal before deciding to wait',
     howCopy: 'GitHub Actions fetches Tibo’s public Posts every 10 minutes without login, X API, or AI calls. This page reads the public event archive and distinguishes forecasts from confirmed delivery; browser or configured Feishu alerts fire only for new, clearly relevant reset updates.', backToTop: 'Back to radar ↑', footerCopy: 'Tracking public signals, waiting for the next reset.', previewOnly: 'GitHub Actions fetch · every 10 minutes',
     info: 'About', ok: 'Got it', month: '', all: 'All', signal: 'Reset signal', activeSignal: 'Signal', notice: 'Forecast', confirmed: 'Confirmed reset', compensation: 'Usage compensation', capIncrease: 'Limit increase', normalPost: 'Update', community: 'Community report', summary: 'Summary', original: 'Original',
     modal: {
       basisTitle: 'Why is this a reset signal?', basisBody: 'A post is classified as a reset signal only when it clearly connects reset language with Codex usage, quota, paid accounts, or banked resets. Time windows stay in the original wording; announcements and delivery confirmations are merged into one event.',
-      probabilityTitle: 'About the probability cards', probabilityBody: 'Probabilities use a simple estimate from local historical reset intervals. They stay hidden until at least four intervals are available. This is not an official forecast and does not call AI.',
+      probabilityTitle: 'About the probability cards', probabilityBody: 'Probabilities use a simple estimate from archived reset intervals. They stay hidden until at least four intervals are available. This is not an official forecast and does not call AI.',
       resetCardTitle: 'Reset cards', resetCardBody: 'This area can show public updates about compensation or extra reset cards, tracked separately from routine usage resets. It is display-only in this preview.',
       feishuHelpTitle: 'Feishu bot setup', feishuHelpBody: 'The public site does not store bot credentials. Create the ignored data/notification-config.json on the computer running the monitor and add the Feishu webhook and optional signing secret there. That file is excluded from the public repository.',
-      historyHelpTitle: 'History counting rules', historyHelpBody: 'The history combines public X posts and a public historical snapshot. A forecast and its later landing confirmation are merged as one event. This page displays local records, not static examples.',
+      historyHelpTitle: 'History counting rules', historyHelpBody: 'The history combines public X posts and a public historical snapshot. A forecast and its later landing confirmation are merged as one event. This page reads public repository data refreshed by the monitor script.',
       miniTitle: 'Mini program', miniBody: 'A live mini-program QR code or entry link can go here. This preview is not connected to a mini program or group QR code.',
       qrTitle: 'WeChat group alerts', qrBody: 'A real group QR code must be provided or generated by the deployed notification service. This gray pattern is a placeholder only.'
     },
@@ -290,7 +290,7 @@ function renderLiveData() {
   $('#statCardsValue').innerHTML = `${cardCount}<span>${t.times}</span>`;
   $('#statAverageValue').innerHTML = `${summary.averageIntervalDays == null ? '—' : summary.averageIntervalDays}<span>${t.days}</span>`;
   $('#statLongestValue').innerHTML = `${summary.longestIntervalDays == null ? '—' : summary.longestIntervalDays}<span>${t.days}</span>`;
-  $('#statSource').textContent = state.lang === 'zh' ? `${resetCount} 条已确认历史记录` : `${resetCount} confirmed history entries`;
+  $('#statSource').textContent = state.lang === 'zh' ? `${resetCount} 条公开确认记录` : `${resetCount} confirmed public records`;
   const probabilities = summary.probabilities;
   for (const horizon of [24, 48, 72]) {
     const value = probabilities?.[String(horizon)];
@@ -300,10 +300,10 @@ function renderLiveData() {
     $(`#prob${horizon}Note`).textContent = value == null ? (state.lang === 'zh' ? '历史样本不足' : 'Not enough history') : (state.lang === 'zh' ? `${resetCount} 次历史记录` : `${resetCount} events`);
   }
   $('#accuracyValue').textContent = '—';
-  $('#accuracyHint').textContent = state.lang === 'zh' ? '尚未积累本地预测回测记录' : 'No local forecast backtest yet';
+  $('#accuracyHint').textContent = state.lang === 'zh' ? '尚未积累预测回测记录' : 'No forecast backtest yet';
   $('#updatedAt').textContent = status.lastSuccessAt ? `${state.lang === 'zh' ? '抓取于 ' : 'Fetched '}${localDateTime(status.lastSuccessAt)}` : t.updatedAt;
   $('#probDisclaimer').textContent = probabilities
-    ? (state.lang === 'zh' ? `按 ${resetCount} 条本地确认记录的间隔估算；仅作参考，不是 AI 预测。` : `Estimated from ${resetCount} local reset records; informational only, not an AI forecast.`)
+    ? (state.lang === 'zh' ? `按 ${resetCount} 条历史确认记录的间隔估算；仅作参考，不是 AI 预测。` : `Estimated from ${resetCount} archived reset records; informational only, not an AI forecast.`)
     : (state.lang === 'zh' ? '确认事件积累到足够数量后才显示概率；当前不会用静态数值冒充预测。' : 'Probabilities appear after enough confirmed events are recorded; no static values are shown as live forecasts.');
   $('#feishuStatus').textContent = data.notifications?.feishuConfigured ? t.feishuConfigured : t.feishuHint;
   $('#formDisclaimer').textContent = t.formDisclaimer;
