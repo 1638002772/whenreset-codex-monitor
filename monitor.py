@@ -441,6 +441,9 @@ def dispatch_public_email_jobs(config: dict | None = None) -> dict:
     try:
         with urllib.request.urlopen(claim, timeout=20) as response:
             payload = json.loads(response.read().decode("utf-8", errors="replace") or "{}")
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace").strip()
+        return {"sent": 0, "failed": 1, "error": f"Could not claim public email jobs: HTTP {exc.code}: {detail[:180]}"}
     except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
         return {"sent": 0, "failed": 1, "error": f"Could not claim public email jobs: {exc}"}
     if not payload.get("ok"):
