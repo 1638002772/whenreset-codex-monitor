@@ -47,9 +47,11 @@ jobs:
         run: python monitor.py --once
 
       - name: Build static data and site
+        if: steps.scrape.outputs.publish_site == 'true'
         run: python tools/build_site.py
 
       - name: Save monitor state
+        if: steps.scrape.outputs.publish_site == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -62,14 +64,17 @@ jobs:
           fi
 
       - name: Configure Pages
+        if: steps.scrape.outputs.publish_site == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload site artifact
+        if: steps.scrape.outputs.publish_site == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
       - name: Deploy to GitHub Pages
+        if: steps.scrape.outputs.publish_site == 'true'
         uses: actions/deploy-pages@v4
 
       - name: Report scrape failure after publishing status

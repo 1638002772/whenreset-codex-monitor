@@ -12,7 +12,7 @@
   <script src="./app.js" defer></script>
 </head>
 <body>
-  <div class="demo-ribbon"><span class="demo-dot" id="connectionDot"></span><span id="demoBadge" data-copy="demoBadge">本机公开抓取 · 正在连接</span><span class="demo-ribbon__date" id="lastUpdatedAt">等待首次抓取</span></div>
+  <div class="demo-ribbon"><span class="demo-dot" id="connectionDot"></span><span id="demoBadge" data-copy="demoBadge">GitHub Actions 云端监控 · 正在连接</span><span class="demo-ribbon__date" id="lastUpdatedAt">等待首次数据更新</span></div>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="WHENRESET 首页">
@@ -52,7 +52,7 @@
           <h1 id="heroTitle" data-copy="heroTitle">正在读取监控数据</h1>
         <div class="hero-summary">
           <span class="summary-mark">↗</span>
-          <p id="heroSummary" data-copy="heroSummary">页面会读取本机脚本抓取的 Tibo 公开 Posts；等待本地数据服务连接。</p>
+          <p id="heroSummary" data-copy="heroSummary">页面会读取 GitHub Actions 云端监控抓取的 Tibo 公开 Posts。</p>
         </div>
         <div class="hero-actions">
           <a class="button button--dark" href="https://x.com/thsottiaux" target="_blank" rel="noreferrer">
@@ -148,11 +148,11 @@
     </section>
 
     <section class="how-section" id="how">
-      <div class="how-icon">✳</div><div><span class="section-kicker" data-copy="howKicker">HOW IT WORKS</span><h2 data-copy="howTitle">把信号看清楚，再决定要不要等</h2><p data-copy="howCopy">后台每 5 分钟抓取 Tibo 的公开 Posts，不登录、不调用 X API。页面会区分重置预告和到账确认。</p></div><a href="#radar" class="button button--outline" data-copy="backToTop">回到雷达 ↑</a>
+      <div class="how-icon">✳</div><div><span class="section-kicker" data-copy="howKicker">HOW IT WORKS</span><h2 data-copy="howTitle">把信号看清楚，再决定要不要等</h2><p data-copy="howCopy">GitHub Actions 云端监控每 10 分钟抓取 Tibo 的公开 Posts，不登录、不调用 X API。页面会区分重置预告和到账确认。</p></div><a href="#radar" class="button button--outline" data-copy="backToTop">回到雷达 ↑</a>
     </section>
   </main>
 
-  <footer class="site-footer"><a class="brand brand--footer" href="#top"><span class="brand-mark"><span></span><span></span><span></span></span><span>whenreset<span class="brand-period">.</span></span></a><span data-copy="footerCopy">记录公开信号，等待下一次重置。</span><span class="footer-status"><i></i><span data-copy="previewOnly">本地公开抓取 · 每 5 分钟</span></span></footer>
+  <footer class="site-footer"><a class="brand brand--footer" href="#top"><span class="brand-mark"><span></span><span></span><span></span></span><span>whenreset<span class="brand-period">.</span></span></a><span data-copy="footerCopy">记录公开信号，等待下一次重置。</span><span class="footer-status"><i></i><span data-copy="previewOnly">GitHub Actions 云端监控 · 每 10 分钟</span></span></footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <dialog class="info-dialog" id="infoDialog">

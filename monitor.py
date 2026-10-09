@@ -87,6 +87,13 @@ def save_json(path: Path, value) -> None:
     temporary.replace(path)
 
 
+def set_workflow_output(name: str, value: bool) -> None:
+    output_path = os.environ.get("GITHUB_OUTPUT")
+    if output_path:
+        with Path(output_path).open("a", encoding="utf-8") as output:
+            output.write(f"{name}={str(value).lower()}\n")
+
+
 def decode_rsc_string(value: str) -> str:
     try:
         return json.loads('"' + value + '"')
@@ -573,7 +580,10 @@ def build_event_record(category: str, status: str, post: dict) -> dict:
 def run_once() -> dict:
     ensure_dirs()
     state = load_json(STATE_PATH, {})
+    previous_failures = int(state.get("consecutiveFailures", 0))
+    previous_monitor_state = state.get("monitorState")
     pending_email_events = state.setdefault("pendingPublicEmailEvents", {})
+    pending_email_events_before = json.dumps(pending_email_events, sort_keys=True)
     public_mail_delivery = dispatch_public_email_jobs()
     for pending_key, pending_event in list(pending_email_events.items())[:1]:
         queued, _detail = send_public_email_alert(pending_event)
@@ -602,15 +612,17 @@ def run_once() -> dict:
             state["failureAlertAt"] = now_iso()
             queue_browser_alert(state, f"fetch-error:{state['failureAlertAt']}", "WHENRESET 抓取暂时受阻", text)
         save_json(STATE_PATH, state)
-        return {"ok": False, "error": str(exc), "consecutiveFailures": state["consecutiveFailures"]}
+        publish_site = state["consecutiveFailures"] <= 2
+        set_workflow_output("publish_site", publish_site)
+        return {"ok": False, "error": str(exc), "consecutiveFailures": state["consecutiveFailures"], "publishSite": publish_site}
 
-    previous_failures = int(state.get("consecutiveFailures", 0))
     seen = list(state.get("seenIds", []))
     seen_set = set(seen)
     existing_posts = load_json(POSTS_PATH, [])
     events = load_json(EVENTS_PATH, [])
     first_run = not bool(state.get("initialized"))
     ordered = list(reversed(posts))
+    new_posts = []
 
     if first_run:
         # First pass establishes a quiet baseline but still builds a real local timeline.
@@ -685,7 +697,15 @@ def run_once() -> dict:
     save_json(POSTS_PATH, existing_posts[:MAX_POSTS])
     save_json(EVENTS_PATH, events)
     save_json(STATE_PATH, state)
-    return {"ok": True, "postsFetched": len(posts), "newPosts": state.get("lastNewPostIds", []), "events": len(events), "baselineOnly": first_run, "mailDelivery": public_mail_delivery}
+    publish_site = (
+        first_run
+        or bool(new_posts)
+        or previous_failures > 0
+        or previous_monitor_state != "ok"
+        or pending_email_events_before != json.dumps(pending_email_events, sort_keys=True)
+    )
+    set_workflow_output("publish_site", publish_site)
+    return {"ok": True, "postsFetched": len(posts), "newPosts": state.get("lastNewPostIds", []), "events": len(events), "baselineOnly": first_run, "mailDelivery": public_mail_delivery, "publishSite": publish_site}
 
 
 def main() -> int:

@@ -1,16 +1,16 @@
 const translations = {
   zh: {
-    demoBadge: '公开页面抓取 · 正在连接', navRadar: '重置雷达', navGuide: '重置问答', navCases: '动态记录', miniProgram: '小程序', pageLanguage: '页面语言',
+    demoBadge: 'GitHub Actions 云端监控 · 正在连接', navRadar: '重置雷达', navGuide: '重置问答', navCases: '动态记录', miniProgram: '小程序', pageLanguage: '页面语言',
     timezoneLabel: '选择显示时区', tzBeijing: '北京', tzLosAngeles: '洛杉矶', tzNewYork: '纽约', tzLondon: '伦敦', tzTokyo: '东京',
-    heroEyebrow: '重点关注 · 本地时间', heroTitle: '正在读取监控数据', heroSummary: '页面会读取本机监控脚本抓取的 Tibo 公开 Posts。',
+    heroEyebrow: '重点关注 · 本地时间', heroTitle: '正在读取监控数据', heroSummary: '页面会读取 GitHub Actions 云端监控抓取的 Tibo 公开 Posts。',
     viewPost: '查看相关原帖', whySignal: '判定依据', heroDisclaimer: '根据 Tibo 的公开 Posts 自动更新；仅将明确重置消息标作信号', wish: '开启提醒', localDemo: '自动抓取 · 每 10 分钟',
     lastReset: '最近一次 Codex 重置', oneDayAgo: '—', cardIssued: '重置卡发放', communityConfirm: '公开帖子与历史档案', forecastKicker: 'FORECAST', forecastTitle: '未来重置概率',
-    within24: '未来 24 小时', within48: '未来 48 小时', within72: '未来 72 小时', sampleModel: '历史间隔估计', accuracy: '预测准确率', accuracyHint: '本地尚无足够的预测回测记录', updatedAt: '等待首次抓取',
+    within24: '未来 24 小时', within48: '未来 48 小时', within72: '未来 72 小时', sampleModel: '历史间隔估计', accuracy: '预测准确率', accuracyHint: '本地尚无足够的预测回测记录', updatedAt: '等待首次数据更新',
     probDisclaimer: '按已记录重置的历史间隔估算；这是简单统计模型，不是 AI 预测。', notifyKicker: 'STAY IN THE LOOP', notifyTitle: '接收重置提醒', emailTitle: 'QQ 邮箱提醒', emailHint: '任意邮箱可收；由云端定时任务发信', emailLabel: '邮箱地址', emailPlaceholder: 'name@qq.com', emailConsent: '我同意将邮箱保存在通知服务中，仅用于 Codex 重置提醒，可随时退订。', emailSubmit: '确认并订阅', emailSending: '正在提交订阅…', emailReady: '提交后请查收确认邮件；云端监控每 10 分钟检查并投递邮件。', emailNotReady: '邮件订阅服务尚未启用。', emailServiceOffline: '邮件服务暂时不可用，请稍后再试。', emailSent: '新订阅会收到确认邮件；已有订阅不会重复发信。邮件由云端任务投递。', emailFailed: '暂时无法提交订阅，请稍后重试。', emailTooMany: '提交过于频繁，请稍后再试。', browserTitle: '浏览器提醒', browserHint: '打开网页并允许通知后接收更新', feishuTitle: '飞书群机器人', feishuHint: '尚未配置', feishuConfigured: '已配置 · 由定时任务推送', feishuBody: '有明确的新重置消息时，由云端定时任务发送到已配置的群聊。', setupGuide: '配置教程 ↗',
     browserAlert: '开启本机浏览器提醒', browserEnabled: '本机浏览器提醒已开启', browserDenied: '浏览器通知被禁用，请在站点设置中打开', browserUnsupported: '此浏览器不支持通知', formDisclaimer: '邮件会发送到已确认订阅的地址；每封提醒都附有退订入口。浏览器提醒需要保持网页打开。',
     historyKicker: 'LOOKING BACK', historyTitle: '过去的重置', resetLegend: '额度重置', cardLegend: '重置卡发放', historyDetails: '查看统计口径', statResets: '记录重置', statCards: '重置卡发放', statAverage: '平均间隔', statLongest: '最长等待', times: '次', days: '天', sinceApril: '自 4 月开始统计', fromHistory: '按历史事件估算',
-    feedKicker: 'SIGNALS & UPDATES', feedTitle: '最新动态', allUpdates: '全部', signalOnly: '重置信号', feedEnd: '本机脚本每 10 分钟抓取并发布公开数据', howKicker: 'HOW IT WORKS', howTitle: '把信号看清楚，再决定要不要等',
-    howCopy: '本机监控脚本每 10 分钟读取 Tibo 的公开 Posts，不登录、不调用 X API，也不调用 AI。页面区分重置预告和已确认到账；邮件订阅者确认邮箱后，只有明确的 Codex 重置预告或确认才会收到邮件。', backToTop: '回到雷达 ↑', footerCopy: '记录公开信号，等待下一次重置。', previewOnly: '公开 Posts 抓取 · 每 10 分钟',
+    feedKicker: 'SIGNALS & UPDATES', feedTitle: '最新动态', allUpdates: '全部', signalOnly: '重置信号', feedEnd: '云端监控每 10 分钟抓取；有新内容时更新页面', howKicker: 'HOW IT WORKS', howTitle: '把信号看清楚，再决定要不要等',
+    howCopy: 'GitHub Actions 云端工作流每 10 分钟读取 Tibo 的公开 Posts，不登录、不调用 X API，也不调用 AI。页面区分重置预告和已确认到账；邮件订阅者确认邮箱后，只有明确的 Codex 重置预告或确认才会收到邮件。', backToTop: '回到雷达 ↑', footerCopy: '记录公开信号，等待下一次重置。', previewOnly: 'GitHub Actions 云端监控 · 每 10 分钟',
     info: '说明', ok: '知道了', month: '月', all: '全部', signal: '重置信号', activeSignal: '活动暗示', notice: '重置预告', confirmed: '已确认重置', compensation: '额度补偿', capIncrease: '上限提升', normalPost: '普通动态', community: '社区观测', summary: '摘要', original: '原文',
     modal: {
       basisTitle: '为什么把它标作重置信号？', basisBody: '只有帖子明确把 reset 与 Codex 用量、额度、付费账户或预存重置联系起来，才会进入重置信号。时间窗原样记录；公告和到账确认归并到同一事件。',
@@ -23,17 +23,17 @@ const translations = {
     toast: { feishu: '飞书测试消息已发送，配置保存在服务端。', wish: '已记录一次祈愿。', charge: '这里显示的是基于历史的估算概率。', copied: '数据来自公开页面监控。' }
   },
   en: {
-    demoBadge: 'Public page fetch · connecting', navRadar: 'Reset radar', navGuide: 'How it works', navCases: 'Activity', miniProgram: 'Mini program', pageLanguage: 'Language',
+    demoBadge: 'GitHub Actions cloud monitor · connecting', navRadar: 'Reset radar', navGuide: 'How it works', navCases: 'Activity', miniProgram: 'Mini program', pageLanguage: 'Language',
     timezoneLabel: 'Choose timezone', tzBeijing: 'Beijing', tzLosAngeles: 'Los Angeles', tzNewYork: 'New York', tzLondon: 'London', tzTokyo: 'Tokyo',
     heroEyebrow: 'SIGNAL WATCH · LOCAL TIME', heroTitle: 'Loading monitor data', heroSummary: 'This page reads Tibo’s public Posts collected by the monitor script.',
     viewPost: 'View the original post', whySignal: 'Classification details', heroDisclaimer: 'Automatically updated from Tibo’s public Posts', wish: 'Get alerts', localDemo: 'Automatic fetch · every 10 minutes',
     lastReset: 'Most recent Codex reset', oneDayAgo: '—', cardIssued: 'Reset cards', communityConfirm: 'Public posts and archived history', forecastKicker: 'FORECAST', forecastTitle: 'Reset probability',
-    within24: 'Next 24 hours', within48: 'Next 48 hours', within72: 'Next 72 hours', sampleModel: 'Historical interval estimate', accuracy: 'Forecast accuracy', accuracyHint: 'Not enough local forecast history yet', updatedAt: 'Waiting for first fetch',
+    within24: 'Next 24 hours', within48: 'Next 48 hours', within72: 'Next 72 hours', sampleModel: 'Historical interval estimate', accuracy: 'Forecast accuracy', accuracyHint: 'Not enough local forecast history yet', updatedAt: 'Waiting for the first data update',
     probDisclaimer: 'Estimated from recorded reset intervals using a simple statistical model, not an AI prediction.', notifyKicker: 'STAY IN THE LOOP', notifyTitle: 'Get reset alerts', emailTitle: 'QQ Mail alerts', emailHint: 'Any inbox works; sent by the cloud monitor', emailLabel: 'Email address', emailPlaceholder: 'name@qq.com', emailConsent: 'I agree to store this address for Codex reset alerts only. I can unsubscribe at any time.', emailSubmit: 'Confirm and subscribe', emailSending: 'Submitting…', emailReady: 'Check your inbox for a confirmation email; the cloud monitor checks every 10 minutes.', emailNotReady: 'Email subscriptions are not enabled yet.', emailServiceOffline: 'The email service is temporarily unavailable. Try again later.', emailSent: 'New subscribers receive a confirmation email; active addresses are not sent another. Mail is delivered by the cloud monitor.', emailFailed: 'Could not submit the subscription. Try again later.', emailTooMany: 'Too many attempts. Try again later.', browserTitle: 'Browser alerts', browserHint: 'Keep this page open and allow notifications', feishuTitle: 'Feishu bot', feishuHint: 'Not configured', feishuConfigured: 'Configured · sent by the scheduled job', feishuBody: 'When a clear reset update appears, the cloud workflow sends it to the configured group.', setupGuide: 'Setup guide ↗',
     browserAlert: 'Enable browser alerts on this computer', browserEnabled: 'Browser alerts are enabled', browserDenied: 'Notifications are blocked; allow them in site settings', browserUnsupported: 'This browser does not support notifications.', formDisclaimer: 'Confirmation and alert emails are sent by the cloud monitor using QQ Mail SMTP and may take up to 10 minutes. Every alert includes an unsubscribe link.',
     historyKicker: 'LOOKING BACK', historyTitle: 'Reset history', resetLegend: 'Usage reset', cardLegend: 'Reset card issued', historyDetails: 'View counting rules', statResets: 'Resets recorded', statCards: 'Reset cards issued', statAverage: 'Average interval', statLongest: 'Longest wait', times: ' times', days: ' days', sinceApril: 'Tracking since April', fromHistory: 'Estimated from past events',
-    feedKicker: 'SIGNALS & UPDATES', feedTitle: 'Latest activity', allUpdates: 'All', signalOnly: 'Reset signals', feedEnd: 'The monitor script fetches public data every 10 minutes', howKicker: 'HOW IT WORKS', howTitle: 'Read the signal before deciding to wait',
-    howCopy: 'A cloud workflow reads Tibo’s public Posts every 10 minutes without login, X API, or AI calls. The site distinguishes reset forecasts from confirmed delivery. After confirming an email address, subscribers receive mail only for clear Codex reset forecasts or confirmations. Mail is delivered through QQ Mail SMTP by the cloud workflow; no monitor needs to run on your computer.', backToTop: 'Back to radar ↑', footerCopy: 'Tracking public signals, waiting for the next reset.', previewOnly: 'Public Posts fetch · every 10 minutes',
+    feedKicker: 'SIGNALS & UPDATES', feedTitle: 'Latest activity', allUpdates: 'All', signalOnly: 'Reset signals', feedEnd: 'The cloud monitor checks every 10 minutes and updates the site when data changes', howKicker: 'HOW IT WORKS', howTitle: 'Read the signal before deciding to wait',
+    howCopy: 'A cloud workflow reads Tibo’s public Posts every 10 minutes without login, X API, or AI calls. The site distinguishes reset forecasts from confirmed delivery. After confirming an email address, subscribers receive mail only for clear Codex reset forecasts or confirmations. Mail is delivered through QQ Mail SMTP by the cloud workflow; no monitor needs to run on your computer.', backToTop: 'Back to radar ↑', footerCopy: 'Tracking public signals, waiting for the next reset.', previewOnly: 'GitHub Actions cloud monitor · every 10 minutes',
     info: 'About', ok: 'Got it', month: '', all: 'All', signal: 'Reset signal', activeSignal: 'Signal', notice: 'Forecast', confirmed: 'Confirmed reset', compensation: 'Usage compensation', capIncrease: 'Limit increase', normalPost: 'Update', community: 'Community report', summary: 'Summary', original: 'Original',
     modal: {
       basisTitle: 'Why is this a reset signal?', basisBody: 'A post is classified as a reset signal only when it clearly connects reset language with Codex usage, quota, paid accounts, or banked resets. Time windows stay in the original wording; announcements and delivery confirmations are merged into one event.',
@@ -328,8 +328,8 @@ function renderLiveData() {
   const connected = data.connected === true;
   const failures = Number(status.consecutiveFailures || 0);
   $('#connectionDot').classList.toggle('connection-dot--error', !connected);
-  $('#demoBadge').textContent = connected ? (state.lang === 'zh' ? '公开页面监控 · 每 10 分钟' : 'Public page monitor · every 10 minutes') : failures ? (state.lang === 'zh' ? `抓取受阻 · 连续失败 ${failures} 次` : `Fetch issue · ${failures} failures`) : (state.lang === 'zh' ? '监控正在启动' : 'Monitor starting');
-  $('#lastUpdatedAt').textContent = status.lastSuccessAt ? localDateTime(status.lastSuccessAt) : (state.lang === 'zh' ? '等待首次抓取' : 'Waiting for first fetch');
+  $('#demoBadge').textContent = connected ? (state.lang === 'zh' ? 'GitHub Actions 云端监控 · 每 10 分钟' : 'GitHub Actions cloud monitor · every 10 minutes') : failures ? (state.lang === 'zh' ? `抓取受阻 · 连续失败 ${failures} 次` : `Fetch issue · ${failures} failures`) : (state.lang === 'zh' ? '监控正在启动' : 'Monitor starting');
+  $('#lastUpdatedAt').textContent = status.lastSuccessAt ? localDateTime(status.lastSuccessAt) : (state.lang === 'zh' ? '等待首次数据更新' : 'Waiting for the first data update');
   $('#connectionBadge').textContent = connected ? (state.lang === 'zh' ? 'X 公开 Posts · 监控服务已连接' : 'Public X Posts · monitor connected') : (state.lang === 'zh' ? `X 抓取暂时不可用${status.error ? `：${status.error}` : ''}` : `X fetch temporarily unavailable${status.error ? `: ${status.error}` : ''}`);
 
   const resetEvent = (data.events || []).find((event) => ['usage_reset', 'banked_reset'].includes(event.category) || event.type === 'reset');
@@ -368,7 +368,7 @@ function renderLiveData() {
   }
   $('#accuracyValue').textContent = '—';
   $('#accuracyHint').textContent = state.lang === 'zh' ? '尚未积累预测回测记录' : 'No forecast backtest yet';
-  $('#updatedAt').textContent = status.lastSuccessAt ? `${state.lang === 'zh' ? '抓取于 ' : 'Fetched '}${localDateTime(status.lastSuccessAt)}` : t.updatedAt;
+  $('#updatedAt').textContent = status.lastSuccessAt ? `${state.lang === 'zh' ? '数据更新于 ' : 'Data updated '}${localDateTime(status.lastSuccessAt)}` : t.updatedAt;
   $('#probDisclaimer').textContent = probabilities
     ? (state.lang === 'zh' ? `按 ${resetCount} 条历史确认记录的间隔估算；仅作参考，不是 AI 预测。` : `Estimated from ${resetCount} archived reset records; informational only, not an AI forecast.`)
     : (state.lang === 'zh' ? '确认事件积累到足够数量后才显示概率；当前不会用静态数值冒充预测。' : 'Probabilities appear after enough confirmed events are recorded; no static values are shown as live forecasts.');
