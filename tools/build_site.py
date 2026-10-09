@@ -20,7 +20,7 @@ def main() -> None:
 
     output = ROOT / "dist"
     output.mkdir(exist_ok=True)
-    for name in ("index.html", "styles.css", "signal-console.css", "app.js"):
+    for name in ("index.html", "styles.css", "signal-console.css", "site-config.js", "app.js"):
         shutil.copy2(ROOT / name, output / name)
     output_data = output / "data"
     output_data.mkdir(exist_ok=True)

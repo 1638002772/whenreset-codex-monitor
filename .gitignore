@@ -5,5 +5,6 @@ data/diagnostics/
 dist/
 cloudflare/.dev.vars
 cloudflare/.wrangler/
+cloudflare/email-api/.wrangler/
 cloudflare/public/
 cloudflare/seed-data.js

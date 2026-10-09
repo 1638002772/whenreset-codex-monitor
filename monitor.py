@@ -344,9 +344,22 @@ def apply_post_to_events(events: list[dict], post: dict, notify: bool) -> tuple[
 
 
 def load_notification_config() -> dict:
-    config = load_json(CONFIG_PATH, {"emails": [], "feishuWebhook": "", "feishuSecret": ""})
+    config = load_json(CONFIG_PATH, {
+        "emails": [], "feishuWebhook": "", "feishuSecret": "",
+        "publicEmailApiUrl": "", "publicEmailApiToken": "",
+        "smtpHost": "smtp.qq.com", "smtpPort": 465, "smtpUser": "",
+        "smtpPassword": "", "smtpFrom": "", "smtpSecurity": "ssl",
+    })
     config["feishuWebhook"] = os.environ.get("WHENRESET_FEISHU_WEBHOOK", config.get("feishuWebhook", ""))
     config["feishuSecret"] = os.environ.get("WHENRESET_FEISHU_SECRET", config.get("feishuSecret", ""))
+    config["publicEmailApiUrl"] = os.environ.get("WHENRESET_EMAIL_API_URL", config.get("publicEmailApiUrl", ""))
+    config["publicEmailApiToken"] = os.environ.get("WHENRESET_EMAIL_API_TOKEN", config.get("publicEmailApiToken", ""))
+    config["smtpHost"] = os.environ.get("WHENRESET_SMTP_HOST", config.get("smtpHost", "smtp.qq.com"))
+    config["smtpPort"] = int(os.environ.get("WHENRESET_SMTP_PORT", str(config.get("smtpPort", 465))))
+    config["smtpUser"] = os.environ.get("WHENRESET_SMTP_USER", config.get("smtpUser", ""))
+    config["smtpPassword"] = os.environ.get("WHENRESET_SMTP_PASSWORD", config.get("smtpPassword", ""))
+    config["smtpFrom"] = os.environ.get("WHENRESET_SMTP_FROM", config.get("smtpFrom") or config["smtpUser"])
+    config["smtpSecurity"] = os.environ.get("WHENRESET_SMTP_SECURITY", config.get("smtpSecurity", "ssl"))
     return config
 
 
@@ -380,23 +393,29 @@ def send_feishu(webhook: str, secret: str, message: str) -> tuple[bool, str]:
         return False, str(exc)
 
 
-def send_email(recipients: list[str], subject: str, body: str) -> tuple[int, str]:
-    host = os.environ.get("WHENRESET_SMTP_HOST", "")
-    user = os.environ.get("WHENRESET_SMTP_USER", "")
-    password = os.environ.get("WHENRESET_SMTP_PASSWORD", "")
-    sender = os.environ.get("WHENRESET_SMTP_FROM", user)
+def send_email(recipients: list[str], subject: str, body: str, html: str | None = None, config: dict | None = None) -> tuple[int, str]:
+    config = config or load_notification_config()
+    host = str(config.get("smtpHost", "")).strip()
+    user = str(config.get("smtpUser", "")).strip()
+    password = str(config.get("smtpPassword", "")).strip()
+    sender = str(config.get("smtpFrom", user)).strip()
     if not (host and user and password and sender and recipients):
         return 0, "SMTP is not configured"
-    port = int(os.environ.get("WHENRESET_SMTP_PORT", "587"))
+    port = int(config.get("smtpPort", 465))
+    security = str(config.get("smtpSecurity", "ssl")).lower()
     message = EmailMessage()
     message["Subject"] = subject
     message["From"] = sender
     message["To"] = ", ".join(recipients)
     message.set_content(body)
+    if html:
+        message.add_alternative(html, subtype="html")
     try:
-        with smtplib.SMTP(host, port, timeout=15) as smtp:
+        smtp_class = smtplib.SMTP_SSL if security == "ssl" else smtplib.SMTP
+        smtp_context = {"context": ssl.create_default_context()} if security == "ssl" else {}
+        with smtp_class(host, port, timeout=15, **smtp_context) as smtp:
             smtp.ehlo()
-            if os.environ.get("WHENRESET_SMTP_TLS", "1") != "0":
+            if security == "starttls":
                 smtp.starttls(context=ssl.create_default_context())
                 smtp.ehlo()
             smtp.login(user, password)
@@ -404,6 +423,79 @@ def send_email(recipients: list[str], subject: str, body: str) -> tuple[int, str
         return len(recipients) - len(refused), "sent"
     except (OSError, smtplib.SMTPException) as exc:
         return 0, str(exc)
+
+
+def dispatch_public_email_jobs(config: dict | None = None) -> dict:
+    config = config or load_notification_config()
+    api_url = str(config.get("publicEmailApiUrl", "")).strip().rstrip("/")
+    token = str(config.get("publicEmailApiToken", "")).strip()
+    if not (api_url and token and config.get("smtpUser") and config.get("smtpPassword")):
+        return {"sent": 0, "failed": 0, "skipped": True}
+
+    claim = urllib.request.Request(
+        api_url + "/api/monitor/mail/claim",
+        data=b"{}",
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(claim, timeout=20) as response:
+            payload = json.loads(response.read().decode("utf-8", errors="replace") or "{}")
+    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+        return {"sent": 0, "failed": 1, "error": f"Could not claim public email jobs: {exc}"}
+    if not payload.get("ok"):
+        return {"sent": 0, "failed": 1, "error": "Email API did not return queued jobs"}
+
+    result = {"sent": 0, "failed": 0}
+    for job in payload.get("jobs", []):
+        recipient = str(job.get("recipient", "")).strip()
+        count, detail = send_email([recipient], str(job.get("subject", "WHENRESET 提醒")), str(job.get("text", "")), str(job.get("html", "")), config)
+        delivered = count == 1
+        acknowledgement = urllib.request.Request(
+            api_url + "/api/monitor/mail/ack",
+            data=json.dumps({"id": job.get("id"), "sent": delivered, "error": "" if delivered else detail}, ensure_ascii=False).encode("utf-8"),
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(acknowledgement, timeout=15) as response:
+                ack = json.loads(response.read().decode("utf-8", errors="replace") or "{}")
+            if not ack.get("ok") or not ack.get("updated"):
+                result["failed"] += 1
+                result.setdefault("errors", []).append("Email API did not acknowledge a delivery")
+            elif delivered:
+                result["sent"] += 1
+            else:
+                result["failed"] += 1
+                result.setdefault("errors", []).append(detail)
+        except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+            result["failed"] += 1
+            result.setdefault("errors", []).append(f"Could not acknowledge a mail job: {exc}")
+    return result
+
+
+def send_public_email_alert(event: dict, config: dict | None = None) -> tuple[bool | None, str]:
+    config = config or load_notification_config()
+    api_url = str(config.get("publicEmailApiUrl", "")).strip().rstrip("/")
+    token = str(config.get("publicEmailApiToken", "")).strip()
+    if not api_url or not token:
+        return None, "Public email API is not configured"
+    request = urllib.request.Request(
+        api_url + "/api/monitor/event",
+        data=json.dumps(event, ensure_ascii=False).encode("utf-8"),
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            result = json.loads(response.read().decode("utf-8", errors="replace") or "{}")
+        if result.get("ok") and result.get("queued"):
+            return True, "queued"
+        return False, "monitor API did not queue the event"
+    except urllib.error.HTTPError as exc:
+        return False, f"HTTP {exc.code}"
+    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+        return False, str(exc)
 
 
 def event_message(event: dict) -> str:
@@ -440,7 +532,7 @@ def queue_browser_alert(state: dict, key: str, title: str, body: str, url: str |
 def send_event_notifications(event: dict) -> dict:
     config = load_notification_config()
     text = event_message(event)
-    results = {"feishu": None, "emailCount": 0, "errors": []}
+    results = {"feishu": None, "emailCount": 0, "publicEmailQueued": None, "errors": []}
     if config.get("feishuWebhook"):
         ok, detail = send_feishu(config["feishuWebhook"], config.get("feishuSecret", ""), text)
         results["feishu"] = ok
@@ -452,6 +544,13 @@ def send_event_notifications(event: dict) -> dict:
         results["emailCount"] = count
         if count == 0 and detail != "SMTP is not configured":
             results["errors"].append(f"Email: {detail}")
+    clear_reset = event.get("category") in {"usage_reset", "banked_reset"}
+    actionable = event.get("status") == "confirmed" or (event.get("status") == "forecast" and event.get("timeWindow"))
+    if clear_reset and actionable and config.get("publicEmailApiUrl") and config.get("publicEmailApiToken"):
+        queued, detail = send_public_email_alert(event, config)
+        results["publicEmailQueued"] = queued
+        if not queued:
+            results["errors"].append(f"Public email: {detail}")
     return results
 
 
@@ -471,6 +570,12 @@ def build_event_record(category: str, status: str, post: dict) -> dict:
 def run_once() -> dict:
     ensure_dirs()
     state = load_json(STATE_PATH, {})
+    pending_email_events = state.setdefault("pendingPublicEmailEvents", {})
+    public_mail_delivery = dispatch_public_email_jobs()
+    for pending_key, pending_event in list(pending_email_events.items())[:1]:
+        queued, _detail = send_public_email_alert(pending_event)
+        if queued:
+            pending_email_events.pop(pending_key, None)
     state["lastAttemptAt"] = now_iso()
     try:
         html = fetch_html()
@@ -479,6 +584,7 @@ def run_once() -> dict:
         state["consecutiveFailures"] = int(state.get("consecutiveFailures", 0)) + 1
         state["lastError"] = str(exc)
         state["monitorState"] = "error"
+        state["lastPublicMailDelivery"] = public_mail_delivery
         if "html" in locals():
             save_html_evidence(html)
         if state["consecutiveFailures"] >= 2 and not state.get("failureAlertSent"):
@@ -526,6 +632,8 @@ def run_once() -> dict:
         notifications = []
         for event in alert_events.values():
             delivery = send_event_notifications(event)
+            if delivery.get("publicEmailQueued") is False:
+                pending_email_events[f"{event['id']}:{event['status']}"] = event
             event["lastAlertedStatus"] = event["status"]
             queue_browser_alert(
                 state,
@@ -535,6 +643,7 @@ def run_once() -> dict:
                 event.get("lastPostUrl"),
             )
             notifications.append({"eventId": event["id"], "status": event["status"], **delivery})
+        public_mail_delivery = dispatch_public_email_jobs()
         if new_posts:
             by_id = {item.get("id"): item for item in existing_posts if item.get("id")}
             for post in posts:
@@ -559,6 +668,7 @@ def run_once() -> dict:
         "monitorState": "ok",
         "postsFetched": len(posts),
         "failureAlertSent": False,
+        "lastPublicMailDelivery": public_mail_delivery,
     })
     if previous_failures >= 2 and state.get("failureAlertAt"):
         config = load_notification_config()
@@ -572,7 +682,7 @@ def run_once() -> dict:
     save_json(POSTS_PATH, existing_posts[:MAX_POSTS])
     save_json(EVENTS_PATH, events)
     save_json(STATE_PATH, state)
-    return {"ok": True, "postsFetched": len(posts), "newPosts": state.get("lastNewPostIds", []), "events": len(events), "baselineOnly": first_run}
+    return {"ok": True, "postsFetched": len(posts), "newPosts": state.get("lastNewPostIds", []), "events": len(events), "baselineOnly": first_run, "mailDelivery": public_mail_delivery}
 
 
 def main() -> int:

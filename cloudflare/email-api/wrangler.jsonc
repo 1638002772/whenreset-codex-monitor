@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "whenreset-email-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-08",
+  "workers_dev": true,
+  "vars": {
+    "SITE_ORIGIN": "https://1638002772.github.io",
+    "SITE_URL": "https://1638002772.github.io/whenreset-codex-monitor/"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "whenreset-subscribers",
+      "database_id": "64f8c1ed-d3a5-4e2d-9e94-8786e0036e49"
+    }
+  ]
+}

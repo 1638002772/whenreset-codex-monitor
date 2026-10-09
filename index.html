@@ -8,6 +8,7 @@
   <title>Codex 重置监控 · WHENRESET</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./signal-console.css">
+  <script src="./site-config.js"></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -99,21 +100,27 @@
     <section class="subscribe-section" id="subscribe">
       <div class="subscribe-heading"><div><span class="section-kicker" data-copy="notifyKicker">STAY IN THE LOOP</span><h2 data-copy="notifyTitle">接收重置提醒</h2></div><span class="subscribe-illustration">✉</span></div>
       <div class="subscribe-grid">
+        <article class="subscribe-card subscribe-card--email">
+          <div class="subscribe-card__head"><span class="channel-icon channel-icon--mail">@</span><div><h3 data-copy="emailTitle">QQ 邮箱提醒</h3><p data-copy="emailHint">QQ 邮箱或其他邮箱均可</p></div></div>
+          <form id="emailSubscribeForm" class="email-subscribe-form">
+            <label class="sr-only" for="subscriberEmail" data-copy="emailLabel">邮箱地址</label>
+            <div class="input-with-icon"><span aria-hidden="true">✉</span><input id="subscriberEmail" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="name@qq.com"></div>
+            <label class="email-consent"><input id="emailConsent" type="checkbox" required><span data-copy="emailConsent">我同意将邮箱保存在通知服务中，仅用于 Codex 重置提醒，可随时退订。</span></label>
+            <label class="email-honeytrap" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            <button class="button button--olive button--full" id="emailSubscribeButton" type="submit" disabled><span id="emailSubscribeButtonText" data-copy="emailSubmit">确认并订阅</span><span>→</span></button>
+            <p class="email-status" id="emailSubscribeStatus" role="status" aria-live="polite" data-copy="emailNotReady">邮件订阅服务尚未启用。</p>
+          </form>
+        </article>
         <article class="subscribe-card">
           <div class="subscribe-card__head"><span class="channel-icon channel-icon--mail">🔔</span><div><h3 data-copy="browserTitle">浏览器提醒</h3><p data-copy="browserHint">打开网页并允许通知后接收更新</p></div></div>
           <button class="button button--olive button--full" id="browserAlertButton" type="button"><span data-copy="browserAlert">开启本机浏览器提醒</span><span>→</span></button>
         </article>
         <article class="subscribe-card">
-          <div class="subscribe-card__head"><span class="channel-icon channel-icon--feishu">飞</span><div><h3 data-copy="feishuTitle">飞书群机器人</h3><p id="feishuStatus" data-copy="feishuHint">可选：管理员在仓库密钥中配置</p></div><button class="help-link" type="button" data-modal="feishuHelp" data-copy="setupGuide">配置教程 ↗</button></div>
+          <div class="subscribe-card__head"><span class="channel-icon channel-icon--feishu">飞</span><div><h3 data-copy="feishuTitle">飞书群机器人</h3><p id="feishuStatus" data-copy="feishuHint">尚未配置</p></div><button class="help-link" type="button" data-modal="feishuHelp" data-copy="setupGuide">配置教程 ↗</button></div>
           <p class="channel-note" data-copy="feishuBody">有明确的新重置消息时，由定时抓取脚本发送到已配置的群聊。</p>
         </article>
-        <div class="subscribe-card subscribe-card--wechat">
-          <div class="subscribe-card__head"><span class="channel-icon channel-icon--wechat">微</span><div><h3 data-copy="wechatTitle">微信群通知</h3><p data-copy="wechatHint">扫码加入提醒群</p></div></div>
-          <button class="qr-placeholder" type="button" id="qrButton" aria-label="查看微信群二维码"><span class="qr-corners"><i></i><i></i><i></i></span><span class="qr-symbol">微</span><span class="qr-caption" data-copy="qrDemo">二维码待配置</span></button>
-          <div class="qr-bottom"><span class="qr-check">✓</span><span data-copy="qrComing">真实通知接入后开放</span></div>
-        </div>
       </div>
-      <p class="demo-note"><span>i</span><span id="formDisclaimer" data-copy="formDisclaimer">浏览器提醒需要保持网页打开；飞书 Webhook 由仓库管理员配置。</span></p>
+      <p class="demo-note"><span>i</span><span id="formDisclaimer" data-copy="formDisclaimer">邮件会发送到已确认订阅的地址；每封提醒都附有退订入口。浏览器提醒需要保持网页打开。</span></p>
     </section>
 
     <section class="history-section" id="history">

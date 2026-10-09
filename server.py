@@ -21,6 +21,7 @@ ASSETS = {
     "/index.html": (ROOT / "index.html", "text/html; charset=utf-8"),
     "/styles.css": (ROOT / "styles.css", "text/css; charset=utf-8"),
     "/signal-console.css": (ROOT / "signal-console.css", "text/css; charset=utf-8"),
+    "/site-config.js": (ROOT / "site-config.js", "text/javascript; charset=utf-8"),
     "/app.js": (ROOT / "app.js", "text/javascript; charset=utf-8"),
 }
 EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
