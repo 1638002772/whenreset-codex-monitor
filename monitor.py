@@ -435,7 +435,7 @@ def dispatch_public_email_jobs(config: dict | None = None) -> dict:
     claim = urllib.request.Request(
         api_url + "/api/monitor/mail/claim",
         data=b"{}",
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": USER_AGENT},
         method="POST",
     )
     try:
@@ -457,7 +457,7 @@ def dispatch_public_email_jobs(config: dict | None = None) -> dict:
         acknowledgement = urllib.request.Request(
             api_url + "/api/monitor/mail/ack",
             data=json.dumps({"id": job.get("id"), "sent": delivered, "error": "" if delivered else detail}, ensure_ascii=False).encode("utf-8"),
-            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": USER_AGENT},
             method="POST",
         )
         try:
@@ -486,7 +486,7 @@ def send_public_email_alert(event: dict, config: dict | None = None) -> tuple[bo
     request = urllib.request.Request(
         api_url + "/api/monitor/event",
         data=json.dumps(event, ensure_ascii=False).encode("utf-8"),
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": USER_AGENT},
         method="POST",
     )
     try:
