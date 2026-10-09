@@ -103,9 +103,9 @@ async function queueMail(env, dedupeKey, recipient, message) {
     .bind(crypto.randomUUID(), dedupeKey, recipient, JSON.stringify(message), now, now).run();
 }
 
-async function queueVerification(env, email, token, id, workerUrl) {
-  const url = new URL('/api/verify', workerUrl);
-  url.searchParams.set('token', token);
+async function queueVerification(env, email, token, id) {
+  const url = new URL('email-action.html', env.SITE_URL);
+  url.hash = new URLSearchParams({ verify: token }).toString();
   const confirmUrl = url.toString();
   const safeUrl = escapeHtml(confirmUrl);
   await queueMail(env, `verify_${id}_${await sha256(token)}`, email, {
@@ -165,7 +165,7 @@ async function handleSubscribe(request, env) {
   try {
     await env.DB.prepare(`DELETE FROM mail_jobs WHERE recipient = ? AND dedupe_key LIKE ? AND status IN ('queued', 'failed')`)
       .bind(email, `verify_${id}_%`).run();
-    await queueVerification(env, email, token, id, request.url);
+    await queueVerification(env, email, token, id);
   } catch (error) {
     await env.DB.prepare(`UPDATE email_subscribers SET verify_token_hash = NULL, verify_expires_at = NULL WHERE id = ? AND status = 'pending'`).bind(id).run();
     console.error('Subscription confirmation could not be queued:', String(error));
@@ -183,14 +183,21 @@ function statusPage(title, message, siteUrl, isError = false) {
 }
 
 async function handleVerify(request, env) {
-  const token = new URL(request.url).searchParams.get('token') || '';
-  if (!token || token.length > 200) return statusPage('链接无效', '请重新提交订阅申请。', env.SITE_URL, true);
+  let token = new URL(request.url).searchParams.get('token') || '';
+  if (request.method === 'POST') {
+    let body;
+    try { body = await readJson(request); } catch { return responseJson({ ok: false, error: 'Invalid confirmation request.' }, 400); }
+    token = String(body.token || '');
+  }
+  const respond = (ok) => request.method === 'POST'
+    ? responseJson(ok ? { ok: true, message: 'Subscription confirmed.' } : { ok: false, error: 'Confirmation link is invalid or expired.' }, ok ? 200 : 410)
+    : statusPage(ok ? '订阅已确认' : '链接已失效', ok ? '当出现明确的 Codex 重置预告或到账确认时，我们会发邮件提醒你。' : '确认链接可能已使用或超过 24 小时，请回到网站重新提交邮箱。', env.SITE_URL, !ok);
+  if (!token || token.length > 200) return respond(false);
   const tokenHash = await sha256(token);
   const now = new Date().toISOString();
   const result = await env.DB.prepare(`UPDATE email_subscribers SET status = 'active', confirmed_at = ?, verify_token_hash = NULL, verify_expires_at = NULL WHERE verify_token_hash = ? AND status = 'pending' AND verify_expires_at > ?`)
     .bind(now, tokenHash, now).run();
-  if (Number(result.meta?.changes || 0) === 1) return statusPage('订阅已确认', '当出现明确的 Codex 重置预告或到账确认时，我们会发邮件提醒你。', env.SITE_URL);
-  return statusPage('链接已失效', '确认链接可能已使用或超过 24 小时，请回到网站重新提交邮箱。', env.SITE_URL, true);
+  return respond(Number(result.meta?.changes || 0) === 1);
 }
 
 async function unsubscribeSignature(id, env) {
@@ -222,6 +229,9 @@ async function handleUnsubscribe(request, env) {
   }
   const expectedToken = id ? await unsubscribeSignature(id, env) : '';
   if (!id || id.length > 128 || !token || token.length > 128 || !sameSecret(expectedToken, token)) {
+    if (request.method === 'POST' && (request.headers.get('Content-Type') || '').includes('application/json')) {
+      return responseJson({ ok: false, error: 'Unsubscribe link is invalid.' }, 400);
+    }
     return statusPage('链接无效', '无法验证退订链接。', env.SITE_URL, true);
   }
   if (request.method === 'GET') {
@@ -232,6 +242,9 @@ async function handleUnsubscribe(request, env) {
   await env.DB.prepare(`UPDATE email_subscribers SET status = 'unsubscribed', unsubscribed_at = ?, verify_token_hash = NULL, verify_expires_at = NULL WHERE id = ?`)
     .bind(new Date().toISOString(), id).run();
   await env.DB.prepare(`DELETE FROM mail_jobs WHERE recipient = (SELECT email FROM email_subscribers WHERE id = ?) AND status IN ('queued', 'failed')`).bind(id).run();
+  if (request.method === 'POST' && (request.headers.get('Content-Type') || '').includes('application/json')) {
+    return responseJson({ ok: true, message: 'Email subscription cancelled.' });
+  }
   return statusPage('已取消订阅', '此邮箱将不再收到 WHENRESET 提醒。', env.SITE_URL);
 }
 
@@ -248,11 +261,10 @@ async function handleMonitorEvent(request, env) {
   if (!eventId) return responseJson({ ok: false, error: 'Event id is required.' }, 400);
   const eventKey = `${eventId}:${event.status}`;
   const now = new Date().toISOString();
-  const origin = new URL(request.url).origin;
   const active = await env.DB.prepare(`SELECT id, email FROM email_subscribers WHERE status = 'active'`).all();
   const statements = [];
   for (const subscriber of active.results) {
-    const unsubscribeUrl = await makeUnsubscribeUrl(origin, subscriber.id, env);
+    const unsubscribeUrl = await makeUnsubscribeUrl(subscriber.id, env);
     const message = formatEventEmail(event, unsubscribeUrl);
     statements.push(env.DB.prepare(`INSERT OR IGNORE INTO mail_jobs(id, dedupe_key, recipient, message_json, status, created_at, updated_at)
       VALUES(?, ?, ?, ?, 'queued', ?, ?)`)
@@ -264,11 +276,10 @@ async function handleMonitorEvent(request, env) {
   return responseJson({ ok: true, queued: true, eventKey, jobCount: statements.length });
 }
 
-function makeUnsubscribeUrl(origin, id, env) {
-  const url = new URL('/api/unsubscribe', origin);
-  url.searchParams.set('id', id);
+function makeUnsubscribeUrl(id, env) {
+  const url = new URL('email-action.html', env.SITE_URL);
   return unsubscribeSignature(id, env).then((token) => {
-    url.searchParams.set('token', token);
+    url.hash = new URLSearchParams({ unsubscribe: id, token }).toString();
     return url.toString();
   });
 }
@@ -327,8 +338,8 @@ const worker = {
       if (url.pathname === '/api/subscribe' && request.method === 'POST') {
         return await handleSubscribe(request, env).then((response) => withHeaders(response, cors));
       }
-      if (url.pathname === '/api/verify' && request.method === 'GET') return await handleVerify(request, env);
-      if (url.pathname === '/api/unsubscribe' && ['GET', 'POST'].includes(request.method)) return await handleUnsubscribe(request, env);
+      if (url.pathname === '/api/verify' && ['GET', 'POST'].includes(request.method)) return await handleVerify(request, env).then((response) => withHeaders(response, cors));
+      if (url.pathname === '/api/unsubscribe' && ['GET', 'POST'].includes(request.method)) return await handleUnsubscribe(request, env).then((response) => withHeaders(response, cors));
       if (url.pathname === '/api/monitor/event' && request.method === 'POST') return await handleMonitorEvent(request, env).then((response) => withHeaders(response, cors));
       if (url.pathname === '/api/monitor/mail/claim' && request.method === 'POST') return await handleMailClaim(request, env).then((response) => withHeaders(response, cors));
       if (url.pathname === '/api/monitor/mail/ack' && request.method === 'POST') return await handleMailAck(request, env).then((response) => withHeaders(response, cors));
