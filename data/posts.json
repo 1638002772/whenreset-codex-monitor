@@ -1,13 +1,31 @@
 [
   {
+    "id": "2108646052178092403",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-09T19:49:30Z",
+    "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
+    "url": "https://x.com/thsottiaux/status/2108646052178092403",
+    "fetchedAt": "2026-10-09T23:01:12Z",
+    "classification": null,
+    "eventStatus": null
+  },
+  {
+    "id": "2108645667451318747",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-09T19:47:58Z",
+    "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.",
+    "url": "https://x.com/thsottiaux/status/2108645667451318747",
+    "fetchedAt": "2026-10-09T23:01:12Z",
+    "classification": null,
+    "eventStatus": null
+  },
+  {
     "id": "2108349826727588000",
     "author": "thsottiaux",
     "createdAt": "2026-10-09T00:12:24Z",
     "text": "Today, we are announcing ChatGPT.\n\nIt is here: https://t.co/Pgk3THSyOJ",
     "url": "https://x.com/thsottiaux/status/2108349826727588000",
-    "fetchedAt": "2026-10-09T00:42:52Z",
-    "classification": null,
-    "eventStatus": null
+    "fetchedAt": "2026-10-09T23:01:12Z"
   },
   {
     "id": "2108275041276420573",
@@ -15,7 +33,7 @@
     "createdAt": "2026-10-08T19:15:14Z",
     "text": "Day 4/\n\nWe have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort.\n\nAlso releasing GPT-6.1 Sol ultrafast. The two work very well https://t.co/4sjkptOtvG",
     "url": "https://x.com/thsottiaux/status/2108275041276420573",
-    "fetchedAt": "2026-10-09T00:42:52Z"
+    "fetchedAt": "2026-10-09T23:01:12Z"
   },
   {
     "id": "2108084615349170480",
@@ -23,7 +41,7 @@
     "createdAt": "2026-10-08T06:38:33Z",
     "text": "Day 3 (encore)/\n\nWe silently re-shipped codex cloud. It’s pretty good now",
     "url": "https://x.com/thsottiaux/status/2108084615349170480",
-    "fetchedAt": "2026-10-09T00:42:52Z"
+    "fetchedAt": "2026-10-09T23:01:12Z"
   },
   {
     "id": "2108040921044639779",
