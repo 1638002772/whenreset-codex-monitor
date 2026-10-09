@@ -78,7 +78,16 @@
             cache: 'no-store',
           });
           const result = await response.json();
-          if (!response.ok || !result.ok) throw new Error(result.error || '请求未能完成。');
+          if ((mode === 'verify' && response.status === 410) || (mode === 'unsubscribe' && response.status === 400)) {
+            title.textContent = mode === 'verify' ? '确认链接已使用或已过期' : '退订链接无效';
+            description.textContent = mode === 'verify'
+              ? '如果此前页面显示“订阅已确认”，你的订阅已经生效，无需重新操作；否则请返回网站重新提交邮箱，获取新链接。'
+              : '请从最新的 WHENRESET 邮件重新打开退订链接。';
+            button.hidden = true;
+            notice.textContent = '';
+            return;
+          }
+          if (!response.ok || !result.ok) throw new Error('邮件服务暂时不可用，请稍后重试。');
           title.textContent = isVerify ? '订阅已确认' : '已取消订阅';
           description.textContent = isVerify
             ? '设置完成。发现明确的 Codex 重置预告或到账确认时，我们会发送邮件提醒。'
@@ -86,7 +95,9 @@
           button.hidden = true;
           notice.textContent = '';
         } catch (error) {
-          notice.textContent = error instanceof Error ? error.message : '请求未能完成，请稍后重试。';
+          notice.textContent = error instanceof TypeError
+            ? '连接邮件服务失败，请检查网络后重试。'
+            : error instanceof Error ? error.message : '请求未能完成，请稍后重试。';
           button.disabled = false;
           button.textContent = mode === 'verify' ? '重试确认' : '重试退订';
         }

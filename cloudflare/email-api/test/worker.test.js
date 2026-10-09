@@ -63,6 +63,46 @@ test('email service health does not require a third-party mail API or custom sen
   assert.deepEqual(await response.json(), { ready: true });
 });
 
+test('email confirmation succeeds once, then reports the link as used', async () => {
+  let pending = true;
+  const env = {
+    SITE_URL: 'https://1638002772.github.io/whenreset-codex-monitor/',
+    DB: {
+      prepare() {
+        return {
+          bind() {
+            return {
+              async run() {
+                if (!pending) return { meta: { changes: 0 } };
+                pending = false;
+                return { meta: { changes: 1 } };
+              },
+            };
+          },
+        };
+      },
+    },
+  };
+  const makeRequest = () => new Request('https://worker.test/api/verify', {
+    method: 'POST',
+    headers: {
+      Origin: 'https://1638002772.github.io',
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ token: 'single-use-token' }),
+  });
+
+  const first = await worker.fetch(makeRequest(), env);
+  assert.equal(first.status, 200);
+  assert.deepEqual(await first.json(), { ok: true, message: 'Subscription confirmed.' });
+  assert.equal(first.headers.get('Access-Control-Allow-Origin'), 'https://1638002772.github.io');
+
+  const second = await worker.fetch(makeRequest(), env);
+  assert.equal(second.status, 410);
+  assert.deepEqual(await second.json(), { ok: false, error: 'Confirmation link is invalid or expired.' });
+});
+
 test('monitor webhook ignores non-reset events', async () => {
   const response = await worker.fetch(new Request('https://worker.test/api/monitor/event', {
     method: 'POST',
