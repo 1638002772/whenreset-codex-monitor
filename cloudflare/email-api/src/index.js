@@ -158,8 +158,8 @@ async function handleSubscribe(request, env) {
     await env.DB.prepare(`UPDATE email_subscribers SET email = ?, status = 'pending', verify_token_hash = ?, verify_expires_at = ?, verification_sent_at = ?, consented_at = ?, unsubscribed_at = NULL WHERE id = ?`)
       .bind(email, tokenHash, expires, now.toISOString(), now.toISOString(), id).run();
   } else {
-    await env.DB.prepare(`INSERT INTO email_subscribers(id, email, email_normalized, status, verify_token_hash, verify_expires_at, verification_sent_at, created_at, consented_at) VALUES(?, ?, ?, 'pending', ?, ?, ?, ?, ?)`)
-      .bind(id, email, normalized, tokenHash, expires, now.toISOString(), now.toISOString(), now.toISOString(), now.toISOString()).run();
+    await env.DB.prepare(`INSERT INTO email_subscribers(id, email, email_normalized, status, verify_token_hash, verify_expires_at, verification_sent_at, created_at, consented_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+      .bind(id, email, normalized, 'pending', tokenHash, expires, now.toISOString(), now.toISOString(), now.toISOString()).run();
   }
 
   try {
@@ -334,7 +334,7 @@ const worker = {
       if (url.pathname === '/api/monitor/mail/ack' && request.method === 'POST') return await handleMailAck(request, env).then((response) => withHeaders(response, cors));
       return responseJson({ ok: false, error: 'Not found.' }, 404, cors);
     } catch (error) {
-      console.error('Email API request failed:', String(error));
+      console.error('Email API request failed:', error instanceof Error ? error.stack : String(error));
       return responseJson({ ok: false, error: 'The request could not be completed.' }, 500, cors);
     }
   },
