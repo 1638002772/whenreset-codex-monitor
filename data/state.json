@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-10-09T00:00:48Z",
+  "lastAttemptAt": "2026-10-09T00:42:50Z",
   "initialized": true,
   "seenIds": [
     "2108040921044639779",
@@ -8,21 +8,24 @@
     "2107676072871600470",
     "2107597780352950624",
     "2108084615349170480",
-    "2108275041276420573"
+    "2108275041276420573",
+    "2108349826727588000"
   ],
-  "lastSuccessAt": "2026-10-09T00:00:50Z",
+  "lastSuccessAt": "2026-10-09T00:42:52Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "monitorState": "ok",
   "postsFetched": 5,
   "failureAlertSent": false,
-  "lastNewPostAt": "2026-10-08T19:15:14Z",
-  "lastNewPostIds": [],
+  "lastNewPostAt": "2026-10-09T00:12:24Z",
+  "lastNewPostIds": [
+    "2108349826727588000"
+  ],
   "lastNotifications": [],
   "pendingPublicEmailEvents": {},
   "lastPublicMailDelivery": {
     "sent": 0,
-    "failed": 0,
-    "skipped": true
+    "failed": 1,
+    "error": "Could not claim public email jobs: HTTP Error 403: Forbidden"
   }
 }
