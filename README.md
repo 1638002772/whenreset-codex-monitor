@@ -1,46 +1,38 @@
 # WHENRESET · Codex 重置监控
 
-网站展示 Tibo（@thsottiaux）的 Codex 用量重置线索、预告和已确认记录。运行抓取的电脑每 10 分钟读取 X 公开 Posts 并运行本地规则；不登录、不调用 X API、不调用 AI。脚本将公开抓取结果推送到此公开仓库，GitHub Actions 随后发布静态页面。
+网站展示 Tibo（@thsottiaux）的公开 Posts、Codex 用量重置预告和已确认记录。抓取、去重、状态保存和 GitHub Pages 发布均由 GitHub Actions 云端完成；不需要电脑开机，也不会在本机定时运行。监控每 10 分钟尝试一次，不登录 X、不调用 X API、不调用 AI。
 
-## GitHub Pages
+## 云端监控与发布
 
-仓库使用 GitHub Actions 发布 Pages。到 **Settings → Pages → Build and deployment** 检查 Source 为 **GitHub Actions**。网站地址可在同一页面查看。
+GitHub 托管 runner 直接访问 X 会返回 HTTP 403，因此工作流通过一个受口令保护的 Cloudflare Worker 请求固定的公开页面 `https://x.com/thsottiaux`。Worker 不接收任意 URL、不存储帖子，只把公开页面 HTML 返回给 GitHub Actions。Actions 解析新帖、将状态写回仓库，然后在同一轮部署 GitHub Pages。
 
-X 会拦截 GitHub 云端 runner 的直接抓取请求，因此抓取任务运行在已登录 GitHub 的 Windows 电脑上。电脑需开机并联网，GitHub Actions 只负责构建和发布 Pages。仓库公开包含网页代码、公开推文内容与事件历史；本机通知配置和抓取诊断文件已加入忽略规则。
+仓库的 Actions workflow 使用 `7,17,27,37,47,57` 分钟的 UTC 时间点，每 10 分钟运行一次。GitHub 可能排队或延迟计划任务；它不是精确到分钟的保证。首次运行只建立基线，不将旧帖作为新提醒。
 
-## 本机监控
+所需配置保存在 Cloudflare Worker secret 和 GitHub Actions secret/variable 中，不写进公开代码：`PROFILE_PROXY_TOKEN`、`WHENRESET_PROFILE_PROXY_TOKEN`、`WHENRESET_X_PROFILE_URL`。监控工作流启用 `contents: write` 和 Pages 部署权限，用于提交公开监控数据并发布站点。
 
-需要 Python 3 和 GitHub CLI 登录账号。安装或更新每 10 分钟执行一次的 Windows 计划任务：
+## 本机任务
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install-monitor-task.ps1
-```
-
-任务会抓取公开 Posts、生成页面数据，并把更新后的公开数据推送到仓库。抓取失败时也会发布状态，网站会显示暂时受阻。移除计划任务：
+Windows 上的 `WHENRESET public X monitor` 计划任务已禁用。不要运行 `install-monitor-task.ps1` 重新安装它。如需手动清除该任务，可在项目目录运行：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\uninstall-monitor-task.ps1
 ```
 
-也可以手动运行一次并发布：
-
-```powershell
-python .\tools\update_and_publish.py
-```
-
-在网页点击“开启本机浏览器提醒”后，保持页面打开即可接收浏览器通知。可选的飞书配置保存在运行电脑的 `data/notification-config.json`，不会进入公开仓库。
-
-## 本地预览
+本地预览只用于开发，不承担线上抓取或通知：
 
 ```powershell
 python .\server.py
 ```
 
-浏览器访问 <http://127.0.0.1:4173/>。首次抓取只建立基线，不会把旧帖作为新提醒；同一重置事件的预告和到账确认会合并。
+浏览器访问 <http://127.0.0.1:4173/>。
 
-## 监控限制
+## 通知
 
-- 只读取公开 Posts，不包含回复、私密帖子或已删除内容。
-- X 可能返回空页或调整页面内部格式；抓取失败会保留错误状态，恢复后继续抓取。
-- Pages 是静态网站；邮箱订阅、祈愿计数等需要数据库的交互不提供。
-- GitHub 的定时发布会在数据推送后启动，显示时间还受 Actions 排队影响。
+网站可使用浏览器通知；需打开网站并允许浏览器通知。QQ 邮箱订阅和飞书通知是可选配置，需另外部署 Cloudflare 邮件 Worker/D1 或配置飞书 Webhook。云端邮件发送使用 GitHub Actions secrets：`WHENRESET_EMAIL_API_URL`、`WHENRESET_EMAIL_API_TOKEN`、`WHENRESET_SMTP_USER`、`WHENRESET_SMTP_PASSWORD` 和 `WHENRESET_SMTP_FROM`；QQ SMTP 为 `smtp.qq.com:465` SSL。未配置并验证这些服务前，不应把邮箱订阅视为已启用。
+
+## 监控范围与限制
+
+- 只读取 Tibo 的公开 Posts，不包含回复、私密帖子或已删除内容。
+- 判断重置预告、已确认到账、额度补偿和上限提升；同一事件的预告和确认会合并。
+- X 可能返回空页、调整 SSR 页面格式或拒绝抓取；状态会反映抓取失败，恢复后继续。
+- GitHub Actions 的计划任务可能延迟；公开仓库会包含页面源码和公开帖子/事件数据。
