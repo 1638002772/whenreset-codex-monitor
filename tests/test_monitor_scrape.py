@@ -37,6 +37,108 @@ class MonitorScrapeTests(unittest.TestCase):
 
         self.assertIsNone(monitor.classify_post(post, []))
 
+    def test_public_index_only_selects_recent_unseen_reset_posts_on_tibos_x_profile(self):
+        now = monitor.parse_date("2026-10-11T02:30:00Z")
+        payload = {
+            "posts": [
+                {
+                    "id": "2109045392684032299",
+                    "source": "https://x.com/thsottiaux/status/2109045392684032299",
+                    "created_at": "2026-10-10T22:16:20Z",
+                    "text": "Global reset by EOD.",
+                },
+                {
+                    "id": "2109090080497508356",
+                    "source": "https://x.com/thsottiaux/status/2109090080497508356",
+                    "created_at": "2026-10-11T01:13:54Z",
+                    "text": "The day we reach perfection it will be resets from there onwards.",
+                },
+                {
+                    "id": "2109045392684032300",
+                    "source": "https://x.com/someone_else/status/2109045392684032300",
+                    "created_at": "2026-10-10T22:16:20Z",
+                    "text": "Global reset by EOD.",
+                },
+                {
+                    "id": "2109045392684032301",
+                    "source": "https://x.com/thsottiaux/status/2109045392684032301",
+                    "created_at": "2026-10-07T22:16:20Z",
+                    "text": "Global reset by EOD.",
+                },
+                {
+                    "id": "2109045392684032302",
+                    "source": "https://x.com/thsottiaux/status/2109045392684032302",
+                    "created_at": "2026-10-10T22:16:20Z",
+                    "text": "Global reset by EOD.",
+                },
+            ]
+        }
+
+        candidates = monitor.signal_index_candidate_ids(
+            payload,
+            known_ids={"2109045392684032302"},
+            now=now,
+        )
+
+        self.assertEqual(candidates, ["2109045392684032299"])
+
+    def test_public_index_candidate_is_rechecked_against_original_x_post(self):
+        now = monitor.parse_date("2026-10-11T02:30:00Z")
+        post = self.make_post(
+            "2109045392684032299",
+            "Global reset by EOD. May the tokens do good things for you.",
+        )
+        payload = {
+            "posts": [
+                {
+                    "id": post["id"],
+                    "source": post["url"],
+                    "created_at": post["createdAt"],
+                    "text": "Global reset by EOD.",
+                }
+            ]
+        }
+
+        with mock.patch.object(monitor, "fetch_signal_index", return_value=payload), mock.patch.object(
+            monitor, "fetch_indexed_status_post", return_value=post
+        ) as fetch_status:
+            indexed_posts = monitor.fetch_indexed_signal_posts(set(), now=now)
+
+        self.assertEqual([item["text"] for item in indexed_posts], [post["text"]])
+        self.assertEqual(indexed_posts[0]["discoveredVia"], "public-index")
+        fetch_status.assert_called_once_with(post["id"])
+
+    def test_unverified_index_entry_is_not_added(self):
+        now = monitor.parse_date("2026-10-11T02:30:00Z")
+        payload = {
+            "posts": [
+                {
+                    "id": "2109045392684032299",
+                    "source": "https://x.com/thsottiaux/status/2109045392684032299",
+                    "created_at": "2026-10-10T22:16:20Z",
+                    "text": "Global reset by EOD.",
+                }
+            ]
+        }
+
+        with mock.patch.object(monitor, "fetch_signal_index", return_value=payload), mock.patch.object(
+            monitor, "fetch_indexed_status_post", return_value=None
+        ):
+            indexed_posts = monitor.fetch_indexed_signal_posts(set(), now=now)
+
+        self.assertEqual(indexed_posts, [])
+
+    def test_indexed_status_uses_locked_cloudflare_proxy_when_configured(self):
+        with mock.patch.dict(
+            os.environ,
+            {"WHENRESET_X_PROFILE_URL": "https://proxy.example.workers.dev/profile"},
+        ):
+            url = monitor.indexed_status_page_url("2109045392684032299")
+
+        self.assertEqual(url, "https://proxy.example.workers.dev/status/2109045392684032299")
+        with self.assertRaises(ValueError):
+            monitor.indexed_status_page_url("../../other-host")
+
     def test_fetch_retries_once_after_an_unsuccessful_attempt(self):
         post = self.make_post("2", "Codex quota reset is now live")
         with mock.patch.object(

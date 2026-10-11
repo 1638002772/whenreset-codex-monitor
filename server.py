@@ -44,8 +44,73 @@ def event_is_reset(event: dict) -> bool:
     return event.get("category") in {"usage_reset", "banked_reset"} or event.get("type") == "reset"
 
 
-def event_is_completed(event: dict) -> bool:
-    return event.get("status") in {"confirmed", "community", "completed"} or bool(event.get("completedAt"))
+def event_is_routine_reset(event: dict) -> bool:
+    return event.get("category") == "usage_reset" or (
+        event.get("type") == "reset" and event.get("category") not in {"banked_reset", "compensation"}
+    )
+
+
+def conditional_interval_probabilities(
+    intervals: list[float],
+    elapsed_hours: float,
+    horizons: tuple[int, ...] = (24, 48, 72),
+) -> tuple[dict[str, float | None], dict[str, int]]:
+    at_risk = [interval for interval in intervals if interval > elapsed_hours]
+    probabilities = {}
+    sample_sizes = {}
+    for horizon in horizons:
+        key = str(horizon)
+        sample_sizes[key] = len(at_risk)
+        if len(at_risk) < 4:
+            probabilities[key] = None
+            continue
+        successes = sum(interval <= elapsed_hours + horizon for interval in at_risk)
+        probabilities[key] = round((successes + 0.5) / (len(at_risk) + 1) * 100, 1)
+    return probabilities, sample_sizes
+
+
+def reset_history_metrics(events: list[dict], now: datetime | None = None) -> dict:
+    now = now or datetime.now(timezone.utc)
+    completed = [
+        event for event in events
+        if event_is_routine_reset(event)
+        and event.get("status") != "community"
+        and event.get("confirmationSource") != "community"
+        and (event.get("status") in {"confirmed", "completed"} or bool(event.get("completedAt")))
+    ]
+    completed.sort(key=lambda event: event.get("confirmedAt") or event.get("completedAt") or event.get("updatedAt") or event.get("timestamp") or "")
+    times = []
+    for event in completed:
+        moment = parse_date(event.get("confirmedAt") or event.get("completedAt") or event.get("updatedAt") or event.get("timestamp"))
+        if moment:
+            times.append(moment)
+    intervals = [(right - left).total_seconds() / 3600 for left, right in zip(times, times[1:]) if right > left]
+    elapsed_hours = max(0, (now - times[-1]).total_seconds() / 3600) if times else None
+    probabilities, sample_sizes = conditional_interval_probabilities(intervals, elapsed_hours) if elapsed_hours is not None else (None, {})
+    intervals_days = [value / 24 for value in intervals]
+
+    pending_event = None
+    for event in sorted(events, key=lambda item: item.get("updatedAt") or item.get("timestamp") or "", reverse=True):
+        if not event_is_reset(event) or event.get("status") != "forecast":
+            continue
+        moment = parse_date(event.get("updatedAt") or event.get("createdAt") or event.get("timestamp"))
+        if moment is None:
+            continue
+        age_hours = (now - moment).total_seconds() / 3600
+        if 0 <= age_hours <= 36:
+            pending_event = event
+            break
+
+    last_reset = completed[-1] if completed else None
+    return {
+        "resetCount": len(completed),
+        "averageIntervalDays": round(sum(intervals_days) / len(intervals_days), 1) if intervals_days else None,
+        "longestIntervalDays": round(max(intervals_days), 1) if intervals_days else None,
+        "lastResetAt": (last_reset.get("confirmedAt") or last_reset.get("completedAt") or last_reset.get("updatedAt") or last_reset.get("timestamp")) if last_reset else None,
+        "pendingEventId": pending_event.get("id") if pending_event else None,
+        "probabilities": probabilities,
+        "probabilitySampleSizes": sample_sizes,
+    }
 
 
 def build_summary() -> dict:
@@ -54,27 +119,7 @@ def build_summary() -> dict:
     events = load_json(EVENTS_PATH, [])
     config = load_notification_config()
     ordered_events = sorted(events, key=lambda event: event.get("updatedAt") or event.get("timestamp") or "", reverse=True)
-    completed = [event for event in events if event_is_reset(event) and event_is_completed(event)]
-    completed.sort(key=lambda event: event.get("confirmedAt") or event.get("completedAt") or event.get("updatedAt") or event.get("timestamp") or "")
-    times = []
-    for event in completed:
-        moment = parse_date(event.get("confirmedAt") or event.get("completedAt") or event.get("updatedAt") or event.get("timestamp"))
-        if moment:
-            times.append(moment)
-    intervals = [(right - left).total_seconds() / 3600 for left, right in zip(times, times[1:]) if right > left]
-    average_hours = sum(intervals) / len(intervals) if intervals else None
-    probabilities = None
-    if len(intervals) >= 4 and average_hours and average_hours > 0:
-        import math
-        pending = any(event_is_reset(event) and event.get("status") == "forecast" for event in events)
-        boost = 1.12 if pending else 1.0
-        probabilities = {
-            str(hours): round(min(99, max(1, (1 - math.exp(-hours / average_hours)) * boost * 100)))
-            for hours in (24, 48, 72)
-        }
-    intervals_days = [value / 24 for value in intervals]
-    last_reset = completed[-1] if completed else None
-    pending_event = next((event for event in ordered_events if event_is_reset(event) and event.get("status") == "forecast"), None)
+    history = reset_history_metrics(events)
     return {
         "connected": bool(state.get("initialized") and state.get("monitorState") == "ok"),
         "status": {
@@ -90,13 +135,14 @@ def build_summary() -> dict:
         "posts": sorted(posts, key=lambda post: post.get("createdAt", ""), reverse=True)[:100],
         "events": ordered_events[:100],
         "summary": {
-            "resetCount": len(completed),
+            "resetCount": history["resetCount"],
             "cardCount": sum(1 for event in events if event.get("category") == "compensation" or event.get("type") == "card"),
-            "averageIntervalDays": round(average_hours / 24, 1) if average_hours else None,
-            "longestIntervalDays": round(max(intervals_days), 1) if intervals_days else None,
-            "lastResetAt": (last_reset.get("confirmedAt") or last_reset.get("completedAt") or last_reset.get("updatedAt") or last_reset.get("timestamp")) if last_reset else None,
-            "pendingEventId": pending_event.get("id") if pending_event else None,
-            "probabilities": probabilities,
+            "averageIntervalDays": history["averageIntervalDays"],
+            "longestIntervalDays": history["longestIntervalDays"],
+            "lastResetAt": history["lastResetAt"],
+            "pendingEventId": history["pendingEventId"],
+            "probabilities": history["probabilities"],
+            "probabilitySampleSizes": history["probabilitySampleSizes"],
             "accuracy": None,
         },
         "notifications": {

@@ -6,7 +6,13 @@ export default {
     if (request.method !== "GET") {
       return new Response("Method not allowed", { status: 405 });
     }
-    if (url.pathname !== "/profile") {
+    const statusMatch = url.pathname.match(/^\/status\/(\d+)$/);
+    const targetUrl = url.pathname === "/profile"
+      ? PROFILE_URL
+      : statusMatch
+        ? `https://x.com/thsottiaux/status/${statusMatch[1]}`
+        : null;
+    if (!targetUrl) {
       return new Response("Not found", { status: 404 });
     }
     if (!env.PROFILE_PROXY_TOKEN || request.headers.get("Authorization") !== `Bearer ${env.PROFILE_PROXY_TOKEN}`) {
@@ -14,7 +20,7 @@ export default {
     }
 
     try {
-      const response = await fetch(PROFILE_URL, {
+      const response = await fetch(targetUrl, {
         headers: {
           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36",
           "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",

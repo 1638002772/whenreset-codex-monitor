@@ -19,6 +19,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
+from urllib.parse import urlsplit, urlunsplit
 
 
 ROOT = Path(__file__).resolve().parent
@@ -29,6 +30,7 @@ EVENTS_PATH = DATA_DIR / "events.json"
 CONFIG_PATH = DATA_DIR / "notification-config.json"
 DIAGNOSTICS_DIR = DATA_DIR / "diagnostics"
 PROFILE_URL = "https://x.com/thsottiaux"
+SIGNAL_INDEX_URL = "https://whenreset.com.cn/api/prediction-v2"
 BASELINE_TWEET_ID = "2107676072871600470"
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -37,6 +39,7 @@ USER_AGENT = (
 MAX_SEEN = 200
 MAX_POSTS = 200
 MAX_EVENTS = 200
+MAX_INDEXED_SIGNAL_PAGES = 5
 BEIJING_TZ = timezone(timedelta(hours=8))
 
 ENTRY_RE = re.compile(r'(?:"entry_id"|entry_id)\s*:\s*"?tweet-(\d+)"?')
@@ -102,8 +105,7 @@ def decode_rsc_string(value: str) -> str:
         return value.replace(r"\n", "\n").replace(r"\u0026", "&").replace(r"\u003c", "<").replace(r"\u003e", ">")
 
 
-def fetch_html() -> str:
-    profile_url = os.environ.get("WHENRESET_X_PROFILE_URL", PROFILE_URL)
+def fetch_page_html(url: str) -> str:
     headers = {
         "User-Agent": USER_AGENT,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -114,7 +116,7 @@ def fetch_html() -> str:
     if proxy_token:
         headers["Authorization"] = f"Bearer {proxy_token}"
     request = urllib.request.Request(
-        profile_url,
+        url,
         headers=headers,
     )
     try:
@@ -126,6 +128,12 @@ def fetch_html() -> str:
             html = raw.decode(charset, errors="replace")
     except (urllib.error.URLError, TimeoutError, OSError) as exc:
         raise ScrapeError(f"X fetch failed: {exc}") from exc
+    return html
+
+
+def fetch_html() -> str:
+    profile_url = os.environ.get("WHENRESET_X_PROFILE_URL", PROFILE_URL)
+    html = fetch_page_html(profile_url)
     if len(html) < 10_000 or "VHdlZXQ6" not in html:
         save_html_evidence(html)
         raise ScrapeError("X page did not contain the expected public SSR tweet data")
@@ -156,6 +164,107 @@ def fetch_posts_with_retry() -> list[dict]:
             if attempt == 0:
                 time.sleep(2)
     raise last_error
+
+
+def fetch_signal_index() -> dict:
+    request = urllib.request.Request(
+        SIGNAL_INDEX_URL,
+        headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            if response.status != 200:
+                raise ScrapeError(f"Public signal index returned HTTP {response.status}")
+            payload = json.loads(response.read().decode("utf-8"))
+    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+        raise ScrapeError(f"Public signal index fetch failed: {exc}") from exc
+    if not isinstance(payload, dict) or not isinstance(payload.get("posts"), list):
+        raise ScrapeError("Public signal index response did not contain a posts list")
+    return payload
+
+
+def signal_index_candidate_ids(payload: dict, known_ids: set[str], now: datetime | None = None) -> list[str]:
+    now = now or datetime.now(timezone.utc)
+    candidates = []
+    for item in payload.get("posts", []):
+        if not isinstance(item, dict):
+            continue
+        tweet_id = str(item.get("id") or "")
+        if not tweet_id.isdigit() or tweet_id in known_ids:
+            continue
+        source_url = item.get("source") or item.get("url") or ""
+        try:
+            parsed_url = urlsplit(source_url)
+            posted_at = parse_date(str(item.get("created_at") or item.get("createdAt") or ""))
+        except (TypeError, ValueError):
+            continue
+        match = re.fullmatch(r"/thsottiaux/status/(\d+)/?", parsed_url.path)
+        if parsed_url.scheme != "https" or parsed_url.netloc.casefold() != "x.com" or not match or match.group(1) != tweet_id:
+            continue
+        author = str(item.get("author") or "thsottiaux").lstrip("@").casefold()
+        if author != "thsottiaux" or posted_at.tzinfo is None:
+            continue
+        age_hours = (now - posted_at).total_seconds() / 3600
+        if age_hours < -5 or age_hours > 72:
+            continue
+        candidate_text = str(item.get("text") or item.get("textEn") or item.get("bodyEn") or "")
+        if not event_category(candidate_text):
+            continue
+        candidates.append(tweet_id)
+        if len(candidates) >= MAX_INDEXED_SIGNAL_PAGES:
+            break
+    return candidates
+
+
+def fetch_indexed_status_post(tweet_id: str) -> dict | None:
+    url = indexed_status_page_url(tweet_id)
+    last_error = None
+    for attempt in range(2):
+        html = None
+        try:
+            html = fetch_page_html(url)
+            if len(html) < 10_000 or "VHdlZXQ6" not in html:
+                save_html_evidence(html)
+                raise ScrapeError("X status page did not contain public SSR tweet data")
+            matches = [post for post in extract_posts(html) if post["id"] == tweet_id]
+            if not matches:
+                raise ScrapeError(f"X status page did not verify candidate {tweet_id}")
+            return matches[0]
+        except Exception as exc:
+            last_error = exc
+            if html:
+                save_html_evidence(html)
+            if attempt == 0:
+                time.sleep(2)
+    print(f"Could not verify indexed X status {tweet_id}: {last_error}", file=sys.stderr)
+    return None
+
+
+def indexed_status_page_url(tweet_id: str) -> str:
+    if not tweet_id.isdigit():
+        raise ValueError("X status IDs must be numeric")
+    profile_url = os.environ.get("WHENRESET_X_PROFILE_URL", "").strip()
+    parsed_profile = urlsplit(profile_url)
+    if parsed_profile.path.rstrip("/").endswith("/profile"):
+        proxy_path = parsed_profile.path.rstrip("/")[:-len("/profile")]
+        return urlunsplit((parsed_profile.scheme, parsed_profile.netloc, f"{proxy_path}/status/{tweet_id}", "", ""))
+    return f"https://x.com/thsottiaux/status/{tweet_id}"
+
+
+def fetch_indexed_signal_posts(known_ids: set[str], now: datetime | None = None) -> list[dict]:
+    try:
+        payload = fetch_signal_index()
+    except Exception as exc:
+        print(f"Supplemental public signal index unavailable: {exc}", file=sys.stderr)
+        return []
+
+    posts = []
+    for tweet_id in signal_index_candidate_ids(payload, known_ids, now=now):
+        post = fetch_indexed_status_post(tweet_id)
+        if post:
+            post["discoveredVia"] = "public-index"
+            posts.append(post)
+    return posts
 
 
 def tweet_key(tweet_id: str) -> str:
@@ -603,6 +712,7 @@ def build_event_record(category: str, status: str, post: dict) -> dict:
 def run_once() -> dict:
     ensure_dirs()
     state = load_json(STATE_PATH, {})
+    existing_posts = load_json(POSTS_PATH, [])
     previous_failures = int(state.get("consecutiveFailures", 0))
     previous_monitor_state = state.get("monitorState")
     pending_email_events = state.setdefault("pendingPublicEmailEvents", {})
@@ -636,9 +746,15 @@ def run_once() -> dict:
         set_workflow_output("publish_site", publish_site)
         return {"ok": False, "error": str(exc), "consecutiveFailures": state["consecutiveFailures"], "publishSite": publish_site}
 
+    known_ids = set(state.get("seenIds", [])) | {str(item.get("id")) for item in existing_posts if item.get("id")}
+    primary_ids = {post["id"] for post in posts}
+    indexed_posts = fetch_indexed_signal_posts(known_ids | primary_ids)
+    posts_by_id = {post["id"]: post for post in posts}
+    posts_by_id.update({post["id"]: post for post in indexed_posts})
+    posts = sorted(posts_by_id.values(), key=lambda item: (item["createdAt"], item["id"]), reverse=True)
+
     seen = list(state.get("seenIds", []))
     seen_set = set(seen)
-    existing_posts = load_json(POSTS_PATH, [])
     events = load_json(EVENTS_PATH, [])
     first_run = not bool(state.get("initialized"))
     ordered = list(reversed(posts))
@@ -725,7 +841,7 @@ def run_once() -> dict:
         or pending_email_events_before != json.dumps(pending_email_events, sort_keys=True)
     )
     set_workflow_output("publish_site", publish_site)
-    return {"ok": True, "postsFetched": len(posts), "newPosts": state.get("lastNewPostIds", []), "events": len(events), "baselineOnly": first_run, "mailDelivery": public_mail_delivery, "publishSite": publish_site}
+    return {"ok": True, "postsFetched": len(posts), "indexedPostsVerified": len(indexed_posts), "newPosts": state.get("lastNewPostIds", []), "events": len(events), "baselineOnly": first_run, "mailDelivery": public_mail_delivery, "publishSite": publish_site}
 
 
 def main() -> int:

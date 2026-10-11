@@ -4,6 +4,7 @@ data/subscribers.json
 data/diagnostics/
 dist/
 cloudflare/.dev.vars
+/.wrangler/
 cloudflare/.wrangler/
 cloudflare/email-api/.wrangler/
 cloudflare/public/
