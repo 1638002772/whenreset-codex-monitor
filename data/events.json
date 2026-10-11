@@ -1,5 +1,33 @@
 [
   {
+    "id": "2109045392684032299",
+    "category": "usage_reset",
+    "status": "forecast",
+    "titleZh": "额度重置 · 重置预告",
+    "titleEn": "Usage reset · Reset forecast",
+    "createdAt": "2026-10-10T22:16:20Z",
+    "updatedAt": "2026-10-10T22:16:20Z",
+    "confirmedAt": null,
+    "timeWindow": "by EOD (timezone not specified)",
+    "postIds": [
+      "2109045392684032299"
+    ],
+    "timeline": [
+      {
+        "postId": "2109045392684032299",
+        "createdAt": "2026-10-10T22:16:20Z",
+        "url": "https://x.com/thsottiaux/status/2109045392684032299",
+        "text": "Global reset by EOD. May the tokens do good things for you.",
+        "status": "forecast",
+        "timeWindow": "by EOD (timezone not specified)"
+      }
+    ],
+    "lastAlertedStatus": "forecast",
+    "lastPostId": "2109045392684032299",
+    "lastPostUrl": "https://x.com/thsottiaux/status/2109045392684032299",
+    "latestText": "Global reset by EOD. May the tokens do good things for you."
+  },
+  {
     "id": "2107913674593644711",
     "category": "banked_reset",
     "status": "confirmed",

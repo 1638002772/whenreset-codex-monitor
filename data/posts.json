@@ -1,13 +1,32 @@
 [
   {
+    "id": "2109090080497508356",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-11T01:13:54Z",
+    "text": "The day we reach perfection it will be resets from there onwards",
+    "url": "https://x.com/thsottiaux/status/2109090080497508356",
+    "fetchedAt": "2026-10-11T02:51:52Z",
+    "classification": null,
+    "eventStatus": null
+  },
+  {
+    "id": "2109045392684032299",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-10T22:16:20Z",
+    "text": "Global reset by EOD. May the tokens do good things for you.",
+    "url": "https://x.com/thsottiaux/status/2109045392684032299",
+    "fetchedAt": "2026-10-11T02:51:58Z",
+    "discoveredVia": "public-index",
+    "classification": "usage_reset",
+    "eventStatus": "forecast"
+  },
+  {
     "id": "2109045220411351517",
     "author": "thsottiaux",
     "createdAt": "2026-10-10T22:15:39Z",
     "text": "Day 6/ Reset",
     "url": "https://x.com/thsottiaux/status/2109045220411351517",
-    "fetchedAt": "2026-10-10T22:30:42Z",
-    "classification": null,
-    "eventStatus": null
+    "fetchedAt": "2026-10-11T02:51:52Z"
   },
   {
     "id": "2108840070648397933",
@@ -15,7 +34,7 @@
     "createdAt": "2026-10-10T08:40:27Z",
     "text": "Blinked and it’s already Saturday",
     "url": "https://x.com/thsottiaux/status/2108840070648397933",
-    "fetchedAt": "2026-10-10T22:30:42Z"
+    "fetchedAt": "2026-10-11T02:51:52Z"
   },
   {
     "id": "2108777962053292398",
@@ -23,7 +42,7 @@
     "createdAt": "2026-10-10T04:33:40Z",
     "text": "Your ChatGPT subscription is now also a Devin subscription",
     "url": "https://x.com/thsottiaux/status/2108777962053292398",
-    "fetchedAt": "2026-10-10T22:30:42Z"
+    "fetchedAt": "2026-10-11T02:51:52Z"
   },
   {
     "id": "2108773703064657936",
@@ -31,7 +50,7 @@
     "createdAt": "2026-10-10T04:16:44Z",
     "text": "Dots got a pretty big upgrade",
     "url": "https://x.com/thsottiaux/status/2108773703064657936",
-    "fetchedAt": "2026-10-10T22:30:42Z"
+    "fetchedAt": "2026-10-11T02:51:52Z"
   },
   {
     "id": "2108646052178092403",

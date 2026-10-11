@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-10-10T22:30:42Z",
+  "lastAttemptAt": "2026-10-11T02:51:51Z",
   "initialized": true,
   "seenIds": [
     "2108040921044639779",
@@ -15,22 +15,43 @@
     "2108773703064657936",
     "2108777962053292398",
     "2108840070648397933",
-    "2109045220411351517"
+    "2109045220411351517",
+    "2109045392684032299",
+    "2109090080497508356"
   ],
-  "lastSuccessAt": "2026-10-10T22:30:42Z",
+  "lastSuccessAt": "2026-10-11T02:52:02Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "monitorState": "ok",
-  "postsFetched": 5,
+  "postsFetched": 6,
   "failureAlertSent": false,
-  "lastNewPostAt": "2026-10-10T22:15:39Z",
+  "lastNewPostAt": "2026-10-11T01:13:54Z",
   "lastNewPostIds": [
-    "2109045220411351517"
+    "2109045392684032299",
+    "2109090080497508356"
   ],
-  "lastNotifications": [],
+  "lastNotifications": [
+    {
+      "eventId": "2109045392684032299",
+      "status": "forecast",
+      "feishu": null,
+      "emailCount": 0,
+      "publicEmailQueued": true,
+      "errors": []
+    }
+  ],
   "pendingPublicEmailEvents": {},
   "lastPublicMailDelivery": {
-    "sent": 0,
+    "sent": 1,
     "failed": 0
-  }
+  },
+  "browserAlerts": [
+    {
+      "key": "2109045392684032299:forecast:2026-10-10T22:16:20Z",
+      "title": "额度重置 · 重置预告",
+      "body": "🟡 重置预告\n时间（北京时间）：2026-10-11 06:16\n原文时间窗：by EOD (timezone not specified)\n原文：Global reset by EOD. May the tokens do good things for you.\nhttps://x.com/thsottiaux/status/2109045392684032299",
+      "url": "https://x.com/thsottiaux/status/2109045392684032299",
+      "createdAt": "2026-10-11T02:51:58Z"
+    }
+  ]
 }
