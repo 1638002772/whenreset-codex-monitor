@@ -48,6 +48,7 @@ SCREEN_NAME_RE = re.compile(r'(?:"screen_name"|screen_name)\s*:\s*"([^"]+)"')
 
 WINDOW_PATTERNS = [
     re.compile(r"\bby\s+EOD\s+(?:PST|PDT|PT)\b", re.I),
+    re.compile(r"\bby\s+EOD\b", re.I),
     re.compile(r"\bby\s+the\s+end\s+of\s+(?:today|the\s+day)(?:\s+(?:PST|PDT|PT|Pacific\s+Time))?\b", re.I),
     re.compile(r"\bwithin\s+(?:the\s+)?(?:next\s+)?(?:\d+\s+)?(?:minutes?|hours?|days?|hour|day)\b", re.I),
     re.compile(r"\bin\s+\d+\s+(?:minutes?|hours?|days?)\b", re.I),
@@ -126,6 +127,7 @@ def fetch_html() -> str:
     except (urllib.error.URLError, TimeoutError, OSError) as exc:
         raise ScrapeError(f"X fetch failed: {exc}") from exc
     if len(html) < 10_000 or "VHdlZXQ6" not in html:
+        save_html_evidence(html)
         raise ScrapeError("X page did not contain the expected public SSR tweet data")
     return html
 
@@ -138,6 +140,22 @@ def save_html_evidence(html: str) -> None:
     files = sorted(DIAGNOSTICS_DIR.glob("x-fetch-*.html"), key=lambda item: item.stat().st_mtime, reverse=True)
     for old in files[3:]:
         old.unlink(missing_ok=True)
+
+
+def fetch_posts_with_retry() -> list[dict]:
+    last_error = None
+    for attempt in range(2):
+        html = None
+        try:
+            html = fetch_html()
+            return extract_posts(html)
+        except Exception as exc:
+            last_error = exc
+            if html:
+                save_html_evidence(html)
+            if attempt == 0:
+                time.sleep(2)
+    raise last_error
 
 
 def tweet_key(tweet_id: str) -> str:
@@ -196,6 +214,8 @@ def parse_time_window(text: str) -> str | None:
         if not match:
             continue
         phrase = match.group(0)
+        if phrase.casefold() == "by eod":
+            phrase = "by EOD (timezone not specified)"
         if phrase.casefold() in {"tomorrow", "later today", "tonight"} and not DELIVERY_WORDS.search(text):
             continue
         return phrase
@@ -210,7 +230,10 @@ def event_category(text: str) -> str | None:
         return "compensation"
     if re.search(r"\bbanked\s+reset\b", lower):
         return "banked_reset"
-    if RESET_WORDS.search(text) and RESET_CONTEXT_WORDS.search(text):
+    if RESET_WORDS.search(text) and (
+        RESET_CONTEXT_WORDS.search(text)
+        or (re.search(r"\bglobal\s+reset\b", text, re.I) and parse_time_window(text))
+    ):
         return "usage_reset"
     return None
 
@@ -591,15 +614,12 @@ def run_once() -> dict:
             pending_email_events.pop(pending_key, None)
     state["lastAttemptAt"] = now_iso()
     try:
-        html = fetch_html()
-        posts = extract_posts(html)
+        posts = fetch_posts_with_retry()
     except Exception as exc:
         state["consecutiveFailures"] = int(state.get("consecutiveFailures", 0)) + 1
         state["lastError"] = str(exc)
         state["monitorState"] = "error"
         state["lastPublicMailDelivery"] = public_mail_delivery
-        if "html" in locals():
-            save_html_evidence(html)
         if state["consecutiveFailures"] >= 2 and not state.get("failureAlertSent"):
             config = load_notification_config()
             text = f"❗️ WHENRESET 抓取暂时受阻\n连续失败：{state['consecutiveFailures']} 次\n原因：{state['lastError']}"
