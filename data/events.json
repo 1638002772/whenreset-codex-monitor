@@ -1,5 +1,33 @@
 [
   {
+    "id": "2109812360596865224",
+    "category": "usage_reset",
+    "status": "forecast",
+    "titleZh": "额度重置 · 重置预告",
+    "titleEn": "Usage reset · Reset forecast",
+    "createdAt": "2026-10-13T01:03:59Z",
+    "updatedAt": "2026-10-13T01:03:59Z",
+    "confirmedAt": null,
+    "timeWindow": "by EOD PST",
+    "postIds": [
+      "2109812360596865224"
+    ],
+    "timeline": [
+      {
+        "postId": "2109812360596865224",
+        "createdAt": "2026-10-13T01:03:59Z",
+        "url": "https://x.com/thsottiaux/status/2109812360596865224",
+        "text": "Global reset landing by EOD PST time. Enjoy",
+        "status": "forecast",
+        "timeWindow": "by EOD PST"
+      }
+    ],
+    "lastAlertedStatus": "forecast",
+    "lastPostId": "2109812360596865224",
+    "lastPostUrl": "https://x.com/thsottiaux/status/2109812360596865224",
+    "latestText": "Global reset landing by EOD PST time. Enjoy"
+  },
+  {
     "id": "2109045392684032299",
     "category": "usage_reset",
     "status": "forecast",
