@@ -1,5 +1,27 @@
 [
   {
+    "id": "2109892247580000595",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-13T06:21:26Z",
+    "text": "Good plans are simple. I have one that should result in significantly more usage for everyone. Hope to get it done soon.",
+    "url": "https://x.com/thsottiaux/status/2109892247580000595",
+    "fetchedAt": "2026-10-13T08:03:47Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2109873287853707513",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-13T05:06:06Z",
+    "text": "What would you like with your side of reset? It's done.",
+    "url": "https://x.com/thsottiaux/status/2109873287853707513",
+    "fetchedAt": "2026-10-13T08:03:47Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2109812360596865224",
     "author": "thsottiaux",
     "createdAt": "2026-10-13T01:03:59Z",
@@ -16,9 +38,7 @@
     "createdAt": "2026-10-13T01:03:25Z",
     "text": "Day 8/ Reset",
     "url": "https://x.com/thsottiaux/status/2109812216212099456",
-    "fetchedAt": "2026-10-13T01:17:27Z",
-    "classification": null,
-    "eventStatus": null
+    "fetchedAt": "2026-10-13T08:03:47Z"
   },
   {
     "id": "2109439315570999598",
@@ -26,7 +46,7 @@
     "createdAt": "2026-10-12T00:21:38Z",
     "text": "The results of this poll has gotten me confused. I definitely thought it would sway much more favorably in the 2X direction across Pro 100/200/500 at the cost of bringing back 5h limits in order to smoothen the demand curve.",
     "url": "https://x.com/thsottiaux/status/2109439315570999598",
-    "fetchedAt": "2026-10-13T01:17:27Z"
+    "fetchedAt": "2026-10-13T08:03:47Z"
   },
   {
     "id": "2109430343346581527",
@@ -34,7 +54,7 @@
     "createdAt": "2026-10-11T23:45:59Z",
     "text": "Day 7/\n\nWe have increased default context length for GPT-6.1 Sol to 500k when used through Codex &amp; Work, up from 272k or an ~ 80% increase.\n\nWe will go higher in the future, but it helps reduce occurrence of compactions and with tasks that require keeping a lot of context and",
     "url": "https://x.com/thsottiaux/status/2109430343346581527",
-    "fetchedAt": "2026-10-13T01:17:27Z"
+    "fetchedAt": "2026-10-13T08:03:47Z"
   },
   {
     "id": "2109152716954222849",

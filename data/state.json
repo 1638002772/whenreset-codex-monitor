@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-10-13T01:17:26Z",
+  "lastAttemptAt": "2026-10-13T08:03:46Z",
   "initialized": true,
   "seenIds": [
     "2108040921044639779",
@@ -23,32 +23,25 @@
     "2109430343346581527",
     "2109439315570999598",
     "2109812216212099456",
-    "2109812360596865224"
+    "2109812360596865224",
+    "2109873287853707513",
+    "2109892247580000595"
   ],
-  "lastSuccessAt": "2026-10-13T01:17:35Z",
+  "lastSuccessAt": "2026-10-13T08:03:50Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "monitorState": "ok",
-  "postsFetched": 6,
+  "postsFetched": 5,
   "failureAlertSent": false,
-  "lastNewPostAt": "2026-10-13T01:03:59Z",
+  "lastNewPostAt": "2026-10-13T06:21:26Z",
   "lastNewPostIds": [
-    "2109812216212099456",
-    "2109812360596865224"
+    "2109873287853707513",
+    "2109892247580000595"
   ],
-  "lastNotifications": [
-    {
-      "eventId": "2109812360596865224",
-      "status": "forecast",
-      "feishu": null,
-      "emailCount": 0,
-      "publicEmailQueued": true,
-      "errors": []
-    }
-  ],
+  "lastNotifications": [],
   "pendingPublicEmailEvents": {},
   "lastPublicMailDelivery": {
-    "sent": 1,
+    "sent": 0,
     "failed": 0
   },
   "browserAlerts": [
