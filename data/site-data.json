@@ -2,24 +2,150 @@
   "connected": true,
   "status": {
     "state": "ok",
-    "lastAttemptAt": "2026-10-08T23:40:37Z",
-    "lastSuccessAt": "2026-10-08T23:40:39Z",
-    "lastNewPostAt": "2026-10-08T19:15:14Z",
+    "lastAttemptAt": "2026-10-13T01:17:26Z",
+    "lastSuccessAt": "2026-10-13T01:17:35Z",
+    "lastNewPostAt": "2026-10-13T01:03:59Z",
     "nextCheckAt": null,
     "consecutiveFailures": 0,
     "error": null,
-    "postsFetched": 5
+    "postsFetched": 6
   },
   "posts": [
+    {
+      "id": "2109812360596865224",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-13T01:03:59Z",
+      "text": "Global reset landing by EOD PST time. Enjoy",
+      "url": "https://x.com/thsottiaux/status/2109812360596865224",
+      "fetchedAt": "2026-10-13T01:17:31Z",
+      "discoveredVia": "public-index",
+      "classification": "usage_reset",
+      "eventStatus": "forecast"
+    },
+    {
+      "id": "2109812216212099456",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-13T01:03:25Z",
+      "text": "Day 8/ Reset",
+      "url": "https://x.com/thsottiaux/status/2109812216212099456",
+      "fetchedAt": "2026-10-13T01:17:27Z",
+      "classification": null,
+      "eventStatus": null
+    },
+    {
+      "id": "2109439315570999598",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-12T00:21:38Z",
+      "text": "The results of this poll has gotten me confused. I definitely thought it would sway much more favorably in the 2X direction across Pro 100/200/500 at the cost of bringing back 5h limits in order to smoothen the demand curve.",
+      "url": "https://x.com/thsottiaux/status/2109439315570999598",
+      "fetchedAt": "2026-10-13T01:17:27Z"
+    },
+    {
+      "id": "2109430343346581527",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-11T23:45:59Z",
+      "text": "Day 7/\n\nWe have increased default context length for GPT-6.1 Sol to 500k when used through Codex &amp; Work, up from 272k or an ~ 80% increase.\n\nWe will go higher in the future, but it helps reduce occurrence of compactions and with tasks that require keeping a lot of context and",
+      "url": "https://x.com/thsottiaux/status/2109430343346581527",
+      "fetchedAt": "2026-10-13T01:17:27Z"
+    },
+    {
+      "id": "2109152716954222849",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-11T05:22:48Z",
+      "text": "Pro users, would you rather have",
+      "url": "https://x.com/thsottiaux/status/2109152716954222849",
+      "fetchedAt": "2026-10-13T01:17:27Z"
+    },
+    {
+      "id": "2109132167112782291",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-11T04:01:09Z",
+      "text": "Put the reset in the bag. All propagated.",
+      "url": "https://x.com/thsottiaux/status/2109132167112782291",
+      "fetchedAt": "2026-10-13T01:17:27Z"
+    },
+    {
+      "id": "2109090080497508356",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-11T01:13:54Z",
+      "text": "The day we reach perfection it will be resets from there onwards",
+      "url": "https://x.com/thsottiaux/status/2109090080497508356",
+      "fetchedAt": "2026-10-12T02:02:07Z"
+    },
+    {
+      "id": "2109045392684032299",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-10T22:16:20Z",
+      "text": "Global reset by EOD. May the tokens do good things for you.",
+      "url": "https://x.com/thsottiaux/status/2109045392684032299",
+      "fetchedAt": "2026-10-11T02:51:58Z",
+      "discoveredVia": "public-index",
+      "classification": "usage_reset",
+      "eventStatus": "forecast"
+    },
+    {
+      "id": "2109045220411351517",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-10T22:15:39Z",
+      "text": "Day 6/ Reset",
+      "url": "https://x.com/thsottiaux/status/2109045220411351517",
+      "fetchedAt": "2026-10-11T07:18:02Z"
+    },
+    {
+      "id": "2108840070648397933",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-10T08:40:27Z",
+      "text": "Blinked and it’s already Saturday",
+      "url": "https://x.com/thsottiaux/status/2108840070648397933",
+      "fetchedAt": "2026-10-11T07:18:02Z"
+    },
+    {
+      "id": "2108777962053292398",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-10T04:33:40Z",
+      "text": "Your ChatGPT subscription is now also a Devin subscription",
+      "url": "https://x.com/thsottiaux/status/2108777962053292398",
+      "fetchedAt": "2026-10-11T02:51:52Z"
+    },
+    {
+      "id": "2108773703064657936",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-10T04:16:44Z",
+      "text": "Dots got a pretty big upgrade",
+      "url": "https://x.com/thsottiaux/status/2108773703064657936",
+      "fetchedAt": "2026-10-11T02:51:52Z"
+    },
+    {
+      "id": "2108646052178092403",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-09T19:49:30Z",
+      "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
+      "url": "https://x.com/thsottiaux/status/2108646052178092403",
+      "fetchedAt": "2026-10-10T22:30:42Z"
+    },
+    {
+      "id": "2108645667451318747",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-09T19:47:58Z",
+      "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.",
+      "url": "https://x.com/thsottiaux/status/2108645667451318747",
+      "fetchedAt": "2026-10-10T14:47:55Z"
+    },
+    {
+      "id": "2108349826727588000",
+      "author": "thsottiaux",
+      "createdAt": "2026-10-09T00:12:24Z",
+      "text": "Today, we are announcing ChatGPT.\n\nIt is here: https://t.co/Pgk3THSyOJ",
+      "url": "https://x.com/thsottiaux/status/2108349826727588000",
+      "fetchedAt": "2026-10-10T08:40:02Z"
+    },
     {
       "id": "2108275041276420573",
       "author": "thsottiaux",
       "createdAt": "2026-10-08T19:15:14Z",
       "text": "Day 4/\n\nWe have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort.\n\nAlso releasing GPT-6.1 Sol ultrafast. The two work very well https://t.co/4sjkptOtvG",
       "url": "https://x.com/thsottiaux/status/2108275041276420573",
-      "fetchedAt": "2026-10-08T19:20:38Z",
-      "classification": null,
-      "eventStatus": null
+      "fetchedAt": "2026-10-09T23:01:12Z"
     },
     {
       "id": "2108084615349170480",
@@ -27,7 +153,7 @@
       "createdAt": "2026-10-08T06:38:33Z",
       "text": "Day 3 (encore)/\n\nWe silently re-shipped codex cloud. It’s pretty good now",
       "url": "https://x.com/thsottiaux/status/2108084615349170480",
-      "fetchedAt": "2026-10-08T19:20:38Z"
+      "fetchedAt": "2026-10-09T23:01:12Z"
     },
     {
       "id": "2108040921044639779",
@@ -35,7 +161,7 @@
       "createdAt": "2026-10-08T03:44:55Z",
       "text": "Confirmed landed across all accounts. How are we doing so far?",
       "url": "https://x.com/thsottiaux/status/2108040921044639779",
-      "fetchedAt": "2026-10-08T19:20:38Z"
+      "fetchedAt": "2026-10-09T00:42:52Z"
     },
     {
       "id": "2107913738791596286",
@@ -55,7 +181,7 @@
       "createdAt": "2026-10-07T19:19:17Z",
       "text": "Day 3/\n\nThe big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.\n\nLoading a banked reset in everyone's paid accounts. See you again tomorrow!",
       "url": "https://x.com/thsottiaux/status/2107913674593644711",
-      "fetchedAt": "2026-10-08T19:20:38Z"
+      "fetchedAt": "2026-10-09T00:42:52Z"
     },
     {
       "id": "2107912709715132482",
@@ -1006,177 +1132,65 @@
       "source": "https://x.com/thsottiaux/status/2041655710346572085",
       "classification": "reset",
       "eventStatus": "completed"
-    },
-    {
-      "id": "2039248564967424483",
-      "author": "thsottiaux",
-      "createdAt": "2026-04-01T07:48:39.000Z",
-      "text": "Usage reset: More users hitting limits, cautious reset",
-      "summaryZh": "额度更新：触限用户增多，谨慎起见重置",
-      "summaryEn": "Usage reset: More users hitting limits, cautious reset",
-      "url": "https://x.com/thsottiaux/status/2039248564967424483",
-      "source": "https://x.com/thsottiaux/status/2039248564967424483",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2037346989244096581",
-      "author": "thsottiaux",
-      "createdAt": "2026-03-27T01:52:28.000Z",
-      "text": "Usage reset: Plugins launch",
-      "summaryZh": "额度更新：插件功能发布",
-      "summaryEn": "Usage reset: Plugins launch",
-      "url": "https://x.com/thsottiaux/status/2037346989244096581",
-      "source": "https://x.com/thsottiaux/status/2037346989244096581",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2031605592352313567",
-      "author": "thsottiaux",
-      "createdAt": "2026-03-11T05:38:13.000Z",
-      "text": "Usage reset: Codex stable again",
-      "summaryZh": "额度更新：Codex 恢复稳定",
-      "summaryEn": "Usage reset: Codex stable again",
-      "url": "https://x.com/thsottiaux/status/2031605592352313567",
-      "source": "https://x.com/thsottiaux/status/2031605592352313567",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2031216405266481489",
-      "author": "thsottiaux",
-      "createdAt": "2026-03-11T05:38:13.000Z",
-      "text": "Usage reset: Incident fully resolved",
-      "summaryZh": "额度更新：故障完全恢复",
-      "summaryEn": "Usage reset: Incident fully resolved",
-      "url": "https://x.com/thsottiaux/status/2031216405266481489",
-      "source": "https://x.com/thsottiaux/status/2031216405266481489",
-      "classification": "reset",
-      "eventStatus": "announced"
-    },
-    {
-      "id": "2030474136024400173",
-      "author": "thsottiaux",
-      "createdAt": "2026-03-08T02:42:13.000Z",
-      "text": "Usage reset: Reports of fast drain, reset while investigating",
-      "summaryZh": "额度更新：用量消耗过快报告，调查期间先重置",
-      "summaryEn": "Usage reset: Reports of fast drain, reset while investigating",
-      "url": "https://x.com/thsottiaux/status/2030474136024400173",
-      "source": "https://x.com/thsottiaux/status/2030474136024400173",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2029308599835738218",
-      "author": "thsottiaux",
-      "createdAt": "2026-03-04T21:30:47.000Z",
-      "text": "Usage reset: 2X promo limits missing for ~9% of users",
-      "summaryZh": "额度更新：2X 促销限额未应用于约 9% 用户",
-      "summaryEn": "Usage reset: 2X promo limits missing for ~9% of users",
-      "url": "https://x.com/thsottiaux/status/2029308599835738218",
-      "source": "https://x.com/thsottiaux/status/2029308599835738218",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2028649088594436225",
-      "author": "thsottiaux",
-      "createdAt": "2026-03-03T01:50:07.000Z",
-      "text": "Usage reset: Requests wrongly blocked as high risk",
-      "summaryZh": "额度更新：请求被误判为高风险的故障",
-      "summaryEn": "Usage reset: Requests wrongly blocked as high risk",
-      "url": "https://x.com/thsottiaux/status/2028649088594436225",
-      "source": "https://x.com/thsottiaux/status/2028649088594436225",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2004100061933064395",
-      "author": "thsottiaux",
-      "createdAt": "2025-12-25T08:01:03.000Z",
-      "text": "Usage reset: Holiday gift, limits doubled until Jan 1",
-      "summaryZh": "额度更新：圣诞礼物，限额翻倍至 1 月 1 日",
-      "summaryEn": "Usage reset: Holiday gift, limits doubled until Jan 1",
-      "url": "https://x.com/thsottiaux/status/2004100061933064395",
-      "source": "https://x.com/thsottiaux/status/2004100061933064395",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2002137269134819610",
-      "author": "thsottiaux",
-      "createdAt": "2025-12-19T22:01:37.000Z",
-      "text": "Usage reset: Usage tracking system rewritten",
-      "summaryZh": "额度更新：用量计费系统重写",
-      "summaryEn": "Usage reset: Usage tracking system rewritten",
-      "url": "https://x.com/thsottiaux/status/2002137269134819610",
-      "source": "https://x.com/thsottiaux/status/2002137269134819610",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "2001114683047317723",
-      "author": "thsottiaux",
-      "createdAt": "2025-12-17T02:18:14.000Z",
-      "text": "Usage reset: Apology for a disruption",
-      "summaryZh": "额度更新：服务中断致歉",
-      "summaryEn": "Usage reset: Apology for a disruption",
-      "url": "https://x.com/thsottiaux/status/2001114683047317723",
-      "source": "https://x.com/thsottiaux/status/2001114683047317723",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "1995988609896513743",
-      "author": "thsottiaux",
-      "createdAt": "2025-12-02T22:49:02.000Z",
-      "text": "Usage reset: Mitigating a usage issue",
-      "summaryZh": "额度更新：缓解用量问题",
-      "summaryEn": "Usage reset: Mitigating a usage issue",
-      "url": "https://x.com/thsottiaux/status/1995988609896513743",
-      "source": "https://x.com/thsottiaux/status/1995988609896513743",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "1992370994028388670",
-      "author": "thsottiaux",
-      "createdAt": "2025-11-22T23:13:56.000Z",
-      "text": "Usage reset: High latency near the US",
-      "summaryZh": "额度更新：美国区高延迟",
-      "summaryEn": "Usage reset: High latency near the US",
-      "url": "https://x.com/thsottiaux/status/1992370994028388670",
-      "source": "https://x.com/thsottiaux/status/1992370994028388670",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "1986166501435711936",
-      "author": "thsottiaux",
-      "createdAt": "2025-11-05T20:19:29.000Z",
-      "text": "Usage reset: 45-minute outage resolved",
-      "summaryZh": "额度更新：45 分钟故障恢复",
-      "summaryEn": "Usage reset: 45-minute outage resolved",
-      "url": "https://x.com/thsottiaux/status/1986166501435711936",
-      "source": "https://x.com/thsottiaux/status/1986166501435711936",
-      "classification": "reset",
-      "eventStatus": "completed"
-    },
-    {
-      "id": "1968163721034994139",
-      "author": "thsottiaux",
-      "createdAt": "2025-09-17T04:02:52.000Z",
-      "text": "Usage reset: GPT-5-Codex launch, also making up for slowdowns",
-      "summaryZh": "额度更新：GPT-5-Codex 上线，兼补偿扩容期间变慢",
-      "summaryEn": "Usage reset: GPT-5-Codex launch, also making up for slowdowns",
-      "url": "https://x.com/thsottiaux/status/1968163721034994139",
-      "source": "https://x.com/thsottiaux/status/1968163721034994139",
-      "classification": "reset",
-      "eventStatus": "completed"
     }
   ],
   "events": [
+    {
+      "id": "2109812360596865224",
+      "category": "usage_reset",
+      "status": "forecast",
+      "titleZh": "额度重置 · 重置预告",
+      "titleEn": "Usage reset · Reset forecast",
+      "createdAt": "2026-10-13T01:03:59Z",
+      "updatedAt": "2026-10-13T01:03:59Z",
+      "confirmedAt": null,
+      "timeWindow": "by EOD PST",
+      "postIds": [
+        "2109812360596865224"
+      ],
+      "timeline": [
+        {
+          "postId": "2109812360596865224",
+          "createdAt": "2026-10-13T01:03:59Z",
+          "url": "https://x.com/thsottiaux/status/2109812360596865224",
+          "text": "Global reset landing by EOD PST time. Enjoy",
+          "status": "forecast",
+          "timeWindow": "by EOD PST"
+        }
+      ],
+      "lastAlertedStatus": "forecast",
+      "lastPostId": "2109812360596865224",
+      "lastPostUrl": "https://x.com/thsottiaux/status/2109812360596865224",
+      "latestText": "Global reset landing by EOD PST time. Enjoy"
+    },
+    {
+      "id": "2109045392684032299",
+      "category": "usage_reset",
+      "status": "forecast",
+      "titleZh": "额度重置 · 重置预告",
+      "titleEn": "Usage reset · Reset forecast",
+      "createdAt": "2026-10-10T22:16:20Z",
+      "updatedAt": "2026-10-10T22:16:20Z",
+      "confirmedAt": null,
+      "timeWindow": "by EOD (timezone not specified)",
+      "postIds": [
+        "2109045392684032299"
+      ],
+      "timeline": [
+        {
+          "postId": "2109045392684032299",
+          "createdAt": "2026-10-10T22:16:20Z",
+          "url": "https://x.com/thsottiaux/status/2109045392684032299",
+          "text": "Global reset by EOD. May the tokens do good things for you.",
+          "status": "forecast",
+          "timeWindow": "by EOD (timezone not specified)"
+        }
+      ],
+      "lastAlertedStatus": "forecast",
+      "lastPostId": "2109045392684032299",
+      "lastPostUrl": "https://x.com/thsottiaux/status/2109045392684032299",
+      "latestText": "Global reset by EOD. May the tokens do good things for you."
+    },
     {
       "id": "2107913674593644711",
       "category": "banked_reset",
@@ -2799,16 +2813,21 @@
     }
   ],
   "summary": {
-    "resetCount": 44,
+    "resetCount": 43,
     "cardCount": 9,
-    "averageIntervalDays": 9.0,
+    "averageIntervalDays": 9.2,
     "longestIntervalDays": 67.7,
-    "lastResetAt": "2026-10-08T03:44:55Z",
-    "pendingEventId": "2087706104814023111",
+    "lastResetAt": "2026-10-07T03:35:09Z",
+    "pendingEventId": "2109812360596865224",
     "probabilities": {
-      "24": 12,
-      "48": 22,
-      "72": 32
+      "24": 11.4,
+      "48": 38.6,
+      "72": 43.2
+    },
+    "probabilitySampleSizes": {
+      "24": 21,
+      "48": 21,
+      "72": 21
     },
     "accuracy": null
   },
@@ -2816,7 +2835,22 @@
     "emailConfigured": false,
     "emailSubscribers": 0,
     "feishuConfigured": false,
-    "browserEvents": []
+    "browserEvents": [
+      {
+        "key": "2109045392684032299:forecast:2026-10-10T22:16:20Z",
+        "title": "额度重置 · 重置预告",
+        "body": "🟡 重置预告\n时间（北京时间）：2026-10-11 06:16\n原文时间窗：by EOD (timezone not specified)\n原文：Global reset by EOD. May the tokens do good things for you.\nhttps://x.com/thsottiaux/status/2109045392684032299",
+        "url": "https://x.com/thsottiaux/status/2109045392684032299",
+        "createdAt": "2026-10-11T02:51:58Z"
+      },
+      {
+        "key": "2109812360596865224:forecast:2026-10-13T01:03:59Z",
+        "title": "额度重置 · 重置预告",
+        "body": "🟡 重置预告\n时间（北京时间）：2026-10-13 09:03\n原文时间窗：by EOD PST\n原文：Global reset landing by EOD PST time. Enjoy\nhttps://x.com/thsottiaux/status/2109812360596865224",
+        "url": "https://x.com/thsottiaux/status/2109812360596865224",
+        "createdAt": "2026-10-13T01:17:31Z"
+      }
+    ]
   },
   "wishes": 0,
   "archive": {

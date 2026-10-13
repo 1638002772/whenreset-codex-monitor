@@ -18,19 +18,26 @@ export function formatEventEmail(event, unsubscribeUrl) {
   const safeSubjectWindow = String(timeWindow).replace(/[\r\n]+/g, ' ').slice(0, 60);
   const time = formatBeijingTime(event.updatedAt);
   const original = String(event.latestText || '');
+  const summaryZh = String(event.latestTextZh || 'Tibo 发布了与 Codex 使用额度重置相关的消息，请结合英文原文判断。');
+  const timeWindowZh = String(event.timeWindowZh || timeWindow);
   const postUrl = String(event.lastPostUrl || 'https://x.com/thsottiaux');
   const safeOriginal = escapeHtml(original);
+  const safeSummaryZh = escapeHtml(summaryZh);
   const safePostUrl = escapeHtml(postUrl);
   const safeUnsubscribeUrl = escapeHtml(unsubscribeUrl);
   const subject = forecast
     ? `【重置预告】Codex 额度可能将在 ${safeSubjectWindow} 内重置`
     : '【已确认重置】Codex 使用额度重置已到账';
-  const html = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head><body style="margin:0;background:#f2f5f4;color:#18312d;font-family:Arial,'Microsoft YaHei',sans-serif"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:30px 12px;background:#f2f5f4"><tr><td align="center"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#fff;border:1px solid #e1e9e6;border-radius:16px;overflow:hidden"><tr><td style="padding:25px 30px;background:#102923;color:#eafff5"><div style="font-size:12px;letter-spacing:2px;color:#8ed7bc">WHENRESET · CODEX USAGE WATCH</div><h1 style="margin:14px 0 0;font-size:23px;line-height:1.35">${label}</h1></td></tr><tr><td style="padding:28px 30px"><div style="border-left:4px solid ${accent};padding:2px 0 2px 14px;color:#334d46;font-size:15px;line-height:1.75"><strong>${forecast ? '尚未确认到账' : '原帖已确认重置执行'}</strong><br>发布时间（北京时间）：${escapeHtml(time)}<br>原文时间窗：${escapeHtml(timeWindow)}</div><h2 style="margin:25px 0 9px;font-size:13px;color:#72827d">TIBO 的英文原文</h2><blockquote style="margin:0;padding:15px 17px;border-radius:10px;background:#f5f8f6;color:#304640;font-size:15px;line-height:1.7;white-space:pre-wrap">${safeOriginal}</blockquote><p style="margin:22px 0 0"><a href="${safePostUrl}" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#18775e;color:#fff;text-decoration:none;font-weight:700">查看 X 原帖</a></p><p style="margin:26px 0 0;color:#8a9994;font-size:12px;line-height:1.7">邮件根据 Tibo 的公开 Posts 自动整理。预告表示尚未确认到账；后续确认消息可能作为同一事件更新再次通知。</p></td></tr><tr><td style="padding:17px 30px;border-top:1px solid #edf1ef;color:#8a9994;font-size:12px">WHENRESET · <a href="${safeUnsubscribeUrl}" style="color:#55786d">取消邮件订阅</a></td></tr></table></td></tr></table></body></html>`;
+  const html = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head><body style="margin:0;background:#f2f5f4;color:#18312d;font-family:Arial,'Microsoft YaHei',sans-serif"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:30px 12px;background:#f2f5f4"><tr><td align="center"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#fff;border:1px solid #e1e9e6;border-radius:16px;overflow:hidden"><tr><td style="padding:25px 30px;background:#102923;color:#eafff5"><div style="font-size:12px;letter-spacing:2px;color:#8ed7bc">WHENRESET · CODEX USAGE WATCH</div><h1 style="margin:14px 0 0;font-size:23px;line-height:1.35">${label}</h1></td></tr><tr><td style="padding:28px 30px"><div style="border-left:4px solid ${accent};padding:2px 0 2px 14px;color:#334d46;font-size:15px;line-height:1.75"><strong>${forecast ? '尚未确认到账' : '原帖已确认重置执行'}</strong><br>发布时间（北京时间）：${escapeHtml(time)}<br>预计时间窗（中文）：${escapeHtml(timeWindowZh)}<br>原文时间窗：${escapeHtml(timeWindow)}</div><h2 style="margin:25px 0 9px;font-size:13px;color:#72827d">中文释义</h2><p style="margin:0;color:#304640;font-size:15px;line-height:1.75">${safeSummaryZh}</p><h2 style="margin:25px 0 9px;font-size:13px;color:#72827d">TIBO 的英文原文</h2><blockquote style="margin:0;padding:15px 17px;border-radius:10px;background:#f5f8f6;color:#304640;font-size:15px;line-height:1.7;white-space:pre-wrap">${safeOriginal}</blockquote><p style="margin:22px 0 0"><a href="${safePostUrl}" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#18775e;color:#fff;text-decoration:none;font-weight:700">查看 X 原帖</a></p><p style="margin:26px 0 0;color:#8a9994;font-size:12px;line-height:1.7">邮件根据 Tibo 的公开 Posts 自动整理。预告表示尚未确认到账；后续确认消息可能作为同一事件更新再次通知。</p></td></tr><tr><td style="padding:17px 30px;border-top:1px solid #edf1ef;color:#8a9994;font-size:12px">WHENRESET · <a href="${safeUnsubscribeUrl}" style="color:#55786d">取消邮件订阅</a></td></tr></table></td></tr></table></body></html>`;
   const text = [
     label,
     forecast ? '状态：尚未确认到账' : '状态：原帖已确认重置执行',
     `发布时间（北京时间）：${time}`,
+    `预计时间窗（中文）：${timeWindowZh}`,
     `原文时间窗：${timeWindow}`,
+    '',
+    '中文释义：',
+    summaryZh,
     '',
     'Tibo 的英文原文：',
     original,

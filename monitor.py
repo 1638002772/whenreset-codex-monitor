@@ -331,6 +331,44 @@ def parse_time_window(text: str) -> str | None:
     return None
 
 
+def translate_time_window(time_window: str | None) -> str:
+    if not time_window:
+        return ""
+    value = str(time_window).strip()
+    lower = value.casefold()
+    if re.search(r"\beod\s+(?:pst|pdt|pt|pacific\s+time)\b", lower):
+        return "太平洋时间当天结束前"
+    if "eod" in lower and "timezone not specified" in lower:
+        return "当天结束前（原文未注明时区）"
+    if re.fullmatch(r"within\s+(?:the\s+)?(?:next\s+)?hour", lower):
+        return "一小时内"
+    if re.fullmatch(r"within\s+(?:the\s+)?(?:next\s+)?day", lower):
+        return "一天内"
+    amount = re.search(r"\d+", lower)
+    if amount and re.fullmatch(r"within\s+(?:the\s+)?(?:next\s+)?\d+\s+hours?", lower):
+        return f"{amount.group(0)} 小时内"
+    if amount and re.fullmatch(r"within\s+(?:the\s+)?(?:next\s+)?\d+\s+minutes?", lower):
+        return f"{amount.group(0)} 分钟内"
+    return {"later today": "今天晚些时候", "tonight": "今晚", "tomorrow": "明天"}.get(lower, value)
+
+
+def translate_reset_text(text: str, category: str | None = None) -> str:
+    original = " ".join(str(text).split())
+    lower = original.casefold().rstrip(".!? ")
+    if lower == "global reset landing by eod pst time. enjoy":
+        return "全球额度重置预计将在太平洋时间当天结束前生效。祝你使用顺利。"
+    if lower == "global reset by eod. may the tokens do good things for you":
+        return "全球额度最晚将在当天结束前重置。愿这些额度能帮你做出好成果。"
+    time_window = parse_time_window(original)
+    if re.search(r"\bglobal\s+reset\b", original, re.I) and time_window:
+        return f"全球额度重置预计将在{translate_time_window(time_window)}生效。"
+    if category == "banked_reset":
+        return "Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。"
+    if category in {"usage_reset", "compensation", "cap_increase"}:
+        return "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。"
+    return "Tibo 发布了一条新动态。"
+
+
 def event_category(text: str) -> str | None:
     lower = text.casefold()
     if re.search(r"\b(cap|limit)\s+(is\s+)?(raised|increased|expanded)|higher\s+(usage|limit|cap)\b", lower):
@@ -462,9 +500,11 @@ def apply_post_to_events(events: list[dict], post: dict, notify: bool) -> tuple[
     event["lastPostId"] = post["id"]
     event["lastPostUrl"] = post["url"]
     event["timeWindow"] = classification["timeWindow"] or event.get("timeWindow")
+    event["timeWindowZh"] = translate_time_window(event["timeWindow"])
     event["timeline"].append({
         "postId": post["id"], "createdAt": post["createdAt"], "url": post["url"],
-        "text": post["text"], "status": status, "timeWindow": classification["timeWindow"],
+        "text": post["text"], "textZh": translate_reset_text(post["text"], category),
+        "status": status, "timeWindow": classification["timeWindow"],
     })
     if status in {"confirmed", "compensation", "cap_increase"}:
         event["status"] = status
@@ -476,6 +516,7 @@ def apply_post_to_events(events: list[dict], post: dict, notify: bool) -> tuple[
     title_zh, title_en = localized_status(category, event["status"])
     event["titleZh"], event["titleEn"] = title_zh, title_en
     event["latestText"] = post["text"]
+    event["latestTextZh"] = translate_reset_text(post["text"], category)
     should_alert = False
     if notify and event.get("lastAlertedStatus") != event["status"]:
         should_alert = event["status"] in {"confirmed", "compensation", "cap_increase"} or (event["status"] == "forecast" and bool(event.get("timeWindow")))
@@ -655,7 +696,9 @@ def event_message(event: dict) -> str:
         when = event.get("updatedAt", "")
     lines = [label, f"时间（北京时间）：{when}"]
     if event.get("timeWindow"):
-        lines.append(f"原文时间窗：{event['timeWindow']}")
+        lines.append(f"时间窗：{event.get('timeWindowZh') or translate_time_window(event['timeWindow'])}（原文：{event['timeWindow']}）")
+    if event.get("latestTextZh"):
+        lines.append(f"中文释义：{event['latestTextZh']}")
     if latest:
         lines.append(f"原文：{latest}")
     if event.get("lastPostUrl"):
@@ -703,8 +746,9 @@ def build_event_record(category: str, status: str, post: dict) -> dict:
         "titleZh": title_zh, "titleEn": title_en,
         "createdAt": post["createdAt"], "updatedAt": post["createdAt"], "confirmedAt": post["createdAt"],
         "timeWindow": None, "postIds": [post["id"]],
-        "timeline": [{"postId": post["id"], "createdAt": post["createdAt"], "url": post["url"], "text": post["text"], "status": status, "timeWindow": None}],
+        "timeline": [{"postId": post["id"], "createdAt": post["createdAt"], "url": post["url"], "text": post["text"], "textZh": translate_reset_text(post["text"], category), "status": status, "timeWindow": None}],
         "lastPostId": post["id"], "lastPostUrl": post["url"], "latestText": post["text"],
+        "latestTextZh": translate_reset_text(post["text"], category),
         "lastAlertedStatus": status,
     }
 
@@ -768,6 +812,7 @@ def run_once() -> dict:
             events, result = apply_post_to_events(events, post, notify=False)
             post["classification"] = result["event"]["category"] if result else None
             post["eventStatus"] = result["event"]["status"] if result else None
+            post["summaryZh"] = result["event"].get("latestTextZh") if result else None
             saved_posts.append(post)
         existing_posts = list(reversed(saved_posts))
         seen = [post["id"] for post in posts]
@@ -778,6 +823,7 @@ def run_once() -> dict:
             events, result = apply_post_to_events(events, post, notify=True)
             post["classification"] = result["event"]["category"] if result else None
             post["eventStatus"] = result["event"]["status"] if result else None
+            post["summaryZh"] = result["event"].get("latestTextZh") if result else None
             if result and result["shouldAlert"]:
                 alert_events[result["event"]["id"]] = result["event"]
         notifications = []

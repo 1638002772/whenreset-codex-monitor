@@ -30,7 +30,25 @@ class MonitorScrapeTests(unittest.TestCase):
         events, result = monitor.apply_post_to_events([], post, notify=True)
         self.assertEqual(len(events), 1)
         self.assertTrue(result["shouldAlert"])
-        self.assertIn("原文时间窗：by EOD (timezone not specified)", monitor.event_message(result["event"]))
+        self.assertIn("（原文：by EOD (timezone not specified)）", monitor.event_message(result["event"]))
+
+    def test_reset_forecast_translation_keeps_the_source_window_unambiguous(self):
+        post = self.make_post(
+            "2109812360596865224",
+            "Global reset landing by EOD PST time. Enjoy",
+            "2026-10-13T01:03:59Z",
+        )
+
+        events, result = monitor.apply_post_to_events([], post, notify=True)
+
+        self.assertEqual(events[0]["timeWindowZh"], "太平洋时间当天结束前")
+        self.assertEqual(
+            result["event"]["latestTextZh"],
+            "全球额度重置预计将在太平洋时间当天结束前生效。祝你使用顺利。",
+        )
+        message = monitor.event_message(result["event"])
+        self.assertIn("中文释义：全球额度重置预计将在太平洋时间当天结束前生效。祝你使用顺利。", message)
+        self.assertIn("（原文：by EOD PST）", message)
 
     def test_global_reset_without_timing_or_usage_context_is_ignored(self):
         post = self.make_post("1", "A global reset can make distributed systems simpler.")

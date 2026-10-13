@@ -17,12 +17,16 @@ test('reset email includes source details and escapes post content in HTML', () 
     status: 'forecast',
     updatedAt: '2026-10-08T02:00:00Z',
     timeWindow: 'within the hour',
+    timeWindowZh: '一小时内',
+    latestTextZh: '全球额度重置预计将在一小时内生效。',
     latestText: '<script>reset soon</script>',
     lastPostUrl: 'https://x.com/thsottiaux/status/123',
   }, 'https://example.test/unsubscribe?id=abc&token=def');
 
   assert.match(message.subject, /重置预告/);
   assert.match(message.html, /within the hour/);
+  assert.match(message.html, /全球额度重置预计将在一小时内生效。/);
+  assert.match(message.text, /预计时间窗（中文）：一小时内/);
   assert.match(message.html, /&lt;script&gt;reset soon&lt;\/script&gt;/);
   assert.doesNotMatch(message.html, /<script>/);
   assert.match(message.html, /https:\/\/x\.com\/thsottiaux\/status\/123/);

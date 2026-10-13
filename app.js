@@ -145,6 +145,17 @@ function formatPostTime(iso) {
   return new Intl.DateTimeFormat(locale, { timeZone: state.timezone, month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: state.lang === 'en' }).format(date);
 }
 
+function translateResetPost(text, category) {
+  const original = String(text || '').replace(/\s+/g, ' ').trim();
+  const lower = original.toLowerCase().replace(/[.!?]+$/, '');
+  if (lower === 'global reset landing by eod pst time. enjoy') return '全球额度重置预计将在太平洋时间当天结束前生效。祝你使用顺利。';
+  if (lower === 'global reset by eod. may the tokens do good things for you') return '全球额度最晚将在当天结束前重置。愿这些额度能帮你做出好成果。';
+  if (/\bglobal\s+reset\b/i.test(original) && /\bby\s+eod\s+(pst|pdt|pt)\b/i.test(original)) return '全球额度重置预计将在太平洋时间当天结束前生效。';
+  if (category === 'banked_reset') return 'Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。';
+  if (['usage_reset', 'compensation', 'cap_increase'].includes(category)) return 'Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。';
+  return 'Tibo 发布了一条新动态。';
+}
+
 function normalizeLivePost(post) {
   const related = state.liveData?.events?.find((event) => event.id === post.id || (event.postIds || []).includes(post.id));
   const timelineEntry = related?.timeline?.find((entry) => entry.postId === post.id);
@@ -152,7 +163,7 @@ function normalizeLivePost(post) {
   const rawStatus = post.eventStatus || post.displayState || timelineEntry?.status || related?.status;
   const tag = ['confirmed', 'completed'].includes(rawStatus) ? 'confirmed' : rawStatus === 'community' ? 'community' : ['forecast', 'announced'].includes(rawStatus) ? 'notice' : rawStatus === 'compensation' ? 'compensation' : rawStatus === 'cap_increase' ? 'capIncrease' : null;
   const signal = Boolean(category || tag);
-  const summaryZh = post.summaryZh || (tag === 'confirmed' ? '原帖确认相关额度已到账。' : tag === 'notice' ? (category === 'banked_reset' ? 'Tibo 宣布正在加载预存重置额度，等待到账确认。' : '出现与 Codex 额度重置相关的新帖，等待后续确认。') : tag === 'compensation' ? 'Tibo 发布了额度补偿消息。' : tag === 'capIncrease' ? 'Tibo 发布了额度上限提升消息。' : related?.summaryZh || related?.titleZh || 'Tibo 发布了一条新动态。');
+  const summaryZh = post.summaryZh || timelineEntry?.textZh || related?.latestTextZh || (signal ? translateResetPost(post.textEn || post.text, category) : 'Tibo 发布了一条新动态。');
   const summaryEn = post.summaryEn || (tag === 'confirmed' ? 'The post confirms that the related usage has landed.' : tag === 'notice' ? (category === 'banked_reset' ? 'Tibo says a banked reset is loading; delivery is not yet confirmed.' : 'A new Codex reset post is awaiting follow-up confirmation.') : tag === 'compensation' ? 'Tibo posted an update about usage compensation.' : tag === 'capIncrease' ? 'Tibo posted an update about a higher usage cap.' : related?.summaryEn || related?.titleEn || 'Tibo published a new update.');
   return {
     id: post.id, kind: signal ? 'signal' : 'normal', author: post.author || 'Tibo', handle: '@thsottiaux',
@@ -339,16 +350,23 @@ function renderLiveData() {
     const title = state.lang === 'zh'
       ? (resetEvent.status === 'compensation' ? '发现额度补偿消息' : resetEvent.status === 'cap_increase' ? '额度上限有所提升' : community ? '社区实测显示额度已恢复' : confirmed ? (resetEvent.category === 'banked_reset' ? '预存重置额度已到账' : 'Codex 重置已确认到账') : '出现新的重置预告')
       : (resetEvent.status === 'compensation' ? 'Usage compensation update' : resetEvent.status === 'cap_increase' ? 'Usage cap increased' : community ? 'Community reports restored usage' : confirmed ? (resetEvent.category === 'banked_reset' ? 'Banked reset confirmed' : 'Codex reset confirmed') : 'A new reset forecast');
-    const summaryText = state.lang === 'zh' ? (resetEvent.summaryZh || resetEvent.titleZh || '') : (resetEvent.summaryEn || resetEvent.titleEn || '');
+    const summaryText = state.lang === 'zh'
+      ? (resetEvent.latestTextZh || translateResetPost(resetEvent.latestText || '', resetEvent.category) || resetEvent.summaryZh || resetEvent.titleZh || '')
+      : (resetEvent.summaryEn || resetEvent.titleEn || '');
     const rawText = resetEvent.latestText || '';
-    const windowText = resetEvent.timeWindow ? `${state.lang === 'zh' ? '原文时间窗' : 'Source time window'}：${resetEvent.timeWindow}` : '';
+    const windowText = resetEvent.timeWindow ? `${state.lang === 'zh' ? '预计时间窗' : 'Time window'}：${state.lang === 'zh' ? (resetEvent.timeWindowZh || (/\bPST\b|\bPDT\b|\bPT\b/i.test(resetEvent.timeWindow) ? '太平洋时间当天结束前' : /\bEOD\b/i.test(resetEvent.timeWindow) ? '当天结束前（原文未注明时区）' : resetEvent.timeWindow)) : resetEvent.timeWindow}` : '';
     $('#heroTitle').textContent = title;
-    $('#heroSummary').textContent = [summaryText, windowText, rawText ? `${state.lang === 'zh' ? '英文原文' : 'Original'}: “${rawText}”` : ''].filter(Boolean).join(' · ');
+    $('#heroSummary').textContent = [summaryText, windowText].filter(Boolean).join(' · ');
+    const originalLine = $('#heroOriginal');
+    originalLine.hidden = !rawText;
+    originalLine.textContent = rawText ? `${state.lang === 'zh' ? '英文原文' : 'Original'}: “${rawText}”` : '';
     const postUrl = resetEvent.lastPostUrl || resetEvent.lastPostId && `https://x.com/thsottiaux/status/${resetEvent.lastPostId}`;
     if (postUrl) $('.hero-actions .button--dark').href = postUrl;
   } else {
     $('#heroTitle').textContent = state.lang === 'zh' ? '暂未发现明确重置消息' : 'No clear reset signal found';
     $('#heroSummary').textContent = state.lang === 'zh' ? '监控服务检查公开 Posts，并补充核验公开索引发现的回复候选；普通动态不会作为重置预告。' : 'The monitor checks public Posts and verifies reply candidates from a public index; unrelated updates are ignored.';
+    $('#heroOriginal').hidden = true;
+    $('#heroOriginal').textContent = '';
   }
 
   $('#lastResetValue').textContent = relativeDate(summary.lastResetAt);
