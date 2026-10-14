@@ -1,14 +1,22 @@
 [
   {
+    "id": "2110151780478927344",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-13T23:32:43Z",
+    "text": "Day 9/\n\nWe've rolled out optimizations to how we store state on disk for the chatgpt &amp; codex desktop app that should reduce the amount stored on disk by 60%. Small ship but we've heard enough feedback about power users running out of disk space.",
+    "url": "https://x.com/thsottiaux/status/2110151780478927344",
+    "fetchedAt": "2026-10-14T00:16:10Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2109892247580000595",
     "author": "thsottiaux",
     "createdAt": "2026-10-13T06:21:26Z",
     "text": "Good plans are simple. I have one that should result in significantly more usage for everyone. Hope to get it done soon.",
     "url": "https://x.com/thsottiaux/status/2109892247580000595",
-    "fetchedAt": "2026-10-13T08:03:47Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-14T00:16:10Z"
   },
   {
     "id": "2109873287853707513",
@@ -16,10 +24,7 @@
     "createdAt": "2026-10-13T05:06:06Z",
     "text": "What would you like with your side of reset? It's done.",
     "url": "https://x.com/thsottiaux/status/2109873287853707513",
-    "fetchedAt": "2026-10-13T08:03:47Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-14T00:16:10Z"
   },
   {
     "id": "2109812360596865224",
@@ -38,7 +43,7 @@
     "createdAt": "2026-10-13T01:03:25Z",
     "text": "Day 8/ Reset",
     "url": "https://x.com/thsottiaux/status/2109812216212099456",
-    "fetchedAt": "2026-10-13T08:03:47Z"
+    "fetchedAt": "2026-10-14T00:16:10Z"
   },
   {
     "id": "2109439315570999598",
@@ -46,7 +51,7 @@
     "createdAt": "2026-10-12T00:21:38Z",
     "text": "The results of this poll has gotten me confused. I definitely thought it would sway much more favorably in the 2X direction across Pro 100/200/500 at the cost of bringing back 5h limits in order to smoothen the demand curve.",
     "url": "https://x.com/thsottiaux/status/2109439315570999598",
-    "fetchedAt": "2026-10-13T08:03:47Z"
+    "fetchedAt": "2026-10-14T00:16:10Z"
   },
   {
     "id": "2109430343346581527",
