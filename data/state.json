@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-10-16T00:40:11Z",
+  "lastAttemptAt": "2026-10-16T05:08:15Z",
   "initialized": true,
   "seenIds": [
     "2108040921044639779",
@@ -33,9 +33,9 @@
     "2110864606088593672"
   ],
   "lastSuccessAt": "2026-10-16T00:40:14Z",
-  "consecutiveFailures": 0,
-  "lastError": null,
-  "monitorState": "ok",
+  "consecutiveFailures": 1,
+  "lastError": "X SSR format changed: could not decode text/time for 2110864606088593672",
+  "monitorState": "error",
   "postsFetched": 5,
   "failureAlertSent": false,
   "lastNewPostAt": "2026-10-15T22:45:14Z",
