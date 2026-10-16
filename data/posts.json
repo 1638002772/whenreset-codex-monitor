@@ -1,14 +1,22 @@
 [
   {
+    "id": "2110864606088593672",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-15T22:45:14Z",
+    "text": "Bonjour",
+    "url": "https://x.com/thsottiaux/status/2110864606088593672",
+    "fetchedAt": "2026-10-16T00:40:12Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2110750421367287996",
     "author": "thsottiaux",
     "createdAt": "2026-10-15T15:11:30Z",
     "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on",
     "url": "https://x.com/thsottiaux/status/2110750421367287996",
-    "fetchedAt": "2026-10-15T19:13:22Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-16T00:40:12Z"
   },
   {
     "id": "2110618732666257557",
@@ -16,7 +24,7 @@
     "createdAt": "2026-10-15T06:28:13Z",
     "text": "Done and dusted",
     "url": "https://x.com/thsottiaux/status/2110618732666257557",
-    "fetchedAt": "2026-10-15T19:13:22Z"
+    "fetchedAt": "2026-10-16T00:40:12Z"
   },
   {
     "id": "2110595484180214059",
@@ -24,7 +32,7 @@
     "createdAt": "2026-10-15T04:55:51Z",
     "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
     "url": "https://x.com/thsottiaux/status/2110595484180214059",
-    "fetchedAt": "2026-10-15T19:13:22Z"
+    "fetchedAt": "2026-10-16T00:40:12Z"
   },
   {
     "id": "2110151780478927344",
@@ -32,7 +40,7 @@
     "createdAt": "2026-10-13T23:32:43Z",
     "text": "Day 9/\n\nWe've rolled out optimizations to how we store state on disk for the chatgpt &amp; codex desktop app that should reduce the amount stored on disk by 60%. Small ship but we've heard enough feedback about power users running out of disk space.",
     "url": "https://x.com/thsottiaux/status/2110151780478927344",
-    "fetchedAt": "2026-10-15T19:13:22Z"
+    "fetchedAt": "2026-10-16T00:40:12Z"
   },
   {
     "id": "2109892247580000595",
