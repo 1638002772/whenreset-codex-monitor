@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-10-16T05:08:15Z",
+  "lastAttemptAt": "2026-10-16T09:54:37Z",
   "initialized": true,
   "seenIds": [
     "2108040921044639779",
@@ -33,11 +33,11 @@
     "2110864606088593672"
   ],
   "lastSuccessAt": "2026-10-16T00:40:14Z",
-  "consecutiveFailures": 1,
-  "lastError": "X SSR format changed: could not decode text/time for 2110864606088593672",
+  "consecutiveFailures": 2,
+  "lastError": "X SSR format changed: could not decode text/time for 2110971985417441512",
   "monitorState": "error",
   "postsFetched": 5,
-  "failureAlertSent": false,
+  "failureAlertSent": true,
   "lastNewPostAt": "2026-10-15T22:45:14Z",
   "lastNewPostIds": [
     "2110864606088593672"
@@ -62,6 +62,14 @@
       "body": "🟡 重置预告\n时间（北京时间）：2026-10-13 09:03\n原文时间窗：by EOD PST\n原文：Global reset landing by EOD PST time. Enjoy\nhttps://x.com/thsottiaux/status/2109812360596865224",
       "url": "https://x.com/thsottiaux/status/2109812360596865224",
       "createdAt": "2026-10-13T01:17:31Z"
+    },
+    {
+      "key": "fetch-error:2026-10-16T09:54:40Z",
+      "title": "WHENRESET 抓取暂时受阻",
+      "body": "❗️ WHENRESET 抓取暂时受阻\n连续失败：2 次\n原因：X SSR format changed: could not decode text/time for 2110971985417441512",
+      "url": null,
+      "createdAt": "2026-10-16T09:54:40Z"
     }
-  ]
+  ],
+  "failureAlertAt": "2026-10-16T09:54:40Z"
 }
