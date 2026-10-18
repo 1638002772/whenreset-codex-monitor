@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-10-16T09:54:37Z",
+  "lastAttemptAt": "2026-10-18T07:02:54Z",
   "initialized": true,
   "seenIds": [
     "2108040921044639779",
@@ -30,17 +30,26 @@
     "2110595484180214059",
     "2110618732666257557",
     "2110750421367287996",
-    "2110864606088593672"
+    "2110864606088593672",
+    "2111338115667509490",
+    "2111492028177723532",
+    "2111492673890824348",
+    "2111495392559067199",
+    "2111566005684289735"
   ],
-  "lastSuccessAt": "2026-10-16T00:40:14Z",
-  "consecutiveFailures": 2,
-  "lastError": "X SSR format changed: could not decode text/time for 2110971985417441512",
-  "monitorState": "error",
+  "lastSuccessAt": "2026-10-18T07:03:11Z",
+  "consecutiveFailures": 0,
+  "lastError": null,
+  "monitorState": "ok",
   "postsFetched": 5,
-  "failureAlertSent": true,
-  "lastNewPostAt": "2026-10-15T22:45:14Z",
+  "failureAlertSent": false,
+  "lastNewPostAt": "2026-10-17T21:12:21Z",
   "lastNewPostIds": [
-    "2110864606088593672"
+    "2111338115667509490",
+    "2111492028177723532",
+    "2111492673890824348",
+    "2111495392559067199",
+    "2111566005684289735"
   ],
   "lastNotifications": [],
   "pendingPublicEmailEvents": {},
@@ -69,7 +78,15 @@
       "body": "❗️ WHENRESET 抓取暂时受阻\n连续失败：2 次\n原因：X SSR format changed: could not decode text/time for 2110971985417441512",
       "url": null,
       "createdAt": "2026-10-16T09:54:40Z"
+    },
+    {
+      "key": "fetch-recovered:2026-10-18T07:03:11Z",
+      "title": "WHENRESET 监控已恢复",
+      "body": "✅ WHENRESET 抓取已恢复\n恢复时间（UTC）：2026-10-18T07:03:11Z",
+      "url": null,
+      "createdAt": "2026-10-18T07:03:11Z"
     }
   ],
-  "failureAlertAt": "2026-10-16T09:54:40Z"
+  "failureAlertAt": "2026-10-16T09:54:40Z",
+  "recoveryNoticeAt": "2026-10-18T07:03:11Z"
 }

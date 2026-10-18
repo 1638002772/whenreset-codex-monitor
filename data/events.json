@@ -1,5 +1,36 @@
 [
   {
+    "id": "2111492673890824348",
+    "category": "usage_reset",
+    "status": "forecast",
+    "titleZh": "额度重置 · 重置预告",
+    "titleEn": "Usage reset · Reset forecast",
+    "createdAt": "2026-10-17T16:20:57Z",
+    "updatedAt": "2026-10-17T16:20:57Z",
+    "confirmedAt": null,
+    "timeWindow": null,
+    "postIds": [
+      "2111492673890824348"
+    ],
+    "timeline": [
+      {
+        "postId": "2111492673890824348",
+        "createdAt": "2026-10-17T16:20:57Z",
+        "url": "https://x.com/thsottiaux/status/2111492673890824348",
+        "text": "Day 13/ Le limit reset https://t.co/zXd2DIH5xf",
+        "textZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。",
+        "status": "forecast",
+        "timeWindow": null
+      }
+    ],
+    "lastAlertedStatus": null,
+    "lastPostId": "2111492673890824348",
+    "lastPostUrl": "https://x.com/thsottiaux/status/2111492673890824348",
+    "timeWindowZh": "",
+    "latestText": "Day 13/ Le limit reset https://t.co/zXd2DIH5xf",
+    "latestTextZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。"
+  },
+  {
     "id": "2109812360596865224",
     "category": "usage_reset",
     "status": "forecast",
