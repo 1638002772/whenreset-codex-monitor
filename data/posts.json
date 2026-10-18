@@ -1,14 +1,22 @@
 [
   {
+    "id": "2111849858374177222",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-18T16:00:17Z",
+    "text": "What’s cooking today",
+    "url": "https://x.com/thsottiaux/status/2111849858374177222",
+    "fetchedAt": "2026-10-18T17:48:41Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2111566005684289735",
     "author": "thsottiaux",
     "createdAt": "2026-10-17T21:12:21Z",
     "text": "Done",
     "url": "https://x.com/thsottiaux/status/2111566005684289735",
-    "fetchedAt": "2026-10-18T07:02:56Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-18T17:48:41Z"
   },
   {
     "id": "2111495392559067199",
@@ -16,10 +24,7 @@
     "createdAt": "2026-10-17T16:31:45Z",
     "text": "My work dot \"Burger\" coordinated with my personal dot \"Dorito\" over email at my personal dots request to get documents, which then coordinated with with my CPA in order to file some tax stuff. Took 20 minutes. We're still so early.",
     "url": "https://x.com/thsottiaux/status/2111495392559067199",
-    "fetchedAt": "2026-10-18T07:02:56Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-18T17:48:41Z"
   },
   {
     "id": "2111492673890824348",
@@ -27,10 +32,7 @@
     "createdAt": "2026-10-17T16:20:57Z",
     "text": "Day 13/ Le limit reset https://t.co/zXd2DIH5xf",
     "url": "https://x.com/thsottiaux/status/2111492673890824348",
-    "fetchedAt": "2026-10-18T07:02:56Z",
-    "classification": "usage_reset",
-    "eventStatus": "forecast",
-    "summaryZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。"
+    "fetchedAt": "2026-10-18T17:48:41Z"
   },
   {
     "id": "2111492028177723532",
@@ -38,10 +40,7 @@
     "createdAt": "2026-10-17T16:18:23Z",
     "text": "Is it just me or was @ajambrosino nerfed today",
     "url": "https://x.com/thsottiaux/status/2111492028177723532",
-    "fetchedAt": "2026-10-18T07:02:56Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-18T17:48:41Z"
   },
   {
     "id": "2111338115667509490",
