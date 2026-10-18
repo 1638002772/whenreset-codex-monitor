@@ -1,3 +1,4 @@
+import json
 import os
 import unittest
 from unittest import mock
@@ -194,6 +195,38 @@ class MonitorScrapeTests(unittest.TestCase):
                 monitor.fetch_posts_with_retry()
 
         self.assertEqual(fetch_html.call_count, 2)
+
+    def test_extract_posts_from_json_escaped_x_ssr_payload(self):
+        tweet_id = "2111566005684289735"
+        tweet = {
+            "__typename": "Tweet",
+            "id": monitor.tweet_key(tweet_id),
+            "rest_id": tweet_id,
+            "details": {"created_at_ms": 1792271541000, "full_text": 'Reset "soon", maybe.'},
+            "core": {"user_results": {"result": {"core": {"screen_name": "thsottiaux"}}}},
+        }
+        entry = {
+            "entry_id": f"tweet-{tweet_id}",
+            "content": {"content": {"tweet_results": {"result": tweet}}},
+        }
+        timeline = {
+            "instructions": [{"__typename": "TimelineAddEntries", "entries": [entry]}]
+        }
+        payload = {
+            "data": {
+                "user_result_by_screen_name": {
+                    "result": {"profile_user_originals_timeline": {"timeline": timeline}}
+                }
+            }
+        }
+        html = f'data-href="/thsottiaux/status/{tweet_id}" value:{json.dumps(json.dumps(payload))}'
+
+        posts = monitor.extract_posts(html)
+
+        self.assertEqual(len(posts), 1)
+        self.assertEqual(posts[0]["id"], tweet_id)
+        self.assertEqual(posts[0]["text"], 'Reset "soon", maybe.')
+        self.assertEqual(posts[0]["createdAt"], "2026-10-17T21:12:21Z")
 
     def test_empty_ssr_response_is_saved_as_diagnostic_evidence(self):
         class FakeHeaders:

@@ -48,6 +48,7 @@ TWEET_ID_RE = re.compile(r'(?:"id"|\bid)\s*:\s*"?(VHdlZXQ6[A-Za-z0-9+/=]+)"?')
 FULL_TEXT_RE = re.compile(r'(?:"full_text"|full_text)\s*:\s*"((?:\\.|[^"\\])*)"')
 CREATED_MS_RE = re.compile(r'(?:"created_at_ms"|created_at_ms)\s*:\s*(\d+)')
 SCREEN_NAME_RE = re.compile(r'(?:"screen_name"|screen_name)\s*:\s*"([^"]+)"')
+RSC_VALUE_RE = re.compile(r'\bvalue\s*:\s*"((?:\\.|[^"\\])*)"')
 
 WINDOW_PATTERNS = [
     re.compile(r"\bby\s+EOD\s+(?:PST|PDT|PT)\b", re.I),
@@ -271,7 +272,102 @@ def tweet_key(tweet_id: str) -> str:
     return base64.b64encode(f"Tweet:{tweet_id}".encode("utf-8")).decode("ascii")
 
 
+def extract_posts_from_serialized_json(html: str) -> list[dict]:
+    posts = []
+    for match in RSC_VALUE_RE.finditer(html):
+        try:
+            serialized = json.loads(f'"{match.group(1)}"')
+            payload = json.loads(serialized)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        if not isinstance(payload, dict):
+            continue
+
+        data = payload.get("data")
+        user = data.get("user_result_by_screen_name", {}) if isinstance(data, dict) else {}
+        result = user.get("result", {}) if isinstance(user, dict) else {}
+        if not isinstance(result, dict):
+            continue
+        profile_timeline = result.get("profile_user_originals_timeline", {})
+        timeline = (
+            profile_timeline.get("timeline", {})
+            if isinstance(profile_timeline, dict)
+            else {}
+        )
+        instructions = timeline.get("instructions", [])
+        if not isinstance(instructions, list):
+            continue
+
+        for instruction in instructions:
+            entries = instruction.get("entries", []) if isinstance(instruction, dict) else []
+            if not isinstance(entries, list):
+                continue
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    continue
+                entry_id = str(entry.get("entry_id") or "")
+                id_match = re.fullmatch(r"tweet-(\d+)", entry_id)
+                if not id_match:
+                    continue
+
+                item = entry.get("content", {})
+                item = item.get("content", {}) if isinstance(item, dict) else {}
+                tweet_result = item.get("tweet_results", {}) if isinstance(item, dict) else {}
+                tweet = tweet_result.get("result", {}) if isinstance(tweet_result, dict) else {}
+                if not isinstance(tweet, dict):
+                    raise ScrapeError(
+                        f"X SSR format changed: invalid Tweet result for {id_match.group(1)}"
+                    )
+                if tweet.get("__typename") == "TweetWithVisibilityResults":
+                    tweet = tweet.get("tweet", {})
+
+                details = tweet.get("details") or tweet.get("legacy") or {}
+                if not isinstance(details, dict):
+                    details = {}
+                text = details.get("full_text") or details.get("text")
+                timestamp_ms = details.get("created_at_ms")
+                core = tweet.get("core", {})
+                user_results = core.get("user_results", {}) if isinstance(core, dict) else {}
+                author_result = user_results.get("result", {}) if isinstance(user_results, dict) else {}
+                author_core = author_result.get("core", {}) if isinstance(author_result, dict) else {}
+                author = author_core.get("screen_name") if isinstance(author_core, dict) else None
+                if not text or not timestamp_ms:
+                    raise ScrapeError(
+                        f"X SSR format changed: could not decode text/time for {id_match.group(1)}"
+                    )
+                if author and str(author).casefold() != "thsottiaux":
+                    continue
+
+                tweet_id = str(tweet.get("rest_id") or id_match.group(1))
+                created = datetime.fromtimestamp(
+                    int(timestamp_ms) / 1000, timezone.utc
+                ).isoformat(timespec="seconds").replace("+00:00", "Z")
+                posts.append(
+                    {
+                        "id": tweet_id,
+                        "author": "thsottiaux",
+                        "createdAt": created,
+                        "text": str(text).strip(),
+                        "url": f"https://x.com/thsottiaux/status/{tweet_id}",
+                        "fetchedAt": now_iso(),
+                    }
+                )
+
+    if posts:
+        unique = {post["id"]: post for post in posts}
+        return sorted(
+            unique.values(),
+            key=lambda item: (item["createdAt"], item["id"]),
+            reverse=True,
+        )
+    return []
+
+
 def extract_posts(html: str) -> list[dict]:
+    serialized_posts = extract_posts_from_serialized_json(html)
+    if serialized_posts:
+        return serialized_posts
+
     entries = [match.group(1) for match in ENTRY_RE.finditer(html)]
     if not entries:
         # Fallback for markup variants. This can include quote cards, so deduplicate.
