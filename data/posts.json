@@ -1,14 +1,22 @@
 [
   {
+    "id": "2112592264686149749",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-20T17:10:20Z",
+    "text": "There were reports of usage draining faster than anticipated for some users over the weekend. We've identified approximately 40,000 accounts that had an inconsistency on which usage limits where the actual usage that was applied did not correspond to their actual selected plan.",
+    "url": "https://x.com/thsottiaux/status/2112592264686149749",
+    "fetchedAt": "2026-10-20T19:23:49Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2112432076767289678",
     "author": "thsottiaux",
     "createdAt": "2026-10-20T06:33:48Z",
     "text": "Day 15/ Nevermind, we're still cooking... and reset. Enjoy.",
     "url": "https://x.com/thsottiaux/status/2112432076767289678",
-    "fetchedAt": "2026-10-20T10:18:15Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-20T19:23:49Z"
   },
   {
     "id": "2112268918681485431",
@@ -16,7 +24,7 @@
     "createdAt": "2026-10-19T19:45:28Z",
     "text": "Day 15/ We're cooked",
     "url": "https://x.com/thsottiaux/status/2112268918681485431",
-    "fetchedAt": "2026-10-20T10:18:15Z"
+    "fetchedAt": "2026-10-20T19:23:49Z"
   },
   {
     "id": "2112039275344941371",
@@ -24,7 +32,7 @@
     "createdAt": "2026-10-19T04:32:57Z",
     "text": "I bought a new domain and I’m very excited for it. Very",
     "url": "https://x.com/thsottiaux/status/2112039275344941371",
-    "fetchedAt": "2026-10-20T10:18:15Z"
+    "fetchedAt": "2026-10-20T19:23:49Z"
   },
   {
     "id": "2112034063934742720",
@@ -32,7 +40,7 @@
     "createdAt": "2026-10-19T04:12:15Z",
     "text": "Our team worked with OpenCode to have their users who are also OpenAI API customers back in business and any credits refunded which would have been drawn in the attack.\n\nAlso, you can request Daybreak Blue access to use our cyber permissive setup for defense. Do not wait until",
     "url": "https://x.com/thsottiaux/status/2112034063934742720",
-    "fetchedAt": "2026-10-20T10:18:15Z"
+    "fetchedAt": "2026-10-20T19:23:49Z"
   },
   {
     "id": "2111990254408434095",
