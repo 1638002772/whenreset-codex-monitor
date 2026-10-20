@@ -1,5 +1,5 @@
 {
-  "lastAttemptAt": "2026-10-19T21:34:42Z",
+  "lastAttemptAt": "2026-10-20T10:18:14Z",
   "initialized": true,
   "seenIds": [
     "2108040921044639779",
@@ -41,17 +41,18 @@
     "2111990254408434095",
     "2112034063934742720",
     "2112039275344941371",
-    "2112268918681485431"
+    "2112268918681485431",
+    "2112432076767289678"
   ],
-  "lastSuccessAt": "2026-10-19T21:34:44Z",
+  "lastSuccessAt": "2026-10-20T10:18:17Z",
   "consecutiveFailures": 0,
   "lastError": null,
   "monitorState": "ok",
   "postsFetched": 5,
   "failureAlertSent": false,
-  "lastNewPostAt": "2026-10-19T19:45:28Z",
+  "lastNewPostAt": "2026-10-20T06:33:48Z",
   "lastNewPostIds": [
-    "2112268918681485431"
+    "2112432076767289678"
   ],
   "lastNotifications": [],
   "pendingPublicEmailEvents": {},
