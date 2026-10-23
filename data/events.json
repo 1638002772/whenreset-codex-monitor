@@ -1,5 +1,36 @@
 [
   {
+    "id": "2113492187770175603",
+    "category": "usage_reset",
+    "status": "forecast",
+    "titleZh": "额度重置 · 重置预告",
+    "titleEn": "Usage reset · Reset forecast",
+    "createdAt": "2026-10-23T04:46:19Z",
+    "updatedAt": "2026-10-23T04:46:19Z",
+    "confirmedAt": null,
+    "timeWindow": null,
+    "postIds": [
+      "2113492187770175603"
+    ],
+    "timeline": [
+      {
+        "postId": "2113492187770175603",
+        "createdAt": "2026-10-23T04:46:19Z",
+        "url": "https://x.com/thsottiaux/status/2113492187770175603",
+        "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!",
+        "textZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。",
+        "status": "forecast",
+        "timeWindow": null
+      }
+    ],
+    "lastAlertedStatus": null,
+    "lastPostId": "2113492187770175603",
+    "lastPostUrl": "https://x.com/thsottiaux/status/2113492187770175603",
+    "timeWindowZh": "",
+    "latestText": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!",
+    "latestTextZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。"
+  },
+  {
     "id": "2111492673890824348",
     "category": "usage_reset",
     "status": "forecast",

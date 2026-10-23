@@ -1,14 +1,22 @@
 [
   {
+    "id": "2113492187770175603",
+    "author": "thsottiaux",
+    "createdAt": "2026-10-23T04:46:19Z",
+    "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!",
+    "url": "https://x.com/thsottiaux/status/2113492187770175603",
+    "fetchedAt": "2026-10-23T07:20:47Z",
+    "classification": "usage_reset",
+    "eventStatus": "forecast",
+    "summaryZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。"
+  },
+  {
     "id": "2113162277688070445",
     "author": "thsottiaux",
     "createdAt": "2026-10-22T06:55:22Z",
     "text": "Day 17/ Bet you thought we forgot, but no, it’s reset day today.\n\nAlso good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don’t want to have to do it in the middle of an incident.",
     "url": "https://x.com/thsottiaux/status/2113162277688070445",
-    "fetchedAt": "2026-10-22T12:01:23Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-10-23T07:20:47Z"
   },
   {
     "id": "2113029655095836957",
@@ -16,7 +24,7 @@
     "createdAt": "2026-10-21T22:08:22Z",
     "text": "Dot, Dotter, Dottest",
     "url": "https://x.com/thsottiaux/status/2113029655095836957",
-    "fetchedAt": "2026-10-22T12:01:23Z"
+    "fetchedAt": "2026-10-23T07:20:47Z"
   },
   {
     "id": "2112712984644784534",
@@ -24,7 +32,7 @@
     "createdAt": "2026-10-21T01:10:02Z",
     "text": "Day 16/\n\nYou can now cache for 12h in the API and for logged in users across Codex &amp; Work we keep cache forever and you don’t have any penalty for coming back to an old conversation or resuming after a few hours and are now guaranteed to hit the cache.",
     "url": "https://x.com/thsottiaux/status/2112712984644784534",
-    "fetchedAt": "2026-10-22T12:01:23Z"
+    "fetchedAt": "2026-10-23T07:20:47Z"
   },
   {
     "id": "2112592264686149749",
@@ -32,7 +40,7 @@
     "createdAt": "2026-10-20T17:10:20Z",
     "text": "There were reports of usage draining faster than anticipated for some users over the weekend. We've identified approximately 40,000 accounts that had an inconsistency on which usage limits where the actual usage that was applied did not correspond to their actual selected plan.",
     "url": "https://x.com/thsottiaux/status/2112592264686149749",
-    "fetchedAt": "2026-10-22T12:01:23Z"
+    "fetchedAt": "2026-10-23T07:20:47Z"
   },
   {
     "id": "2112432076767289678",
