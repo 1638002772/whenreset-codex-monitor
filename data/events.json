@@ -1,5 +1,36 @@
 [
   {
+    "id": "2116405414921384099",
+    "category": "usage_reset",
+    "status": "forecast",
+    "titleZh": "额度重置 · 重置预告",
+    "titleEn": "Usage reset · Reset forecast",
+    "createdAt": "2026-10-31T05:42:26Z",
+    "updatedAt": "2026-10-31T05:42:26Z",
+    "confirmedAt": null,
+    "timeWindow": null,
+    "postIds": [
+      "2116405414921384099"
+    ],
+    "timeline": [
+      {
+        "postId": "2116405414921384099",
+        "createdAt": "2026-10-31T05:42:26Z",
+        "url": "https://x.com/thsottiaux/status/2116405414921384099",
+        "text": "Day 26/ You can now easily switch between multiple accounts on mobile, and coming soon to desktop too. Next two days will be resets… banked… do with this what you may 👀.\n\nhttps://t.co/iQxsqbuk0f",
+        "textZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。",
+        "status": "forecast",
+        "timeWindow": null
+      }
+    ],
+    "lastAlertedStatus": null,
+    "lastPostId": "2116405414921384099",
+    "lastPostUrl": "https://x.com/thsottiaux/status/2116405414921384099",
+    "timeWindowZh": "",
+    "latestText": "Day 26/ You can now easily switch between multiple accounts on mobile, and coming soon to desktop too. Next two days will be resets… banked… do with this what you may 👀.\n\nhttps://t.co/iQxsqbuk0f",
+    "latestTextZh": "Tibo 发布了与 Codex 使用额度相关的消息，具体含义请结合英文原文。"
+  },
+  {
     "id": "2113492187770175603",
     "category": "usage_reset",
     "status": "forecast",
