@@ -1,14 +1,33 @@
 [
   {
+    "id": "2117489367417803042",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-03T05:29:40Z",
+    "text": "Le GPT Fat",
+    "url": "https://x.com/thsottiaux/status/2117489367417803042",
+    "fetchedAt": "2026-11-03T05:45:35Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2117412956950638872",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-03T00:26:03Z",
+    "text": "We know some Git-fu. Excited the team is finally able to talk about it a bit. Massive props to @tnm and team",
+    "url": "https://x.com/thsottiaux/status/2117412956950638872",
+    "fetchedAt": "2026-11-03T05:45:35Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2117283124833055196",
     "author": "thsottiaux",
     "createdAt": "2026-11-02T15:50:08Z",
     "text": "Fellow resetters, heads up that we're working on expanding the family of frontier models that power dots, including GPT-6 Astra and GPT-6.1 Terra and some others in the future. Terra brings speed and a nice personality upgrade, and will help us bring dots to more people.",
     "url": "https://x.com/thsottiaux/status/2117283124833055196",
-    "fetchedAt": "2026-11-02T17:09:14Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-03T05:45:35Z"
   },
   {
     "id": "2117035794678546764",
@@ -16,7 +35,7 @@
     "createdAt": "2026-11-01T23:27:20Z",
     "text": "Day 28/ Banked 2/2",
     "url": "https://x.com/thsottiaux/status/2117035794678546764",
-    "fetchedAt": "2026-11-02T17:09:14Z"
+    "fetchedAt": "2026-11-03T05:45:35Z"
   },
   {
     "id": "2116935650511585696",
@@ -24,7 +43,7 @@
     "createdAt": "2026-11-01T16:49:24Z",
     "text": "Dot still autocorrects to dog and that makes many texts I receive hilarious",
     "url": "https://x.com/thsottiaux/status/2116935650511585696",
-    "fetchedAt": "2026-11-02T17:09:14Z"
+    "fetchedAt": "2026-11-03T05:45:35Z"
   },
   {
     "id": "2116692529970311254",
