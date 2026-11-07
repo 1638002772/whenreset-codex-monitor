@@ -1,14 +1,33 @@
 [
   {
+    "id": "2118953362725159104",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-07T06:27:04Z",
+    "text": "Cyber",
+    "url": "https://x.com/thsottiaux/status/2118953362725159104",
+    "fetchedAt": "2026-11-07T09:02:06Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2118938956301779171",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-07T05:29:49Z",
+    "text": "Get me out of the basement\n\nhttps://t.co/SsG3P83NBg",
+    "url": "https://x.com/thsottiaux/status/2118938956301779171",
+    "fetchedAt": "2026-11-07T09:02:06Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2118871902366441879",
     "author": "thsottiaux",
     "createdAt": "2026-11-07T01:03:22Z",
     "text": "It's Friday",
     "url": "https://x.com/thsottiaux/status/2118871902366441879",
-    "fetchedAt": "2026-11-07T02:17:35Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-07T09:02:06Z"
   },
   {
     "id": "2118569235953893573",
@@ -16,7 +35,7 @@
     "createdAt": "2026-11-06T05:00:41Z",
     "text": "I can confidently say that humans were not very good at writing secure infrastructure. The endstate will be hypersecure infrastructure and software for all, but we're going to go through some turbulence before we reach that.",
     "url": "https://x.com/thsottiaux/status/2118569235953893573",
-    "fetchedAt": "2026-11-07T02:17:35Z"
+    "fetchedAt": "2026-11-07T09:02:06Z"
   },
   {
     "id": "2118469621011677521",
@@ -24,7 +43,7 @@
     "createdAt": "2026-11-05T22:24:51Z",
     "text": "Wild stat. We are now generate more than 4B images per week across ChatGPT and the API, up from the more than 3B per week only 8 weeks ago.",
     "url": "https://x.com/thsottiaux/status/2118469621011677521",
-    "fetchedAt": "2026-11-07T02:17:35Z"
+    "fetchedAt": "2026-11-07T09:02:06Z"
   },
   {
     "id": "2118444105969926407",
