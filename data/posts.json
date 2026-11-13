@@ -1,14 +1,33 @@
 [
   {
+    "id": "2121036562058400200",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-13T00:24:58Z",
+    "text": "We announced new tools we're developing for cybersecurity today across automated patching and automated red teaming. Watch the recording here https://t.co/fW371aFjB5",
+    "url": "https://x.com/thsottiaux/status/2121036562058400200",
+    "fetchedAt": "2026-11-13T00:43:05Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2120999993079451919",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-12T21:59:39Z",
+    "text": "We shipped some good updates to dots today and the banked reset has been activated and should land in everyones accounts sometime soon!",
+    "url": "https://x.com/thsottiaux/status/2120999993079451919",
+    "fetchedAt": "2026-11-13T00:43:05Z",
+    "classification": "banked_reset",
+    "eventStatus": "forecast",
+    "summaryZh": "Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。"
+  },
+  {
     "id": "2120410006273380750",
     "author": "thsottiaux",
     "createdAt": "2026-11-11T06:55:15Z",
     "text": "It’s been a while without resets. Maybe I should come back out of the basement",
     "url": "https://x.com/thsottiaux/status/2120410006273380750",
-    "fetchedAt": "2026-11-11T08:21:33Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-13T00:43:05Z"
   },
   {
     "id": "2120267268517249036",
@@ -16,7 +35,7 @@
     "createdAt": "2026-11-10T21:28:04Z",
     "text": "How many of you have a small business?",
     "url": "https://x.com/thsottiaux/status/2120267268517249036",
-    "fetchedAt": "2026-11-11T08:21:33Z"
+    "fetchedAt": "2026-11-13T00:43:05Z"
   },
   {
     "id": "2120266880963473789",
@@ -24,7 +43,7 @@
     "createdAt": "2026-11-10T21:26:31Z",
     "text": "Labs innovating together ftw https://t.co/WnRpl5WpUw",
     "url": "https://x.com/thsottiaux/status/2120266880963473789",
-    "fetchedAt": "2026-11-11T08:21:33Z"
+    "fetchedAt": "2026-11-13T00:43:05Z"
   },
   {
     "id": "2120021043876106429",
