@@ -1,14 +1,22 @@
 [
   {
+    "id": "2122206990101536852",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-16T05:55:49Z",
+    "text": "Codex team might have actually fixed the \"model at capacity\" errors that have been pestering you. https://t.co/EgS0HkOATY",
+    "url": "https://x.com/thsottiaux/status/2122206990101536852",
+    "fetchedAt": "2026-11-16T10:54:42Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2121845965997101118",
     "author": "thsottiaux",
     "createdAt": "2026-11-15T06:01:14Z",
     "text": "Cyber team wants your feedback on Daybreak. Models, codex plugins, blue/red access, documentation, red teaming &amp; defense factory... What can we do better or improve?",
     "url": "https://x.com/thsottiaux/status/2121845965997101118",
-    "fetchedAt": "2026-11-15T12:19:01Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-16T10:54:42Z"
   },
   {
     "id": "2121062974161092792",
@@ -16,7 +24,7 @@
     "createdAt": "2026-11-13T02:09:55Z",
     "text": "How can codex be improved? Try not to say model.",
     "url": "https://x.com/thsottiaux/status/2121062974161092792",
-    "fetchedAt": "2026-11-15T12:19:01Z"
+    "fetchedAt": "2026-11-16T10:54:42Z"
   },
   {
     "id": "2121036562058400200",
@@ -24,7 +32,7 @@
     "createdAt": "2026-11-13T00:24:58Z",
     "text": "We announced new tools we're developing for cybersecurity today across automated patching and automated red teaming. Watch the recording here https://t.co/fW371aFjB5",
     "url": "https://x.com/thsottiaux/status/2121036562058400200",
-    "fetchedAt": "2026-11-15T12:19:01Z"
+    "fetchedAt": "2026-11-16T10:54:42Z"
   },
   {
     "id": "2120999993079451919",
@@ -32,7 +40,7 @@
     "createdAt": "2026-11-12T21:59:39Z",
     "text": "We shipped some good updates to dots today and the banked reset has been activated and should land in everyones accounts sometime soon!",
     "url": "https://x.com/thsottiaux/status/2120999993079451919",
-    "fetchedAt": "2026-11-15T12:19:01Z"
+    "fetchedAt": "2026-11-16T10:54:42Z"
   },
   {
     "id": "2120410006273380750",
