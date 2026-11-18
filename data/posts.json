@@ -1,14 +1,22 @@
 [
   {
+    "id": "2122929634916679820",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-18T05:47:21Z",
+    "text": "One of the funny reasons for the difference in vibes between the influencers and the crowd today on 6.2 Sol/Astra is that we gave a few folks access a while ago and then made a lot of changes in the last 3-4 days and I'm pretty sure no re-testing was done within those days and",
+    "url": "https://x.com/thsottiaux/status/2122929634916679820",
+    "fetchedAt": "2026-11-18T11:08:49Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2122753991000133943",
     "author": "thsottiaux",
     "createdAt": "2026-11-17T18:09:24Z",
     "text": "GPT-6.2 Sol &amp; Astra are *finally* here. We've also expanded ultrafast to Pro 200 plans for GPT-6.2 Sol, it's my go-to model for most day to day things.",
     "url": "https://x.com/thsottiaux/status/2122753991000133943",
-    "fetchedAt": "2026-11-17T21:06:10Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-18T11:08:49Z"
   },
   {
     "id": "2122206990101536852",
@@ -16,7 +24,7 @@
     "createdAt": "2026-11-16T05:55:49Z",
     "text": "Codex team might have actually fixed the \"model at capacity\" errors that have been pestering you. https://t.co/EgS0HkOATY",
     "url": "https://x.com/thsottiaux/status/2122206990101536852",
-    "fetchedAt": "2026-11-17T21:06:10Z"
+    "fetchedAt": "2026-11-18T11:08:49Z"
   },
   {
     "id": "2121845965997101118",
@@ -24,7 +32,7 @@
     "createdAt": "2026-11-15T06:01:14Z",
     "text": "Cyber team wants your feedback on Daybreak. Models, codex plugins, blue/red access, documentation, red teaming &amp; defense factory... What can we do better or improve?",
     "url": "https://x.com/thsottiaux/status/2121845965997101118",
-    "fetchedAt": "2026-11-17T21:06:10Z"
+    "fetchedAt": "2026-11-18T11:08:49Z"
   },
   {
     "id": "2121062974161092792",
@@ -32,7 +40,7 @@
     "createdAt": "2026-11-13T02:09:55Z",
     "text": "How can codex be improved? Try not to say model.",
     "url": "https://x.com/thsottiaux/status/2121062974161092792",
-    "fetchedAt": "2026-11-17T21:06:10Z"
+    "fetchedAt": "2026-11-18T11:08:49Z"
   },
   {
     "id": "2121036562058400200",
