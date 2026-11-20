@@ -1,14 +1,44 @@
 [
   {
+    "id": "2123557171321561133",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-19T23:20:58Z",
+    "text": "We’re also working on a new mobile experience for ChatGPT! \n\nIt’s easier to get to your favorite features and discover what you can do in ChatGPT. We’re starting with Pro users who have a dot or are eligible to create one. Your dot gets its own tab, and you can pin Codex, https://t.co/F3JNQtTYVf",
+    "url": "https://x.com/thsottiaux/status/2123557171321561133",
+    "fetchedAt": "2026-11-20T00:47:12Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2123556256392847657",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-19T23:17:19Z",
+    "text": "Heads up, we’re starting to test dots with a small number of ChatGPT Plus users. Looking forward to the continued feedback as we expand and I’m recently seeing a lot more positives around how good the proactivity has been after many improvements. \n\nWe’re also bringing dots to all",
+    "url": "https://x.com/thsottiaux/status/2123556256392847657",
+    "fetchedAt": "2026-11-20T00:47:12Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2123505331531882923",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-19T19:54:58Z",
+    "text": "Tokens go brrrrrr. Going to need more compute.",
+    "url": "https://x.com/thsottiaux/status/2123505331531882923",
+    "fetchedAt": "2026-11-20T00:47:12Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2123175166519992652",
     "author": "thsottiaux",
     "createdAt": "2026-11-18T22:03:01Z",
     "text": "GPT-6.2 Astra is pretty good at hard things. Here the team shared some results on AMD and Jalapeño chip optimizations.\n\nI do get the feedback on its communication style and we're working on that, but for really the hardest tasks in the world it does seem to be in a league of its",
     "url": "https://x.com/thsottiaux/status/2123175166519992652",
-    "fetchedAt": "2026-11-19T01:24:01Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-20T00:47:12Z"
   },
   {
     "id": "2123113107048501273",
@@ -16,7 +46,7 @@
     "createdAt": "2026-11-18T17:56:24Z",
     "text": "How is 6.2 Sol treating you today?",
     "url": "https://x.com/thsottiaux/status/2123113107048501273",
-    "fetchedAt": "2026-11-19T01:24:01Z"
+    "fetchedAt": "2026-11-20T00:47:12Z"
   },
   {
     "id": "2122929634916679820",
