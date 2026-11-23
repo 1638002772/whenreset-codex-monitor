@@ -1,14 +1,33 @@
 [
   {
+    "id": "2124923055072043052",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-23T17:48:30Z",
+    "text": "Inside OpenAI, dots are quickly becoming the primary way to get things done. We have dots building the dots system.",
+    "url": "https://x.com/thsottiaux/status/2124923055072043052",
+    "fetchedAt": "2026-11-23T20:06:33Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2124922313019953319",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-23T17:45:33Z",
+    "text": "New ChatGPT Business workspaces created by Nov 30 get double the included usage for every seat type through Dec 31. \n\nAlready on Business? We will have a gift for you, too. Stay tuned 👀 https://t.co/Lw8q9Qw00r",
+    "url": "https://x.com/thsottiaux/status/2124922313019953319",
+    "fetchedAt": "2026-11-23T20:06:33Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2124322968499282388",
     "author": "thsottiaux",
     "createdAt": "2026-11-22T02:03:58Z",
     "text": "Team is already preparing another big update, but how are things since yesterday’s update to the ChatGPT/Codex desktop app? What still requires attention and is not quite there?",
     "url": "https://x.com/thsottiaux/status/2124322968499282388",
-    "fetchedAt": "2026-11-22T03:29:53Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-23T20:06:33Z"
   },
   {
     "id": "2124277855131664869",
@@ -16,7 +35,7 @@
     "createdAt": "2026-11-21T23:04:42Z",
     "text": "Going to check out this threads thing",
     "url": "https://x.com/thsottiaux/status/2124277855131664869",
-    "fetchedAt": "2026-11-22T03:29:53Z"
+    "fetchedAt": "2026-11-23T20:06:33Z"
   },
   {
     "id": "2123997735326232775",
@@ -24,7 +43,7 @@
     "createdAt": "2026-11-21T04:31:36Z",
     "text": "We’ve been messing around a bit and inadvertently created an experience that’s a bit too fun internally and now everyone is just having fun instead of working. We might not recover from this.",
     "url": "https://x.com/thsottiaux/status/2123997735326232775",
-    "fetchedAt": "2026-11-22T03:29:53Z"
+    "fetchedAt": "2026-11-23T20:06:33Z"
   },
   {
     "id": "2123864112694509995",
@@ -1957,30 +1976,6 @@
     "summaryEn": "Usage reset: High latency near the US",
     "url": "https://x.com/thsottiaux/status/1992370994028388670",
     "source": "https://x.com/thsottiaux/status/1992370994028388670",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "1986166501435711936",
-    "author": "thsottiaux",
-    "createdAt": "2025-11-05T20:19:29.000Z",
-    "text": "Usage reset: 45-minute outage resolved",
-    "summaryZh": "额度更新：45 分钟故障恢复",
-    "summaryEn": "Usage reset: 45-minute outage resolved",
-    "url": "https://x.com/thsottiaux/status/1986166501435711936",
-    "source": "https://x.com/thsottiaux/status/1986166501435711936",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "1968163721034994139",
-    "author": "thsottiaux",
-    "createdAt": "2025-09-17T04:02:52.000Z",
-    "text": "Usage reset: GPT-5-Codex launch, also making up for slowdowns",
-    "summaryZh": "额度更新：GPT-5-Codex 上线，兼补偿扩容期间变慢",
-    "summaryEn": "Usage reset: GPT-5-Codex launch, also making up for slowdowns",
-    "url": "https://x.com/thsottiaux/status/1968163721034994139",
-    "source": "https://x.com/thsottiaux/status/1968163721034994139",
     "classification": "reset",
     "eventStatus": "completed"
   }
