@@ -1,14 +1,33 @@
 [
   {
+    "id": "2125027477877887231",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-24T00:43:26Z",
+    "text": "Worth listening to if you're curious what goes on in the minds of the people at OpenAI who are obsessively trying to patch all the flaws in OSS software and infrastructure we all rely on",
+    "url": "https://x.com/thsottiaux/status/2125027477877887231",
+    "fetchedAt": "2026-11-24T04:45:53Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
+    "id": "2124998553856844186",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-23T22:48:30Z",
+    "text": "You should feel a significant jump in quality of answers on ChatGPT once rolled out to you.\n\nTogether with all the investments we are making across simplifying the app, making it faster and merging chat &amp; work, it's going to be quite the improvement in day to day experience by",
+    "url": "https://x.com/thsottiaux/status/2124998553856844186",
+    "fetchedAt": "2026-11-24T04:45:53Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2124923055072043052",
     "author": "thsottiaux",
     "createdAt": "2026-11-23T17:48:30Z",
     "text": "Inside OpenAI, dots are quickly becoming the primary way to get things done. We have dots building the dots system.",
     "url": "https://x.com/thsottiaux/status/2124923055072043052",
-    "fetchedAt": "2026-11-23T20:06:33Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-24T04:45:53Z"
   },
   {
     "id": "2124922313019953319",
@@ -16,10 +35,7 @@
     "createdAt": "2026-11-23T17:45:33Z",
     "text": "New ChatGPT Business workspaces created by Nov 30 get double the included usage for every seat type through Dec 31. \n\nAlready on Business? We will have a gift for you, too. Stay tuned 👀 https://t.co/Lw8q9Qw00r",
     "url": "https://x.com/thsottiaux/status/2124922313019953319",
-    "fetchedAt": "2026-11-23T20:06:33Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-24T04:45:53Z"
   },
   {
     "id": "2124322968499282388",
@@ -27,7 +43,7 @@
     "createdAt": "2026-11-22T02:03:58Z",
     "text": "Team is already preparing another big update, but how are things since yesterday’s update to the ChatGPT/Codex desktop app? What still requires attention and is not quite there?",
     "url": "https://x.com/thsottiaux/status/2124322968499282388",
-    "fetchedAt": "2026-11-23T20:06:33Z"
+    "fetchedAt": "2026-11-24T04:45:53Z"
   },
   {
     "id": "2124277855131664869",
@@ -1952,30 +1968,6 @@
     "summaryEn": "Usage reset: Apology for a disruption",
     "url": "https://x.com/thsottiaux/status/2001114683047317723",
     "source": "https://x.com/thsottiaux/status/2001114683047317723",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "1995988609896513743",
-    "author": "thsottiaux",
-    "createdAt": "2025-12-02T22:49:02.000Z",
-    "text": "Usage reset: Mitigating a usage issue",
-    "summaryZh": "额度更新：缓解用量问题",
-    "summaryEn": "Usage reset: Mitigating a usage issue",
-    "url": "https://x.com/thsottiaux/status/1995988609896513743",
-    "source": "https://x.com/thsottiaux/status/1995988609896513743",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "1992370994028388670",
-    "author": "thsottiaux",
-    "createdAt": "2025-11-22T23:13:56.000Z",
-    "text": "Usage reset: High latency near the US",
-    "summaryZh": "额度更新：美国区高延迟",
-    "summaryEn": "Usage reset: High latency near the US",
-    "url": "https://x.com/thsottiaux/status/1992370994028388670",
-    "source": "https://x.com/thsottiaux/status/1992370994028388670",
     "classification": "reset",
     "eventStatus": "completed"
   }
