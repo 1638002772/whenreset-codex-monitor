@@ -1,14 +1,33 @@
 [
   {
+    "id": "2125299248782778588",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-24T18:43:21Z",
+    "text": "To all the ChatGPT Business teams out there. We have two small things for you, a banked reset and fast mode at no extra charge through Dec 31. Have fun!",
+    "url": "https://x.com/thsottiaux/status/2125299248782778588",
+    "fetchedAt": "2026-11-24T23:59:34Z",
+    "classification": "banked_reset",
+    "eventStatus": "forecast",
+    "summaryZh": "Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。"
+  },
+  {
+    "id": "2125284868414394550",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-24T17:46:13Z",
+    "text": "Hi. We’re beginning to roll out the combined Chat and Work experience to a small group of Pro users to learn from feedback before we roll out more broadly. \n\nLet us know what you think and where we can improve!",
+    "url": "https://x.com/thsottiaux/status/2125284868414394550",
+    "fetchedAt": "2026-11-24T23:59:34Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2125141302501417232",
     "author": "thsottiaux",
     "createdAt": "2026-11-24T08:15:44Z",
     "text": "We’re working with Cisco on what we think are going to be key infrastructure primitives in the new era of cybersecurity. \n\nEverything needs to be built to be operated safely by aligned agents at machine speed.",
     "url": "https://x.com/thsottiaux/status/2125141302501417232",
-    "fetchedAt": "2026-11-24T15:21:14Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-24T23:59:34Z"
   },
   {
     "id": "2125027477877887231",
@@ -16,7 +35,7 @@
     "createdAt": "2026-11-24T00:43:26Z",
     "text": "Worth listening to if you're curious what goes on in the minds of the people at OpenAI who are obsessively trying to patch all the flaws in OSS software and infrastructure we all rely on",
     "url": "https://x.com/thsottiaux/status/2125027477877887231",
-    "fetchedAt": "2026-11-24T15:21:14Z"
+    "fetchedAt": "2026-11-24T23:59:34Z"
   },
   {
     "id": "2124998553856844186",
@@ -24,7 +43,7 @@
     "createdAt": "2026-11-23T22:48:30Z",
     "text": "You should feel a significant jump in quality of answers on ChatGPT once rolled out to you.\n\nTogether with all the investments we are making across simplifying the app, making it faster and merging chat &amp; work, it's going to be quite the improvement in day to day experience by",
     "url": "https://x.com/thsottiaux/status/2124998553856844186",
-    "fetchedAt": "2026-11-24T15:21:14Z"
+    "fetchedAt": "2026-11-24T23:59:34Z"
   },
   {
     "id": "2124923055072043052",
@@ -1937,30 +1956,6 @@
     "summaryEn": "Usage reset: Requests wrongly blocked as high risk",
     "url": "https://x.com/thsottiaux/status/2028649088594436225",
     "source": "https://x.com/thsottiaux/status/2028649088594436225",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "2004100061933064395",
-    "author": "thsottiaux",
-    "createdAt": "2025-12-25T08:01:03.000Z",
-    "text": "Usage reset: Holiday gift, limits doubled until Jan 1",
-    "summaryZh": "额度更新：圣诞礼物，限额翻倍至 1 月 1 日",
-    "summaryEn": "Usage reset: Holiday gift, limits doubled until Jan 1",
-    "url": "https://x.com/thsottiaux/status/2004100061933064395",
-    "source": "https://x.com/thsottiaux/status/2004100061933064395",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "2002137269134819610",
-    "author": "thsottiaux",
-    "createdAt": "2025-12-19T22:01:37.000Z",
-    "text": "Usage reset: Usage tracking system rewritten",
-    "summaryZh": "额度更新：用量计费系统重写",
-    "summaryEn": "Usage reset: Usage tracking system rewritten",
-    "url": "https://x.com/thsottiaux/status/2002137269134819610",
-    "source": "https://x.com/thsottiaux/status/2002137269134819610",
     "classification": "reset",
     "eventStatus": "completed"
   }

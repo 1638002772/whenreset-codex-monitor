@@ -1,5 +1,36 @@
 [
   {
+    "id": "2125299248782778588",
+    "category": "banked_reset",
+    "status": "forecast",
+    "titleZh": "预存重置额度 · 重置预告",
+    "titleEn": "Banked reset · Reset forecast",
+    "createdAt": "2026-11-24T18:43:21Z",
+    "updatedAt": "2026-11-24T18:43:21Z",
+    "confirmedAt": null,
+    "timeWindow": null,
+    "postIds": [
+      "2125299248782778588"
+    ],
+    "timeline": [
+      {
+        "postId": "2125299248782778588",
+        "createdAt": "2026-11-24T18:43:21Z",
+        "url": "https://x.com/thsottiaux/status/2125299248782778588",
+        "text": "To all the ChatGPT Business teams out there. We have two small things for you, a banked reset and fast mode at no extra charge through Dec 31. Have fun!",
+        "textZh": "Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。",
+        "status": "forecast",
+        "timeWindow": null
+      }
+    ],
+    "lastAlertedStatus": null,
+    "lastPostId": "2125299248782778588",
+    "lastPostUrl": "https://x.com/thsottiaux/status/2125299248782778588",
+    "timeWindowZh": "",
+    "latestText": "To all the ChatGPT Business teams out there. We have two small things for you, a banked reset and fast mode at no extra charge through Dec 31. Have fun!",
+    "latestTextZh": "Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。"
+  },
+  {
     "id": "2120999993079451919",
     "category": "banked_reset",
     "status": "forecast",
