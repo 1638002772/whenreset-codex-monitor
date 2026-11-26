@@ -1,14 +1,33 @@
 [
   {
+    "id": "2125853628250599730",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-26T07:26:16Z",
+    "text": "Banked reset is online",
+    "url": "https://x.com/thsottiaux/status/2125853628250599730",
+    "fetchedAt": "2026-11-26T10:46:23Z",
+    "classification": "banked_reset",
+    "eventStatus": "forecast",
+    "summaryZh": "Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。"
+  },
+  {
+    "id": "2125784147889393806",
+    "author": "thsottiaux",
+    "createdAt": "2026-11-26T02:50:10Z",
+    "text": "We made a billing mistake at launch of GPT-6.2 that incorrectly discounted GPT-6.2 Astra and Sol usage for most users. \n\nWe’ve fixed this now, so the same work will use more of your plan’s usage allowance. Comparing to last week, you will reach your limits 40% faster on GPT-6.2",
+    "url": "https://x.com/thsottiaux/status/2125784147889393806",
+    "fetchedAt": "2026-11-26T10:46:23Z",
+    "classification": null,
+    "eventStatus": null,
+    "summaryZh": null
+  },
+  {
     "id": "2125299248782778588",
     "author": "thsottiaux",
     "createdAt": "2026-11-24T18:43:21Z",
     "text": "To all the ChatGPT Business teams out there. We have two small things for you, a banked reset and fast mode at no extra charge through Dec 31. Have fun!",
     "url": "https://x.com/thsottiaux/status/2125299248782778588",
-    "fetchedAt": "2026-11-24T23:59:34Z",
-    "classification": "banked_reset",
-    "eventStatus": "forecast",
-    "summaryZh": "Tibo 表示预存重置额度正在处理；到账仍需等待明确确认。"
+    "fetchedAt": "2026-11-26T10:46:23Z"
   },
   {
     "id": "2125284868414394550",
@@ -16,10 +35,7 @@
     "createdAt": "2026-11-24T17:46:13Z",
     "text": "Hi. We’re beginning to roll out the combined Chat and Work experience to a small group of Pro users to learn from feedback before we roll out more broadly. \n\nLet us know what you think and where we can improve!",
     "url": "https://x.com/thsottiaux/status/2125284868414394550",
-    "fetchedAt": "2026-11-24T23:59:34Z",
-    "classification": null,
-    "eventStatus": null,
-    "summaryZh": null
+    "fetchedAt": "2026-11-26T10:46:23Z"
   },
   {
     "id": "2125141302501417232",
@@ -27,7 +43,7 @@
     "createdAt": "2026-11-24T08:15:44Z",
     "text": "We’re working with Cisco on what we think are going to be key infrastructure primitives in the new era of cybersecurity. \n\nEverything needs to be built to be operated safely by aligned agents at machine speed.",
     "url": "https://x.com/thsottiaux/status/2125141302501417232",
-    "fetchedAt": "2026-11-24T23:59:34Z"
+    "fetchedAt": "2026-11-26T10:46:23Z"
   },
   {
     "id": "2125027477877887231",
@@ -1932,30 +1948,6 @@
     "summaryEn": "Usage reset: Reports of fast drain, reset while investigating",
     "url": "https://x.com/thsottiaux/status/2030474136024400173",
     "source": "https://x.com/thsottiaux/status/2030474136024400173",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "2029308599835738218",
-    "author": "thsottiaux",
-    "createdAt": "2026-03-04T21:30:47.000Z",
-    "text": "Usage reset: 2X promo limits missing for ~9% of users",
-    "summaryZh": "额度更新：2X 促销限额未应用于约 9% 用户",
-    "summaryEn": "Usage reset: 2X promo limits missing for ~9% of users",
-    "url": "https://x.com/thsottiaux/status/2029308599835738218",
-    "source": "https://x.com/thsottiaux/status/2029308599835738218",
-    "classification": "reset",
-    "eventStatus": "completed"
-  },
-  {
-    "id": "2028649088594436225",
-    "author": "thsottiaux",
-    "createdAt": "2026-03-03T01:50:07.000Z",
-    "text": "Usage reset: Requests wrongly blocked as high risk",
-    "summaryZh": "额度更新：请求被误判为高风险的故障",
-    "summaryEn": "Usage reset: Requests wrongly blocked as high risk",
-    "url": "https://x.com/thsottiaux/status/2028649088594436225",
-    "source": "https://x.com/thsottiaux/status/2028649088594436225",
     "classification": "reset",
     "eventStatus": "completed"
   }
